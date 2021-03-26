@@ -1,0 +1,45 @@
+.login-container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: url('../images/bgcopy2.jpg') center center no-repeat;
+    background-size: cover;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container .login-form{
+    width: 40%;
+    min-width: 300px;
+    max-width: 400px;  
+    text-align: center;
+}
+.login-container .login-form .login-logo{
+    width: 250px;
+    padding: 15px;
+}
+.login-container .login-form .disable-account-container{
+    width: 100%;
+    color: #f86c6b;
+    font-family: 'Arial';
+    font-size: 12px;
+}
+.login-container .login-form .btn{
+    margin-top: 20px;
+}
+.login-container .login-form .login-option{
+    margin: 20px 0;
+}
+.login-container .login-form .login-option a{
+    font-size: 12px;
+    font-family: 'Arial';
+    text-decoration: none;
+    color: white;  
+}
+.login-container .login-form .login-option a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #ec115d;
+}

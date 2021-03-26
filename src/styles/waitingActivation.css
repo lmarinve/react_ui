@@ -1,0 +1,31 @@
+.waiting-container{
+    position: fixed;
+    background: url('../images/bgcopy2.jpg') center center no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.waiting-container .waiting-box{
+    width: 40%;
+    min-width: 300px;
+    max-width: 500px;
+    text-align: center;
+}
+.waiting-container .waiting-box .waiting-logo{
+    width: 250px;
+    padding: 15px;
+}
+.waiting-container .waiting-box p{
+    color: white;
+    font-size: 20px;
+}
+.waiting-container .waiting-box p:nth-of-type(3){
+    margin: 20px;
+    font-size: 15px;
+}
+

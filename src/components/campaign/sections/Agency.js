@@ -11,6 +11,7 @@ import {
 } from '../../../_services'
 
 import { useLoader } from '../../../_helpers/Loader'
+import CreateNewCard from '../CreateNewCard'
 import CardButton from '../../CardButton'
 import ConfigurationCard from '../../ConfigurationCard'
 
@@ -20,25 +21,32 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
     setActiveTab(1)
   }
 
-  return <div className="agency-list-container animated fadeInUp">
-    <div className="agency-list">
-        {
-          agencies.map((agency, i) => (
-            <CardAgency 
-              agencyId={agency.id}
-              agencyName={agency.name}
-              agencyAddress="Test address"
-              contactName="Test name"
-              contactPhone="Test phone" 
-              contactEmail="ray@mediagistic.com"
-              blueBtnText="Update"
-              key={agency.id}
-              handleClick={() => updateAgency(agency)}
-            />
-          ))
-        }
-    </div>
-         </div>
+    return(
+        // CASO: no hay ninguna agencia creada
+        // <CreateNewCard 
+        //     sectionTitle="Agency"
+        //     cardTitle="Agencies"
+        // />
+        <div className="agency-list-container animated fadeInUp">
+            <div className="agency-list">
+                {
+                agencies.map((agency, i) => (
+                    <CardAgency 
+                    agencyId={agency.id}
+                    agencyName={agency.name}
+                    agencyAddress="Test address"
+                    contactName="Test name"
+                    contactPhone="Test phone" 
+                    contactEmail="ray@mediagistic.com"
+                    blueBtnText="Update"
+                    key={agency.id}
+                    handleClick={() => updateAgency(agency)}
+                    />
+                ))
+                }
+            </div>
+        </div>
+    )
 }
 
 const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenciesAsActive }) => {
@@ -163,14 +171,14 @@ const AgencyMyAccount = () => {
           }
         </div>
       </div>
-      <ActiveTab 
+        <ActiveTab 
         setMyAgenciesAsActive={setMyAgenciesAsActive} 
         agencies={agencies} 
         isThereActiveEntity={isThereActiveEntity} 
         entity={entity} 
         setEntity={setEntity}
         setActiveTab={setActiveTab}
-      />
+        />                                          
     </div>
   )
 }

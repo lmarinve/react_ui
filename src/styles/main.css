@@ -414,6 +414,154 @@
 }
 
 
+/* Error section styles */
+
+
+.error-section-container{
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Create new card syles */
+
+
+.create-new-card-box{
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.create-new-card-box h2{
+    margin-bottom: 30px;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #e4e4e4;
+    font-weight: 500;
+}
+.create-new-card-box p{
+    margin: 30px 0;
+    color: #e4e4e4;
+    font-size: 20px;
+}
+.create-new-card-box button{
+    padding: 5px 15px;
+    font-size: 15px;
+    color: #fff;
+    background: rgba(226, 34, 101, 0.753);
+    border: 1px solid rgb(226, 34, 101);
+    border-radius: 50px;
+    transition: all 0.5s ease;
+}
+.create-new-card-box button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.create-new-card-box button:focus{
+    outline: 0;
+    transform: scale(1);
+}
+
+
+/* Alert styles */
+
+
+.alert-container{
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 40px;
+    right: -425px;
+    width: 400px;
+    padding: 10px 10px 10px 15px;
+    background-color: #1f1f1f;
+    border: 1px solid #b7b7b7;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none;
+    box-shadow: 0px 0px 20px black;
+    transition: all 1s ease;
+
+    /* FLEX */
+    display: flex;
+}
+.deploy-in{
+    right: 0;
+    animation: deploy-in 1.5s ease;
+}
+.deploy-out{
+    right: -425px;
+    animation: deploy-out 1.5s ease;
+}
+@keyframes deploy-in{
+    0%{
+        right: -425px;
+    }
+    100%{
+        right: 0;
+    }
+}
+@keyframes deploy-out{
+    0%{
+        right: 0;
+    }
+    100%{
+        right: -425px;
+    }
+}
+.alert-container .alert-close-icon{
+    position: absolute;
+    top: calc(50% - 7.5px );
+    left: 10px;
+    color: #b7b7b7;
+    font-size: 15px;
+}
+.alert-container .alert-close-icon:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+}
+.alert-container .alert-icon-container{
+    width: 20%;
+    
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.alert-container .alert-icon-container .alert-icon{
+    font-size: 60px;
+    color: #ec115d
+}
+.alert-container .alert-message{
+    width: 80%;
+    text-align: center;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.alert-container .alert-message .title{
+    margin-bottom: 10px;
+}
+.alert-container .alert-message .title h3{
+    margin-bottom: 2.5px;
+    color: #e4e4e4;
+}
+.alert-container .alert-message .title div{
+    width: 100%;
+    height: 2px;
+    background-color: #ec115d;
+}
+.alert-container .alert-message p{
+    color: #b7b7b7;
+}
+
 /* User section syles */
 
 

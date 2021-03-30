@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import DashHeader from '../components/DashHeader'
 import LoadingComp from '../components/Loader'
+import ErrorComp from '../components/ErrorView'
 import User from '../components/campaign/sections/User'
 import AgenciesComponents from '../components/campaign/sections/Agency'
 import ClientsComponents from '../components/campaign/sections/Client'
@@ -14,6 +15,7 @@ import Launch from '../components/campaign/sections/Launch'
 import UseTabController from '../_helpers/UseTabController'
 import Step from '../components/campaign/Step'
 import ExplanationBox from '../components/campaign/ExplanationBox'
+import Alert from '../components/campaign/Alert'
 import { navigate } from '@reach/router'
 import UserContext from '../Contexts/User'
 import { 
@@ -61,6 +63,10 @@ const MainMenu = ({ path }) => {
 
   const commonTabs = [
     // CASO: si el usuario selecciona Campaign Wizard
+    {
+        name: 'User',
+        module: User
+    },
     {
         name: 'Agencies',
         module: Agencies,
@@ -192,6 +198,11 @@ const MainMenu = ({ path }) => {
         </div>
       </div>
       {
+        // Caso: si ha ocurrido un error
+        // <div className="error-section-container">
+        //     <ErrorComp />
+        // </div>
+        
         MenuLoader.isLoading()
           ? <div className="loading-section-container">
               <LoadingComp />
@@ -208,6 +219,36 @@ const MainMenu = ({ path }) => {
         title='Campaign Type'
         text='This block of text will explain to the user what they need to do in this section of the wizard. Each section is different, therefore this block is made up of dynamic text.'
       />
+      {/* Caso: Se creo una nueva agencia */}
+       {/* <Alert 
+        icon="far fa-file-plus"
+        title="Congratulations!"
+        message="A new Agency has been created sucessfully"
+       /> */}
+      {/* Caso: Se actualizo una nueva agencia */}
+        {/* <Alert 
+        icon="fas fa-sync-alt"
+        title="Congratulations!"
+        message="The Agency has been updated sucessfully"
+       /> */}
+      {/* Caso: Se borro una nueva agencia */}
+        {/* <Alert 
+        icon="fas fa-trash-alt"
+        title="Congratulations!"
+        message="The Agency has been deleted sucessfully"
+       /> */}
+      {/* Caso: ocurrio un error */}
+       {/* <Alert 
+        icon="far fa-frown"
+        title="Oh no!"
+        message="An error has occurred, try it again"
+       /> */}
+      {/* Caso: no tienes permiso */}
+       {/* <Alert 
+        icon="far fa-ban"
+        title="Not so fast!"
+        message="You are not allowed to do that, try something else"
+       /> */}
     </div>
   )
 }

@@ -495,3 +495,21 @@ body::-webkit-scrollbar-thumb{
     color: #b7b7b7;
     font-size: 15px;
 }
+
+/* Error view styles */
+
+.error-box{
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.error-box p{
+    margin: 10px 0;
+    font-size: 20px;
+    color: #b7b7b7;
+}
+.error-box .error-icon{
+    font-size: 100px;
+    color: #ec115d;
+}

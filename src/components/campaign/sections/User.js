@@ -4,16 +4,43 @@ import TabController from '../../../_helpers/UseTabController'
 import { CardNewUser, CardUser } from '../CardUser'
 import DashInput from '../DashInput'
 import SearchList from '../SearchList'
+import CardButton from '../../CardButton'
+import ErrorMessage from '../../ErrorMessage'
 import UserContext from '../../../Contexts/User'
+import useEntityHandler from '../../../_helpers/useEntityHandler'
+import { useLoader } from '../../../_helpers/Loader'
+import {
+  request
+} from '../../../_services'
 
 import ProfileImage from '../../../images/avatar.png'
 
-const NewUsersList = () => (
+const NewUsersList = ({ users, setActiveTab, setEntity }) => (
   <>
     <h3 className="section-title animated fadeInDown">select which type of user will be the new users registered</h3>
     <div className="user-list-container animated fadeInUp">
       <div className="new-user-list">
-        <CardNewUser
+        {
+            users.map((user, i) => (
+              <CardNewUser
+                key={user.id}
+                username={user.username} 
+                email={user.email}
+                IdUserDemo={user.userId}
+                IdUserClient="client-1"
+                IdUserStaff="staff-1"
+                clientId1="1"
+                clientId2="2"
+                clientId3="3"
+                btnText="Set"
+                handleClick={() => {
+                  setEntity(user)
+                  setActiveTab(2)
+                }}
+              />
+            ))
+        }
+        {/* <CardNewUser
           username="Test username" 
           email="lmarinvera@mediagistic.com"
           IdUserDemo="demo-1"
@@ -78,18 +105,41 @@ const NewUsersList = () => (
           clientId2="17"
           clientId3="18"
           btnText="Set" 
-        />
+        /> */}
       </div>
     </div> 
   </>
 )
 
-const UsersList = () => (
+const UsersList = ({ users, setEntity, setActiveTab }) => (
   <>
     <SearchList animation="animated fadeInDown" searchPlaceholder="Search users..." />
       <div className="user-list-container animated fadeInUp">
         <div className="user-list">
-          <CardUser
+          {
+            users.map((user, i) => (
+              <CardUser
+                key={user.id}
+                username={user.username}
+                email={user.email}
+                firstName={user.firstName}
+                lastName={user.lastName}
+                lastLogin="10/10/2021"
+                dateJoined="10/10/2021"
+                IdUserClient={user.id}
+                IdUserStaff="staff-1"
+                clientId1="1"
+                clientId2="2"
+                clientId3="3"
+                btnText="Modify"
+                handleClick={() => {
+                  setEntity(user)
+                  setActiveTab(2)
+                }}
+              />
+            ))
+          }
+          {/* <CardUser
             username="Test username" 
             email="lmarinvera@mediagistic.com"
             firstName="Test first name"
@@ -172,18 +222,129 @@ const UsersList = () => (
             clientId2="17"
             clientId3="18"
             btnText="Modify" 
-          />
+          /> */}
         </div>
       </div>
   </>
 )
 
-const AccountConfiguration = ({ user }) => {
-//   const [userTypes, setUserTypes] = React.useState({
-//     0: { name: 'Demo', className: '', checked: user.user_type === 0, activeAgency: user.agency_id, activeCampaign: user.clients[0], activeClient: user.campaigns[0] },
-//     1: { name: 'Client', className: '-check', checked: user.user_type === 1, activeAgency: user.agency_id, activeCampaign: 'demo', activeClient: 'demo' },
-//     2: { name: 'Staff', className: '-cog', checked: user.user_type === 2, activeAgency: user.agency_id, activeCampaign: 'demo', activeClient: 'demo' }
-//   })
+const AccountConfiguration = (props) => {
+  const { 
+    myInfo, isThereActiveEntity, entity, 
+    setEntity, clients, adfluence_campaigns, 
+    data, setData, sendToMyUsers, setAlert, removeUser 
+  } = props
+
+  const [user, setUser] = React.useState(() => {
+    if (!isThereActiveEntity())
+      return { 
+        ...myInfo, 
+        clients: clients, 
+        adfluence_campaigns: adfluence_campaigns,
+        currentPassword: '',
+        newPassword: '',
+        confirmedPassword: '',
+        modified: false
+      }
+    else
+      return { 
+        ...entity(),
+        clients: [], 
+        adfluence_campaigns: [],
+        modified: false 
+      }
+  })
+  const [showBadPasswordMessage, setShowBadPasswordMessage] = useState(false)
+
+  const loaders = {
+    'update': useLoader(),
+    'remove': useLoader()
+  }
+
+  const handleChange = event => {
+    setShowBadPasswordMessage(false)
+    setUser({
+      ...user,
+      [event.target.name]: event.target.value,
+      modified: true
+    })
+  }
+
+  const update = () => {
+    if (!user.modified)
+      return 0
+    
+    if (isThereActiveEntity()) {
+        return 0
+    }
+    else {
+      if (user.password !== user.currentPassword || user.newPassword !== user.confirmedPassword)
+        return setShowBadPasswordMessage(true)
+
+      loaders['update'].loading()
+      const dispatch = () => {
+        setData({
+          ...data,
+          myInfo: {
+            ...myInfo,
+            password: user.newPassword
+          }
+        })
+        setUser({
+          ...user,
+          password: user.newPassword,
+          currentPassword: '',
+          newPassword: '',
+          confirmedPassword: '',
+        })
+      }
+      request(dispatch)
+        .then((response) => {
+          dispatch()
+          loaders['update'].loaded()
+          document.getElementById('currentPassword').value = ''
+          document.getElementById('newPassword').value = ''
+          document.getElementById('confirmedPassword').value = ''
+          setAlert({
+            title: 'Yeah!',
+            message: 'Your password was succesfully updated',
+            icon: 'fas fa-sync-alt'
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          setAlert({
+            title: 'Oops...',
+            message: 'Something went wrong',
+            icon: 'fas fa-sync-alt'
+          })
+        })
+    }
+
+  }
+
+  const remove = () => {
+    loaders['remove'].loading()
+    request(() => null)
+        .then((response) => {
+          loaders['remove'].loaded()
+          removeUser()
+          sendToMyUsers()
+          setAlert({
+            title: 'Success!',
+            message: 'The user was deleted',
+            icon: 'fas fa-sync-alt'
+          })
+        })
+        .catch(error => {
+          console.log(error)
+          setAlert({
+            title: 'Oops...',
+            message: 'Something went wrong',
+            icon: 'fas fa-sync-alt'
+          })
+        })
+  }
 
   return (
     <div className="account-config-container animated fadeInUp">
@@ -199,45 +360,25 @@ const AccountConfiguration = ({ user }) => {
             <div className="left">
                 <div className="row">
                     <label>Username:</label>
-                    <label>demo users</label>
+                    <label>{user.username}</label>
                 </div>
                 <div className="row">
                     <label>User email:</label>
-                    {/* <label> {user.email} </label> */}
-                    <label>testwmail@gmail.com</label>
+                    <label>{user.email}</label>
                 </div>
                 <div className="row">
                     <label>First name:</label>
-                    {/* <label>{user.name || 'demo user'}</label>  */}
-                    <label>demo user</label>
+                    <label>{user.firstName}</label>
                 </div>
                 <div className="row">
                     <label>Last name name:</label>
-                    {/* <label>{user.name || 'demo user'}</label>  */}
-                    <label>demo user</label>
+                    <label>{user.lastName}</label>
                 </div>
             </div>
             <div className="right">
-              {/* <label>User type:</label>
-              {  
-                user.user_type === 2
-                  ? <>
-                    { 
-                      userTypes.map((userType, index) => (
-                        <div className="user-type">
-                          <input type="checkbox" checked={userType.checked} onClick={e => console.log(e.target)} name={index} />
-                          <label><i className={`user-type-icon fas fa${userType.className}`} /> {userType.name} </label>
-                        </div>
-                      ))
-                    }
-                    </>
-                  : <div className="user-type">
-                    <label htmlFor="staff-7"><i className={`user-type-icon fas fa-user${userTypes[user.user_type].className}`} /> {userTypes[user.user_type].name} </label>
-                    </div>
-              } */}
                 <label>User type:</label>
                 <div className="user-type">
-                    <label htmlFor="1"><i className="user-type-icon fas fa-user"></i>Demo</label>
+                    <label htmlFor="1"><i className="user-type-icon fas fa-user" />Demo</label>
                 </div>
             </div>
           </div>
@@ -254,7 +395,7 @@ const AccountConfiguration = ({ user }) => {
                 <label className="agency-option" tabIndex="3">Agency Name</label> */
                 }
                 {/* <label className='agency-option active' tabIndex="1"> {user.agency_id} </label> */}
-                <label className='agency-option active' tabIndex="1"> demo </label>
+                <label className='agency-option active' tabIndex="1"> {user.agencyName} </label>
               </div>
             </div>
             <div className="select-container">
@@ -263,14 +404,13 @@ const AccountConfiguration = ({ user }) => {
                 <i className="select-icon fas fa-angle-down" />
               </button>
               <div className="list-container">
-                {/* {  
-                  user.clients.map((client, index) => (
-                    <div className="row"><input type="checkbox" id="19" /><label className="client-option" htmlFor="19">{client}</label></div>
-                  ))
-                } */}
-                <div className="row"><input type="checkbox"/><label className="client-option">Demo</label></div>
-                <div className="row"><input type="checkbox"/><label className="client-option">Coconut Bay</label></div>
-                <div className="row"><input type="checkbox"/><label className="client-option">Saint Lucia</label></div>
+                {
+                  user.clients.length
+                    ? user.clients.map((client, i) => (
+                      <div key={client.id} className='row'><input type="checkbox" /><label className='client-option'>{client.name}</label></div>
+                    ))
+                    : <div className='row'> There are no clients </div>
+                }
               </div>
             </div>
           </div>
@@ -281,67 +421,70 @@ const AccountConfiguration = ({ user }) => {
                 <i className="select-icon fas fa-angle-down" />
               </button>
               <div className="list-container">
-                {/* { 
-                  user.campaigns.map(campaign => (
-                    <label className="agency-option" tabIndex="1">{campaign}</label>
-                  ))
-                 } */}
-                <label className="agency-option active" tabIndex="1">Demo</label>
-                <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
-                <label className="agency-option" tabIndex="3">Agency Name</label>
+                {
+                  user.adfluence_campaigns.length
+                    ? user.adfluence_campaigns.map((campaign, i) => (
+                      <label key={campaign.id} className="agency-option" tabIndex="1">{campaign.name}</label>
+                    ))
+                    : <label className="agency-option" tabIndex="1"> There are no campaigns </label>
+                }
+                {/* // <label className="agency-option active" tabIndex="1">Demo</label>
+                // <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
+                // <label className="agency-option" tabIndex="3">Agency Name</label> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <p className="change-text">Change your password</p>
+      {
+        !isThereActiveEntity()
+          && <>
+            <p className="change-text">Change your password</p>
       <DashInput
         inputTitle='Current Password'
         inputId='currentPassword'
         inputType="password"
+        handleChange={handleChange}
       />
       <DashInput
         inputTitle='New Password'
-        inputId='password'
+        inputId='newPassword'
         inputType="password"
+        handleChange={handleChange}
       />
       <DashInput
         inputTitle='Confirm Password'
         inputId='confirmedPassword'
         inputType="password"
+        handleChange={handleChange}
       />
+             </>
+      }
+      {showBadPasswordMessage
+          && <ErrorMessage message='The passwords does not match' marginBottom='0.5rem' />}
     </div>
     <div className="crud-btn-container">
-      <button className="crud-btn"><i className="crud-icon fas fa-sync-alt" />Update</button>
-      <button className="crud-btn"><i className="crud-icon fas fa-trash-alt" />Delete</button>
+      {
+        isThereActiveEntity()
+          ? <CardButton
+            text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
+            />
+          : <CardButton 
+            text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
+            />
+      }
     </div>
     </div>
   )
 }
 
-const User = () =>{
-    // const { data, mockedData } = useContext(UserContext)
-
-    // const userConfiguration = {
-    //   0: data.length ? data[0] : mockedData,
-    //   1: data.length ? data[0] : mockedData,
-    //   2: data.length ? data[0] : mockedData
-    // }
-
-    // const tabs = data.length && data[0].user_type === 2
-    //   ? [
-    //     { name: 'New users list', Component: NewUsersList, props: {} },
-    //     { name: 'Users list', Component: UsersList, props: {} },
-    //     { name: 'Account configuration', Component: AccountConfiguration, props: { user: userConfiguration[data[0].user_type] } }
-    //   ]
-    //   : [
-    //     { name: 'Account configuration', Component: AccountConfiguration, props: { user: userConfiguration[data[0].user_type] } }
-    //   ]
+const User = ({ setAlert }) =>{
+    const { data, setData } = React.useContext(UserContext)
+    const { myInfo, agencies, clients, adfluence_campaigns, users } = data
 
     const tabs = [
       { name: 'New users list', Component: NewUsersList, props: {} },
       { name: 'Users list', Component: UsersList, props: {} },
-    //   { name: 'Account configuration', Component: AccountConfiguration, props: { user: data.length ? userConfiguration[data[0].user_type] : mockedData[0] } }
       { name: 'Account configuration', Component: AccountConfiguration, props: {} }
     ]
 
@@ -357,21 +500,58 @@ const User = () =>{
     }
     
     const tabController = useTabController(tabs)
-
-    const ActiveTab = tabController.activeTab()
+    const ActiveTab = tabController.activeTab().Component
+    const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
+    const sendToMyUsers = () => {
+      tabController.setActiveTab(1)
+    }
+    const removeUser = () => {
+      const newUsers = data.users.filter(user => user.userId !== entity().userId)
+      setData({
+        ...data,
+        users: newUsers
+      })
+      sendToMyUsers()
+    }
 
     return(
         <div className="user-section-container animated fadeInUp">
 
         {/* CASO: si el usuario es STAFF */}
+        {console.log(data)}
           <div className="user-section-menu">
             <div className="user-menu-box" style={tabController.tabs().length > 1 ? {} : { flexDirection: 'column', alignItems: 'center' }}>
               {tabController.tabs().map((tab, index) => (
-                <button className={tabController.isActiveTab(index) ? 'active' : ''} onClick={() => tabController.setActiveTab(index)}> {tab.name} </button>
+                <button 
+                  key={index} 
+                  className={tabController.isActiveTab(index) ? 'active' : ''} 
+                  onClick={() => {
+                    if (index === 2)
+                      setEntity({})
+                      
+                    tabController.setActiveTab(index)
+                  }}
+                > {tab.name} 
+                </button>
               ))}
             </div>
           </div>
-          <ActiveTab.Component {...ActiveTab.props} />
+          <ActiveTab
+            data={data}
+            setData={setData}
+            myInfo={myInfo}
+            entity={entity}
+            setEntity={setEntity}
+            isThereActiveEntity={isThereActiveEntity}
+            agencies={agencies}
+            clients={clients}
+            adfluence_campaigns={adfluence_campaigns}
+            sendToMyUsers={sendToMyUsers}
+            setAlert={setAlert}
+            users={users}
+            setActiveTab={tabController.setActiveTab}
+            removeUser={removeUser}
+          />
         </div>
     )
 }

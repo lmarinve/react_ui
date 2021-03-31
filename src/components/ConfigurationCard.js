@@ -8,7 +8,7 @@ const Photos = {
     'Client': ClientPhoto
 }
 
-const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity }) => (
+const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies }) => (
     <div className="card-container">
             <div className={`${entityName.toLowerCase()}-photo-container`}>
               <div className={`${entityName.toLowerCase()}-photo pointer`}>
@@ -21,17 +21,6 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
               </div>
             </div>
             <div className={`${entityName.toLowerCase()}-data-container`}>
-              <div className="row">
-                <label>{(entityName === 'Client' && !isThereActiveEntity()) ? 'Agency' : entityName} ID:</label>
-                <input 
-                  type="number" 
-                  name={(entityName === 'Client' && !isThereActiveEntity()) ? 'agencyId' : 'id'} 
-                  value={(entityName === 'Client' && !isThereActiveEntity()) ? entity.agencyId : entity.id} 
-                  unselectable={entityName === 'Client' ? 'on' : 'off'} 
-                  onChange={handleChange}
-                  onInput={handleChange}
-                />
-              </div>
               <div className="row">
                 <label>Name:</label>
                 <input type="text" name='name' onChange={handleChange} onInput={handleChange} value={entity.name} />
@@ -76,28 +65,54 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                   </div>
                 </div>
               </div>
-              <div className={`${entityName.toLowerCase()}-selects`}>
-                <div className="select-container">
-                  <button className="select-btn">
-                    {itemsName}
-                    <i className="select-icon fas fa-angle-down" />
-                  </button>
-                  <div className="list-container">
-                    <label>STLUC</label>
-                    <label>COBAY</label>
+              {
+                (entityName === 'Client' && !isThereActiveEntity())
+                  && <div className={`${entityName.toLowerCase()}-selects`}>
+                    <div className="select-container">
+                    {console.log(agencies.tabs())}
+                      <button className="select-btn">
+                        {agencies.activeTab() ? agencies.activeTab().name : 'Choose client agency'}
+                        <i className="select-icon fas fa-angle-down" />
+                      </button>
+                      {agencies.tabs().length > 0
+                        && <div className="list-container">
+                        {
+                            agencies.tabs().map((agency, i) => {
+                            if (!agencies.isActiveTab(i) && agency)
+                              return <label onClick={() => agencies.setActiveTab(i)}> {agency.name} </label>
+                            else
+                              return null
+                            })
+                        }
+                      </div>}
+                    </div>
+                  </div>
+              }
+              {
+                isThereActiveEntity()
+                  && <div className={`${entityName.toLowerCase()}-selects`}>
+                  <div className="select-container">
+                    <button className="select-btn">
+                      {itemsName}
+                      <i className="select-icon fas fa-angle-down" />
+                    </button>
+                    <div className="list-container">
+                      <label>STLUC</label>
+                      <label>COBAY</label>
+                    </div>
+                  </div>
+                  <div className="select-container">
+                    <button className="select-btn">
+                      Users
+                      <i className="select-icon fas fa-angle-down" />
+                    </button>
+                    <div className="list-container">
+                      <label>lmarinvera@mediagistic.com</label>
+                      <label>ray@mediagistic.com</label>
+                    </div>
                   </div>
                 </div>
-                <div className="select-container">
-                  <button className="select-btn">
-                    Users
-                    <i className="select-icon fas fa-angle-down" />
-                  </button>
-                  <div className="list-container">
-                    <label>lmarinvera@mediagistic.com</label>
-                    <label>ray@mediagistic.com</label>
-                  </div>
-                </div>
-              </div>
+              }
             </div>
     </div>
 )

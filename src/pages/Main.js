@@ -64,10 +64,6 @@ const MainMenu = ({ path }) => {
   const commonTabs = [
     // CASO: si el usuario selecciona Campaign Wizard
     {
-        name: 'User',
-        module: User
-    },
-    {
         name: 'Agencies',
         module: Agencies,
         props: {
@@ -102,6 +98,10 @@ const MainMenu = ({ path }) => {
       }
     ],
     'my-account': [
+      {
+        name: 'User',
+        module: User
+      },
       ...commonTabs,
       {
         name: 'Ad Channel',
@@ -166,6 +166,8 @@ const MainMenu = ({ path }) => {
     return 0
   } 
 
+  const [alert, setAlert] = useState({})
+
   return (
     <div className="main-container animated fadeIn">
       <div className="main-header">
@@ -207,7 +209,7 @@ const MainMenu = ({ path }) => {
           ? <div className="loading-section-container">
               <LoadingComp />
             </div> 
-          : <ActiveTab {...activeProps()} />
+          : <ActiveTab {...activeProps()} setAlert={setAlert} />
       }
       <div className='navigation-buttons-container'>
         {canShowPrevOrNextButton('previous')
@@ -219,11 +221,20 @@ const MainMenu = ({ path }) => {
         title='Campaign Type'
         text='This block of text will explain to the user what they need to do in this section of the wizard. Each section is different, therefore this block is made up of dynamic text.'
       />
+      {
+        Object.keys(alert).length > 0
+          && <Alert 
+            icon={alert.icon}
+            title={alert.title}
+            message={alert.message}
+            handleClick={() => setAlert({})}
+             />
+      }
       {/* Caso: Se creo una nueva agencia */}
        {/* <Alert 
-        icon="far fa-file-plus"
-        title="Congratulations!"
-        message="A new Agency has been created sucessfully"
+         icon="far fa-file-plus"
+         title="Congratulations!"
+         message="A new Agency has been created sucessfully"
        /> */}
       {/* Caso: Se actualizo una nueva agencia */}
         {/* <Alert 

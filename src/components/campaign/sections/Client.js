@@ -7,18 +7,21 @@ import {
   getUserClients as getUserClientsRequest,
   createUserClient as createUserClientRequest,
   updateUserClient as updateUserClientRequest,
-  removeUserClient as removeUserAgencyRequest 
+  removeUserClient as removeUserAgencyRequest,
+  request
 } from '../../../_services'
 import useEntityHandler from '../../../_helpers/useEntityHandler'
 import CardButton from '../../CardButton'
 import ConfigurationCard from '../../ConfigurationCard'
+import CreateNewCard from '../CreateNewCard'
 import { useLoader } from '../../../_helpers/Loader'
 
-const ClientsList = ({ clients, updateClient }) => (
+const ClientsList = ({ clients, goToUpdateClient, setActiveTab }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
             {
-                clients.map((client, i) => (
+              clients.length > 0
+                ? clients.map((client, i) => (
                     <CardClient 
                       clientId={client.id}
                       clientName={client.name}
@@ -28,46 +31,53 @@ const ClientsList = ({ clients, updateClient }) => (
                       contactEmail="ray@mediagistic.com"
                       blueBtnText="Update"
                       key={client.id}
-                      handleClick={() => updateClient(client)}
+                      handleClick={() => goToUpdateClient(client)}
                     /> 
                 ))
+                : <CreateNewCard title='There are no clients' entity='Client' handleClick={() => setActiveTab(2)} />
             }
         </div>
     </div>
 )
 
-const MyClients = ({ clients, updateClient }) => (
+const MyClients = ({ clients, goToUpdateClient, setActiveTab }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
-        {
-            clients.map((client, i) => (
-                <CardClient 
-                  clientId={client.id}
-                  clientName={client.name}
-                  clientAddress="Test address"
-                  contactName="Test name"
-                  contactPhone="Test phone"
-                  contactEmail="ray@mediagistic.com"
-                  blueBtnText="Update"
-                  key={client.id}
-                  handleClick={() => updateClient(client)}
-                /> 
-            ))
-        }
+             {
+              clients.length > 0
+                ? clients.map((client, i) => (
+                    <CardClient 
+                      clientId={client.id}
+                      clientName={client.name}
+                      clientAddress="Test address"
+                      contactName="Test name"
+                      contactPhone="Test phone"
+                      contactEmail="ray@mediagistic.com"
+                      blueBtnText="Update"
+                      key={client.id}
+                      handleClick={() => goToUpdateClient(client)}
+                    /> 
+                ))
+                : <CreateNewCard title='There are no clients' entity='Client' handleClick={() => setActiveTab(2)} />
+             }
         </div>
     </div>
 )
 
 const ClientConfiguration = (props) => {
     const token = localStorage.getItem('token')
-    const { isThereActiveEntity, entity, setMyClientsAsActive, agencies } = props
-    const clientLoader = useLoader()
+    const { isThereActiveEntity, entity, setMyClientsAsActive, agencies, setAlert, createClient, updateClient,removeClient } = props
     const [client, setClient] = useState(() => {
         if (!isThereActiveEntity())
-          return { id: '', name: '', agencyId: '' }
+          return {  name: '' }
         else
           return { ...entity() }
     })
+    const loaders = {
+      'create': useLoader(),
+      'update': useLoader(),
+      'remove': useLoader()
+    }
     const handleChange = event => {
         setClient({
           ...client,
@@ -82,49 +92,79 @@ const ClientConfiguration = (props) => {
         }
     }
     const createUserClient = () => {
-        if (client.name.length && client.agencyId) {
-            clientLoader.loading()
-            createUserClientRequest(token, client)
-              .then(handleResponse)
-              .finally(clientLoader.loaded)
+        if (client.name.length && agenciesToChoose.activeTab()) {
+            loaders['create'].loading()
+            request()
+              .then(() => {
+                  createClient({ name: client.name, agencyId: agenciesToChoose.activeTab().id })
+                  setAlert({
+                    title: 'Success!',
+                    message: 'The client was created',
+                    icon: 'fas fa-sync-alt'
+                  })
+                  setMyClientsAsActive()
+              })
+              .finally(loaders['create'].loaded)
         }
     }
-    const canUpdateClient = () => (client.name.length && client.agencyId && client.agencyName && client.id)
+    const canUpdateClient = () => (client.name.length && client.agencyId)
     const updateUserClient = () => { 
-        console.log(client, agencies)
         if (canUpdateClient()) {
-            clientLoader.loading()
-            updateUserClientRequest(token, client)
-              .then(handleResponse)
-              .finally(clientLoader.loaded)    
+            loaders['update'].loading()
+            request()
+              .then(() => {
+                updateClient(client.id, client.name)
+                setAlert({
+                    title: 'Success!',
+                    message: 'The client was updated',
+                    icon: 'fas fa-sync-alt'
+                })
+                  setMyClientsAsActive()
+              })
+              .finally(loaders['update'].loaded)    
         }
     }
     const removeUserClient = () => {
-        clientLoader.loading()
-        removeUserAgencyRequest(token, client.id)
-          .then(handleResponse)
-          .finally(clientLoader.loaded)
+        loaders['remove'].loading()
+        request()
+          .then(() => {
+            removeClient(client.id)
+            setAlert({
+                title: 'Success!',
+                message: 'The client was removed',
+                icon: 'fas fa-sync-alt'
+            })
+            setMyClientsAsActive()
+          })
+          .finally(loaders['remove'].loaded)
     }
+
+    const agenciesToChoose = useTabController([null, ...agencies])
 
     useEffect(() => {
         if (!isThereActiveEntity())
-          setClient({ id: '', name: '', agencyId: '', agencyName: '' })
+          setClient({ name: '', })
         else
           setClient({ ...entity() })
     
-        return () => setClient({})
+        return () => {
+          setClient({})
+          for (let key in loaders) {
+            loaders[key].loaded()
+          }
+        }
       }, [entity()])
 
     return <div className="client-config-container animated fadeInUp">
-        <ConfigurationCard entity={client} handleChange={handleChange} itemsName='Campaigns' entityName='Client' isThereActiveEntity={isThereActiveEntity} />
+        <ConfigurationCard agencies={agenciesToChoose} entity={client} handleChange={handleChange} itemsName='Campaigns' entityName='Client' isThereActiveEntity={isThereActiveEntity} />
         <div className="crud-btn-container">
         { 
             !isThereActiveEntity()
-            ? <CardButton text='Create' iconClassName='far fa-file-plus' handleClick={createUserClient} isLoading={clientLoader.isLoading} />
+            ? <CardButton text='Create' iconClassName='far fa-file-plus' handleClick={createUserClient} isLoading={loaders['create'].isLoading} />
             // eslint-disable-next-line react/jsx-fragments
             : <> 
-                <CardButton text='Update' iconClassName='fas fa-sync-alt' isLoading={clientLoader.isLoading} handleClick={updateUserClient} />
-                <CardButton text='Delete' iconClassName='fas fa-trash-alt' isLoading={clientLoader.isLoading} handleClick={removeUserClient} />
+                <CardButton text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={updateUserClient} />
+                <CardButton text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={removeUserClient} />
               </>
         }
         </div>
@@ -132,7 +172,7 @@ const ClientConfiguration = (props) => {
 }
 
 
-const ClientMyAccount = () => {
+const ClientMyAccount = ({ setAlert }) => {
     const token = localStorage.getItem('token')
     const { data, setData } = React.useContext(UserContext)
     const { clients, agencies } = data
@@ -145,22 +185,46 @@ const ClientMyAccount = () => {
     const ActiveTab = activeTab().Component
     const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
     const setMyClientsAsActive = () => {
-        getUserClientsRequest(token)
-          .then((response) => {
-            setData({
-              ...data,
-              clients: response.data 
-            })
-            setActiveTab(1)
-          })
+        // getUserClientsRequest(token)
+        //   .then((response) => {
+        //     setData({
+        //       ...data,
+        //       clients: response.data 
+        //     })
+        //     setActiveTab(1)
+        //   })
+        setActiveTab(1)
     }
-    const updateClient = (client) => {
-        setEntity({
-            id: client.id,
-            name: client.name,
-            agencyId: client.agency.id,
-            agencyName: client.agency.name
+    const createClient = (client) => {
+      const newClient = {
+        ...client,
+        id: clients.length + 1,
+      }
+      setData({
+        ...data,
+        clients: [...clients, newClient]
+      })
+    }
+    const updateClient = (clientId, clientNewName) => {
+      let clientToUpdateIndex = clients.findIndex(client => client.id === clientId)
+      setData({
+        ...data,
+        clients: clients.map((client, i) => {
+          if (i === clientToUpdateIndex)
+              return { ...client, name: clientNewName }
+          else 
+              return client
         })
+      })
+    }
+    const removeClient = (clientId) => {
+      setData({
+        ...data,
+        clients: clients.filter(client => client.id !== clientId)
+      })
+    }
+    const goToUpdateClient = (client) => {
+        setEntity(client)
         setActiveTab(2)
     }
 
@@ -193,8 +257,12 @@ const ClientMyAccount = () => {
               entity={entity} 
               setEntity={setEntity}
               setActiveTab={setActiveTab}
-              updateClient={updateClient}
+              goToUpdateClient={goToUpdateClient}
               agencies={agencies}
+              setAlert={setAlert}
+              createClient={createClient}
+              updateClient={updateClient}
+              removeClient={removeClient}
             />
         </div>
     )

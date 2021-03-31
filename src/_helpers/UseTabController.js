@@ -1,7 +1,7 @@
 export default (tabs, initialProps = {}) => {
   const [activeTab, setActiveTab] = React.useState(0)
   const [activeProps, setActiveProps] = React.useState(initialProps)
-  tabs[activeTab].props = initialProps
+  tabs[activeTab] ? tabs[activeTab].props = initialProps : null
 
   return {
     tabs: () => tabs,

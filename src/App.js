@@ -15,7 +15,6 @@ export default () => {
   const { isAuth } = useContext(Context)
   const { data } = useContext(UserContext)
   useEffect(() => {
-    console.log(data)
     !isAuth && window.localStorage.getItem('token')
       ? window.localStorage.removeItem('token')
       : null

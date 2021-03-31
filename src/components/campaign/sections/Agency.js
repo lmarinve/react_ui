@@ -7,7 +7,8 @@ import {
   getUserAgencies as getUserAgenciesRequest,
   createUserAgency as createUserAgencyRequest,
   updateUserAgency as updateUserAgencyRequest,
-  removeUserAgency as removeUserAgencyRequest
+  removeUserAgency as removeUserAgencyRequest,
+  request
 } from '../../../_services'
 
 import { useLoader } from '../../../_helpers/Loader'
@@ -21,41 +22,55 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
     setActiveTab(1)
   }
 
+  const goToConfiguration = () => setActiveTab(1)
+
     return(
         // CASO: no hay ninguna agencia creada
         // <CreateNewCard 
         //     sectionTitle="Agency"
         //     cardTitle="Agencies"
         // />
-        <div className="agency-list-container animated fadeInUp">
-            <div className="agency-list">
+        
+            agencies.length < 1
+            ? <CreateNewCard 
+              title="There are no agencies"
+              entity="Agency"
+              handleClick={goToConfiguration}
+              />
+            :  <div className="agency-list-container animated fadeInUp">
+              <div className="agency-list">
                 {
                 agencies.map((agency, i) => (
                     <CardAgency 
-                    agencyId={agency.id}
-                    agencyName={agency.name}
-                    agencyAddress="Test address"
-                    contactName="Test name"
-                    contactPhone="Test phone" 
-                    contactEmail="ray@mediagistic.com"
-                    blueBtnText="Update"
-                    key={agency.id}
-                    handleClick={() => updateAgency(agency)}
+                      agencyId={agency.id}
+                      agencyName={agency.name}
+                      agencyAddress="Test address"
+                      contactName="Test name"
+                      contactPhone="Test phone" 
+                      contactEmail="ray@mediagistic.com"
+                      blueBtnText="Update"
+                      key={agency.id}
+                      handleClick={() => updateAgency(agency)}
                     />
                 ))
                 }
-            </div>
-        </div>
+              </div>
+               </div>
+        
     )
 }
 
-const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenciesAsActive }) => {
+const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenciesAsActive, addAgency, updateAgency, removeAgency, setAlert }) => {
   const token = localStorage.getItem('token')
   const [createdAgency, setCreatedAgency] = useState(false)
-  const agencyLoader = useLoader()
+  const loaders = {
+    'create': useLoader(),
+    'update': useLoader(),
+    'remove': useLoader()
+  }
   const [agency, setAgency] = useState(() => {
     if (!isThereActiveEntity())
-      return { id: '', name: '' }
+      return { name: '' }
     else
       return { ...entity() }
   })
@@ -74,62 +89,87 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
   }
   const createUserAgency = () => {
     if (agency.name.length) {
-      agencyLoader.loading()
-      createUserAgencyRequest(token, agency)
-        .then(responseHandler)
-        .finally(agencyLoader.loaded)
+      loaders['create'].loading()
+      request()
+        .then(() => {
+          addAgency(agency.name)
+          setAlert({
+            title: 'Success!',
+            message: 'The agency was created',
+            icon: 'fas fa-sync-alt'
+          })
+          setMyAgenciesAsActive()
+        })
+        .finally(loaders['create'].loaded)
 
     }
     return 0
   }
   const updateUserAgency = () => {
     if (agency.name.length) {
-      agencyLoader.loading()
-      updateUserAgencyRequest(token, agency)
-        .then(responseHandler)
-        .finally(agencyLoader.loaded)
+      loaders['update'].loading()
+      request()
+        .then(() => {
+          updateAgency(entity().id, agency.name)
+          setAlert({
+            title: 'Success!',
+            message: 'The agency was updated',
+            icon: 'fas fa-sync-alt'
+          })
+          setMyAgenciesAsActive()
+        })
+        .finally(loaders['update'].loaded)
 
     }
     return 0
   }
   const removeUserAgency = () => {
-      agencyLoader.loading()
-      removeUserAgencyRequest(token, agency.id)
-        .then(responseHandler)
-        .finally(agencyLoader.loaded)
+      loaders['remove'].loading()
+      request()
+        .then(() => {
+          removeAgency(entity().id)
+          setAlert({
+            title: 'Success!',
+            message: 'The agency was removed',
+            icon: 'fas fa-sync-alt'
+          })
+          setMyAgenciesAsActive()
+        })
+        .finally(loaders['remove'].loaded)
 
   }
 
   useEffect(() => {
     if (!isThereActiveEntity())
-      setAgency({ id: '', name: '' })
+      setAgency({ name: '' })
     else
       setAgency({ ...entity() })
 
-    return () => setAgency({})
+    return () => {
+      setAgency({})
+      for (let key in loaders) {
+        loaders[key].loaded()
+      }
+    }
   }, [entity()])
 
   return <div className="agency-config-container animated fadeInUp">
     {console.log(agency)}
-    <ConfigurationCard entity={agency} handleChange={handleChange} itemsName='Clients' entityName='Agency' />
+    <ConfigurationCard entity={agency} handleChange={handleChange} itemsName='Clients' entityName='Agency' isThereActiveEntity={isThereActiveEntity} />
     <div className="crud-btn-container">
       {
         !isThereActiveEntity()
-          ? <CardButton text='Create' iconClassName='far fa-file-plus' handleClick={createUserAgency} isLoading={agencyLoader.isLoading} />
+          ? <CardButton text='Create' iconClassName='far fa-file-plus' handleClick={createUserAgency} isLoading={loaders['create'].isLoading} />
           : <> 
-            <CardButton text='Update' iconClassName='fas fa-sync-alt' isLoading={agencyLoader.isLoading} handleClick={updateUserAgency} />
-            <CardButton text='Delete' iconClassName='fas fa-trash-alt' isLoading={agencyLoader.isLoading} handleClick={removeUserAgency} />
+            <CardButton text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={updateUserAgency} />
+            <CardButton text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={removeUserAgency} />
             </>
       }
     </div>
-    {
-        createdAgency
-          && <p>Created!</p>
-    }
          </div>
 }
 
-const AgencyMyAccount = () => {
+const AgencyMyAccount = ({ setAlert }) => {
   const token = localStorage.getItem('token')
   const { data, setData } = React.useContext(UserContext)
   const { agencies } = data
@@ -140,14 +180,43 @@ const AgencyMyAccount = () => {
   const ActiveTab = activeTab().Component
   const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
   const setMyAgenciesAsActive = () => {
-      getUserAgenciesRequest(token)
-        .then((response) => {
-          setData({
-            ...data,
-            agencies: response.data 
-          })
-          setActiveTab(0)
-        })
+      // getUserAgenciesRequest(token)
+      //   .then((response) => {
+      //     setData({
+      //       ...data,
+      //       agencies: response.data 
+      //     })
+      //     setActiveTab(0)
+      //   })
+      setActiveTab(0)
+  }
+  const addAgency = agencyName => {
+    const newAgency = {
+      id: agencies.length + 1,
+      name: agencyName
+    }
+    setData({
+      ...data,
+      agencies: [...agencies, newAgency]
+    })
+  }
+  const updateAgency = (agencyId, agencyNewName) => {
+    let agencyToUpdateIndex = agencies.findIndex(agency => agency.id === agencyId)
+    setData({
+      ...data,
+      agencies: agencies.map((agency, i) => {
+        if (i === agencyToUpdateIndex)
+            return { ...agency, name: agencyNewName }
+        else 
+            return agency
+      })
+    })
+  }
+  const removeAgency = (agencyId) => {
+    setData({
+      ...data,
+      agencies: agencies.filter(agency => agency.id !== agencyId)
+    })
   }
 
   return (
@@ -172,12 +241,16 @@ const AgencyMyAccount = () => {
         </div>
       </div>
         <ActiveTab 
-        setMyAgenciesAsActive={setMyAgenciesAsActive} 
-        agencies={agencies} 
-        isThereActiveEntity={isThereActiveEntity} 
-        entity={entity} 
-        setEntity={setEntity}
-        setActiveTab={setActiveTab}
+          setMyAgenciesAsActive={setMyAgenciesAsActive} 
+          agencies={agencies} 
+          isThereActiveEntity={isThereActiveEntity} 
+          entity={entity} 
+          setEntity={setEntity}
+          setActiveTab={setActiveTab}
+          addAgency={addAgency}
+          updateAgency={updateAgency}
+          removeAgency={removeAgency}
+          setAlert={setAlert}
         />                                          
     </div>
   )

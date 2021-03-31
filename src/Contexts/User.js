@@ -6,15 +6,50 @@ const Context = createContext({})
 
 export const UserProvider = ({ children }) => {
   const [data, setData] = useState({
+    myInfo: {
+      username: 'Demo user 123',
+      email: 'demouser@gmail.com',
+      password: 'pajarraco123',
+      firstName: 'Luis',
+      lastName: 'Pajarraco',
+      userId: 1,
+      agencyName: 'demo',
+      agencyId: 1
+    },
+    users: [
+      {
+        username: 'joalbert123',
+        email: 'joalbert@gmail.com',
+        password: 'pajarraco123',
+        firstName: 'jose',
+        lastName: 'milano',
+        userId: 2,
+        agencyName: 'demo2',
+        agencyId: 2
+      },
+      {
+        username: 'jeanpier 123',
+        email: 'jeanpier@gmail.com',
+        password: 'pajarraco123',
+        firstName: 'Luis',
+        lastName: 'monse',
+        userId: 3,
+        agencyName: 'demo',
+        agencyId: 1
+      }
+    ],
     agencies: [],
     clients: [],
     adfluence_campaigns: []
   })
+  const [alert, setAlert] = useState({})
   const [activeMenu, setActiveMenu] = useState('')
   const value = {
     data,
     setData,
-    cleanData: () => setData([]),
+    alert,
+    setAlert: setAlert,
+    cleanData: () => setData({}),
     mockedData: {
       agencies: [
         {

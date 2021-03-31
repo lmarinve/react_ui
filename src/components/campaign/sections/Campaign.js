@@ -1,101 +1,163 @@
 /* eslint-disable react/jsx-fragments */
-import React from 'react'
+import React, { useEffect } from 'react'
 import SearchList from '../SearchList'
 import CardCampaign from '../CardCampaign'
 import UseTabController from '../../../_helpers/UseTabController'
+import useEntityHandler from '../../../_helpers/useEntityHandler'
 import UserContext from '../../../Contexts/User'
+import ConfigurationCard from '../../ConfigurationCard'
+import CardButton from '../../CardButton'
 
 import CampaignPhoto from '../../../images/lucia3.jpg'
+import CreateNewCard from '../CreateNewCard'
+import { useLoader } from '../../../_helpers/Loader'
+import {
+  request
+} from '../../../_services'
 
-const CampaignsList = ({ adfluence_campaigns }) => (
+const CampaignsList = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) => (
   <div className="campaign-list-container animated fadeInUp">
     <div className="campaign-list">
-        <CardCampaign 
-          campaignImage={CampaignPhoto}
-          CampaignId="Test ID" 
-          CampaignName="Coconut Bay January 2021"
-          CampaignStart="2021-01-19"
-          CampaignEnd="2021-10-19"
-          CampaignBudget="5.00"
-          CampaignStatus="Active"
-          blueBtnText="Update"
-        />                    
-        <CardCampaign 
-          campaignImage={CampaignPhoto}
-          CampaignId="Test ID" 
-          CampaignName="Coconut Bay January 2021"
-          CampaignStart="2021-01-19"
-          CampaignEnd="2021-10-19"
-          CampaignBudget="5.00"
-          CampaignStatus="Active"
-          blueBtnText="Update"
-        />
         {
-            adfluence_campaigns.map((campaign, i) => (
-                <CardCampaign 
-                  campaignImage={CampaignPhoto}
-                  CampaignId="Test ID" 
-                  CampaignName={campaign.name}
-                  CampaignStart="2021-01-19"
-                  CampaignEnd="2021-10-19"
-                  CampaignBudget="5.00"
-                  CampaignStatus="Active"
-                  blueBtnText="Update"
-                  key={campaign.id}
+            adfluence_campaigns.length > 0
+              ? adfluence_campaigns.map((campaign, i) => (
+                  <CardCampaign 
+                    campaignImage={CampaignPhoto}
+                    CampaignId={campaign.id}
+                    CampaignName={campaign.name}
+                    CampaignStart="2021-01-19"
+                    CampaignEnd="2021-10-19"
+                    CampaignBudget="5.00"
+                    CampaignStatus="Active"
+                    blueBtnText="Update"
+                    handleClick={() => goToUpdateCampaign(campaign)}
+                    key={campaign.id}
+                  />
+              ))
+              : <CreateNewCard
+                title='There are no adfluence campaigns'
+                entity='Campaign'
+                handleClick={() => setActiveTab(2)}
                 />
-            ))
         }
     </div> 
   </div>
 )
 
-const MyCampaigns = ({ adfluence_campaigns }) => (
+const MyCampaigns = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) => (
   <>
     <SearchList animation="animated fadeInDown" searchPlaceholder="Search campaigns..." />
     <div className="campaign-list-container animated fadeInUp">
       <div className="campaign-list">
-        <CardCampaign 
-          campaignImage={CampaignPhoto}
-          CampaignId="Test ID" 
-          CampaignName="Coconut Bay January 2021"
-          CampaignStart="2021-01-19"
-          CampaignEnd="2021-10-19"
-          CampaignBudget="5.00"
-          CampaignStatus="Active"
-          blueBtnText="Update"
-        />                    
-        <CardCampaign 
-          campaignImage={CampaignPhoto}
-          CampaignId="Test ID" 
-          CampaignName="Coconut Bay January 2021"
-          CampaignStart="2021-01-19"
-          CampaignEnd="2021-10-19"
-          CampaignBudget="5.00"
-          CampaignStatus="Active"
-          blueBtnText="Update"
-        />
-        {
-            adfluence_campaigns.map((campaign, i) => (
-                <CardCampaign 
-                  campaignImage={CampaignPhoto}
-                  CampaignId="Test ID" 
-                  CampaignName={campaign.name}
-                  CampaignStart="2021-01-19"
-                  CampaignEnd="2021-10-19"
-                  CampaignBudget="5.00"
-                  CampaignStatus="Active"
-                  blueBtnText="Update"
-                  key={campaign.id}
+      {
+            adfluence_campaigns.length > 0
+              ? adfluence_campaigns.map((campaign, i) => (
+                  <CardCampaign 
+                    campaignImage={CampaignPhoto}
+                    CampaignId={campaign.id}
+                    CampaignName={campaign.name}
+                    CampaignStart="2021-01-19"
+                    CampaignEnd="2021-10-19"
+                    CampaignBudget="5.00"
+                    CampaignStatus="Active"
+                    blueBtnText="Update"
+                    handleClick={() => goToUpdateCampaign(campaign)}
+                    key={campaign.id}
+                  />
+              ))
+              : <CreateNewCard
+                title='There are no adfluence campaigns'
+                entity='Campaign'
+                handleClick={() => setActiveTab(2)}
                 />
-            ))
         }
       </div>
     </div>
   </>
 )
 
-const CampaignConfiguration = () => (
-    <div className="campaign-config-container animated fadeInUp">
+const CampaignConfiguration = (props) => {
+    const { isThereActiveEntity, entity, clients, setAlert, createCampaign, updateCampaign, removeCampaign, setMyCampaignsAsActive } = props
+    const [campaign, setCampaign] = React.useState(() => {
+        if (!isThereActiveEntity())
+          return { name: '' }
+        else
+          return { ...entity() }
+    })
+    const loaders = {
+        'create': useLoader(),
+        'update': useLoader(),
+        'remove': useLoader()
+    }
+    const handleChange = event => {
+        setCampaign({
+          ...campaign,
+          [event.target.name]: event.target.value
+        })
+    }
+    const create = () => {
+        if (campaign.name.length && clientsToChoose.activeTab()) {
+            loaders['create'].loading()
+            request()
+              .then(() => {
+                  createCampaign({ name: campaign.name, clientId: clientsToChoose.activeTab().id })
+                  setAlert({
+                    title: 'Success!',
+                    message: 'The campaign was created',
+                    icon: 'fas fa-sync-alt'
+                  })
+                  setMyCampaignsAsActive()
+              })
+              .finally(loaders['create'].loaded)
+        }
+    }
+    const update = () => {
+        if (campaign.name.length) {
+            loaders['update'].loading()
+            request()
+              .then(() => {
+                updateCampaign(campaign.id, campaign.name)
+                setAlert({
+                    title: 'Success!',
+                    message: 'The campaign was updated',
+                    icon: 'fas fa-sync-alt'
+                })
+                  setMyCampaignsAsActive()
+              })
+              .finally(loaders['update'].loaded)    
+        }
+    }
+    const remove = () => {
+        loaders['remove'].loading()
+        request()
+          .then(() => {
+            removeCampaign(campaign.id)
+            setAlert({
+                title: 'Success!',
+                message: 'The campaign was removed',
+                icon: 'fas fa-sync-alt'
+            })
+            setMyCampaignsAsActive()
+          })
+          .finally(loaders['remove'].loaded)
+    }
+    const clientsToChoose = UseTabController(clients)
+
+    useEffect(() => {
+        if (!isThereActiveEntity())
+          setCampaign({ name: '', })
+        else
+          setCampaign({ ...entity() })
+    
+        return () => {
+          setCampaign({})
+          for (let key in loaders) {
+            loaders[key].loaded()
+          }
+        }
+      }, [entity()])
+
+    return <div className="campaign-config-container animated fadeInUp">
     <div className="card-container">
         <div className="campaign-photo-container">
             <div className="campaign-photo">
@@ -109,12 +171,8 @@ const CampaignConfiguration = () => (
         </div>
         <div className="campaign-data-container">
             <div className="row">
-                <label>Campaign ID:</label>
-                <input type="text" />
-            </div>
-            <div className="row">
                 <label>Name:</label>
-                <input type="text" />
+                <input type="text" name='name' onInput={handleChange} value={campaign.name} />
             </div>
             <div className="row">
                 <label>Start date:</label>
@@ -141,9 +199,11 @@ const CampaignConfiguration = () => (
                         <i className="select-icon fas fa-angle-down" />
                     </button>
                     <div className="list-container">
-                        <label>Client ID</label>
-                        <label>Client ID</label>
-                        <label>Client ID</label>
+                        {
+                            clientsToChoose.tabs().map((client, i) => (
+                                <label key={client.id} onClick={() => clientsToChoose.setActiveTab(i)} className={clientsToChoose.isActiveTab(i) ? 'active' : ''}> {client.name} </label>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="select-container">
@@ -183,16 +243,21 @@ const CampaignConfiguration = () => (
         </div>
     </div>
     <div className="crud-btn-container">
-      <button className="crud-btn"><i className="crud-icon far fa-file-plus" />Create</button>
-      <button className="crud-btn"><i className="crud-icon fas fa-sync-alt" />Update</button>
-      <button className="crud-btn"><i className="crud-icon fas fa-trash-alt" />Delete</button>
+        {
+            isThereActiveEntity()
+              ? <>
+                <CardButton text='Update' iconClassName='fas fa-sync-alt' handleClick={update} isLoading={loaders['update'].isLoading} /> 
+                <CardButton text='Delete' iconClassName='fas fa-trash-alt' handleClick={remove} isLoading={loaders['remove'].isLoading} />
+                </>
+              : <CardButton text='Create' iconClassName='far fa-file-plus' handleClick={create} isLoading={loaders['create'].isLoading} />
+        }
     </div>
-    </div>
-)
+           </div>
+}
 
-const CampaignMyAccount = () => {
-    const { data } = React.useContext(UserContext)
-    const { adfluence_campaigns } = data
+const CampaignMyAccount = ({ setAlert }) => {
+    const { data, setData } = React.useContext(UserContext)
+    const { adfluence_campaigns, clients } = data
 
     const campaignTabs = [
             { name: 'Campaigns list', Component: CampaignsList },
@@ -202,17 +267,74 @@ const CampaignMyAccount = () => {
     const { activeTab, isActiveTab, tabs, setActiveTab } = UseTabController(campaignTabs)
 
     const ActiveTab = activeTab().Component
+    const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
+    const setMyCampaignsAsActive = () => {
+        setActiveTab(1)
+    }
+    const createCampaign = (campaign) => {
+        const newCampaign = {
+          ...campaign,
+          id: adfluence_campaigns.length + 1,
+        }
+        setData({
+          ...data,
+          adfluence_campaigns: [...adfluence_campaigns, newCampaign]
+        })
+      }
+      const updateCampaign = (campaignId, campaignNewName) => {
+        let campaignToUpdateIndex = adfluence_campaigns.findIndex(campaign => campaign.id === campaignId)
+        setData({
+          ...data,
+          adfluence_campaigns: adfluence_campaigns.map((campaign, i) => {
+            if (i === campaignToUpdateIndex)
+                return { ...campaign, name: campaignNewName }
+            else 
+                return campaign
+          })
+        })
+      }
+      const removeCampaign = (campaignId) => {
+        setData({
+          ...data,
+          adfluence_campaigns: adfluence_campaigns.filter(campaign => campaign.id !== campaignId)
+        })
+      }
+      const goToUpdateCampaign = (campaign) => {
+          setEntity(campaign)
+          setActiveTab(2)
+      }
 
     return(
         <div className="campaign-section-container animated fadeInUp">
             <div className="campaign-section-menu">
                 <div className="campaign-menu-box" style={tabs().length > 1 ? {} : { flexDirection: 'column', alignItems: 'center' }}>
                     {tabs().map((tab, index) => (
-                        <button className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
+                        <button
+                          key={index}
+                          className={isActiveTab(index) ? 'active' : ''} 
+                          onClick={() => {
+                              if (index === 2)
+                                  setEntity({})
+                              setActiveTab(index)
+                          }}
+                        > {tab.name} 
+                        </button>
                     ))}
                 </div>
             </div>
-           <ActiveTab  adfluence_campaigns={adfluence_campaigns} />
+           <ActiveTab 
+             adfluence_campaigns={adfluence_campaigns}
+             entity={entity}
+             isThereActiveEntity={isThereActiveEntity}
+             setMyCampaignsAsActive={setMyCampaignsAsActive}
+             createCampaign={createCampaign}
+             updateCampaign={updateCampaign}
+             removeCampaign={removeCampaign}
+             goToUpdateCampaign={goToUpdateCampaign}
+             setActiveTab={setActiveTab}
+             clients={clients}
+             setAlert={setAlert}
+           />
         </div>
     )
 }

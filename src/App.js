@@ -10,9 +10,12 @@ import Main from './pages/Main'
 import WelcomeSignup from './pages/WelcomeSignup'
 import WaitingActivation from './pages/WaitingActivation'
 import ValidateAccount from './pages/ValidateAccount'
+import { useState } from 'react'
 
 export default () => {
-  const { isAuth } = useContext(Context)
+  
+  // const { isAuth } = useContext(Context)
+  const [isAuth, setIsAuth] = useState(true) 
   const { data } = useContext(UserContext)
   useEffect(() => {
     !isAuth && window.localStorage.getItem('token')

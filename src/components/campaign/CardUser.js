@@ -1,7 +1,13 @@
 import React from 'react'
+import { Select, SelectCheckbox } from './Select'
+
+// Elementos de prueba para las selects
+const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
+const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
 
 const CardNewUser = (props) =>{
-    const {username, email, IdUserDemo, IdUserClient, IdUserStaff, clientId1, clientId2, clientId3, btnText, handleClick} = props
+    const {username, email, btnText, handleClick} = props
+
     return(
         <div className="card-container">
             <div className="user-data-container">
@@ -18,42 +24,30 @@ const CardNewUser = (props) =>{
                 <div className="right">
                     <label>User type:</label>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserDemo} />
-                        <label htmlFor={IdUserDemo}><i className="user-type-icon fas fa-user" />Demo</label>
+                        <input type="checkbox"/>
+                        <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserClient} />
-                        <label htmlFor={IdUserClient}><i className="user-type-icon fas fa-user-check" />Client</label>
+                        <input type="checkbox" />
+                        <label><i className="user-type-icon fas fa-user-tag" />Client</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserStaff} />
-                        <label htmlFor={IdUserStaff}><i className="user-type-icon fas fa-user-cog" />Staff</label>
+                        <input type="checkbox" />
+                        <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
                     </div>
                 </div>
             </div>
             <div className="user-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        My Agency
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label className="agency-option active" tabIndex="1">Demo</label>
-                        <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
-                        <label className="agency-option" tabIndex="3">Agency Name</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        My Clients
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <div className="row"><input type="checkbox" id={clientId1} /><label className="client-option" htmlFor={clientId1}>Demo</label></div>
-                        <div className="row"><input type="checkbox" id={clientId2} /><label className="client-option" htmlFor={clientId2}>Coconut Bay</label></div>
-                        <div className="row"><input type="checkbox" id={clientId3} /><label className="client-option" htmlFor={clientId3}>Saint Lucia</label></div>
-                    </div>
-                </div>
+                <Select 
+                    title="My Agency"
+                    elementsName="agencies"
+                    options={agenciesTest}
+                />
+                <SelectCheckbox 
+                    title="My Clients"
+                    elementsName="clients"
+                    options={clientsTest}
+                />
             </div>
             <div className="blue-btn-container">
                 <button className="blue-btn" onClick={handleClick}>{btnText}</button>
@@ -124,28 +118,16 @@ const CardUser = (props) => {
                 </div>
             </div>
             <div className="user-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        My Agency
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label className="agency-option active" tabIndex="1">Demo</label>
-                        <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
-                        <label className="agency-option" tabIndex="3">Agency Name</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        My Clients
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <div className="row"><input type="checkbox" id={clientId1} /><label className="client-option" htmlFor={clientId1}>Demo</label></div>
-                        <div className="row"><input type="checkbox" id={clientId2} /><label className="client-option" htmlFor={clientId2}>Coconut Bay</label></div>
-                        <div className="row"><input type="checkbox" id={clientId3} /><label className="client-option" htmlFor={clientId3}>Saint Lucia</label></div>
-                    </div>
-                </div>
+                <Select 
+                    title="My Agency"
+                    elementsName="agencies"
+                    options={agenciesTest}
+                />
+                <SelectCheckbox 
+                    title="My Clients"
+                    elementsName="clients"
+                    options={clientsTest}
+                />
             </div>
             <div className="blue-btn-container">
                 <button className="blue-btn" onClick={handleClick}>{btnText}</button>
@@ -154,4 +136,4 @@ const CardUser = (props) => {
     )
 }
 
-export { CardNewUser, CardUser}
+export { CardNewUser, CardUser }

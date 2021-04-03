@@ -37,26 +37,25 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
               entity="Agency"
               handleClick={goToConfiguration}
               />
-            :  <div className="agency-list-container animated fadeInUp">
-              <div className="agency-list">
-                {
-                agencies.map((agency, i) => (
-                    <CardAgency 
-                      agencyId={agency.id}
-                      agencyName={agency.name}
-                      agencyAddress="Test address"
-                      contactName="Test name"
-                      contactPhone="Test phone" 
-                      contactEmail="ray@mediagistic.com"
-                      blueBtnText="Update"
-                      key={agency.id}
-                      handleClick={() => updateAgency(agency)}
-                    />
-                ))
-                }
-              </div>
-               </div>
-        
+            :   <div className="agency-list-container animated fadeInUp">
+                    <div className="agency-list">
+                        {
+                        agencies.map((agency, i) => (
+                            <CardAgency 
+                            agencyId={agency.id}
+                            agencyName={agency.name}
+                            agencyAddress="Test address"
+                            contactName="Test name"
+                            contactPhone="Test phone" 
+                            contactEmail="ray@mediagistic.com"
+                            blueBtnText="Update"
+                            key={agency.id}
+                            handleClick={() => updateAgency(agency)}
+                            />
+                        ))
+                        }
+                    </div>
+                </div>
     )
 }
 

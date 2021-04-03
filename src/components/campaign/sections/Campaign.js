@@ -7,6 +7,7 @@ import useEntityHandler from '../../../_helpers/useEntityHandler'
 import UserContext from '../../../Contexts/User'
 import ConfigurationCard from '../../ConfigurationCard'
 import CardButton from '../../CardButton'
+import { Select } from '../Select'
 
 import CampaignPhoto from '../../../images/lucia3.jpg'
 import CreateNewCard from '../CreateNewCard'
@@ -77,6 +78,12 @@ const MyCampaigns = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) 
 )
 
 const CampaignConfiguration = (props) => {
+
+    const clientsTest = ["Client ID", "Client ID", "Client ID"]
+    const injectionTest = ["Injection tags #1", "Injection  tags #2", "Injection tags #3"]
+    const adChannelTest = ["Ad channel #1", "Ad channel #2", "Ad channel #3"]
+    const usersTest = ["lmarinvera@mediagistic.com", "ray@mediagistic.com"]
+
     const { isThereActiveEntity, entity, clients, setAlert, createCampaign, updateCampaign, removeCampaign, setMyCampaignsAsActive } = props
     const [campaign, setCampaign] = React.useState(() => {
         if (!isThereActiveEntity())
@@ -193,7 +200,13 @@ const CampaignConfiguration = (props) => {
                 </div>
             </div>
             <div className="campaign-selects">
-                <div className="select-container">
+                <Select 
+                    title="Clients"
+                    elementsName="clients"
+                    isSelectable
+                    options={clientsTest}
+                />
+                {/* <div className="select-container">
                     <button className="select-btn">
                         Client
                         <i className="select-icon fas fa-angle-down" />
@@ -205,40 +218,27 @@ const CampaignConfiguration = (props) => {
                             ))
                         }
                     </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        Copy injection tags
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label>Copy injection tags #1</label>
-                        <label>Copy injection tags #2</label>
-                        <label>Copy injection tags #3</label>
-                    </div>
-                </div>
+                </div> */}
+                <Select 
+                    title="Copy injection tags"
+                    elementsName="Copy injection tags"
+                    isSelectable
+                    options={injectionTest}
+                />
             </div>
             <div className="campaign-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Ad channel
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label>Ad channel #1</label>
-                        <label>Ad channel #2</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        Users
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label>lmarinvera@mediagistic.com</label>
-                        <label>lmarinve@gmail.com</label>
-                    </div>
-                </div>
+                <Select 
+                    title="Ad channel"
+                    elementsName="Ad channels"
+                    isSelectable
+                    options={adChannelTest}
+                />
+                <Select 
+                    title="Users"
+                    elementsName="users"
+                    isSelectable
+                    options={usersTest}
+                />
             </div>
         </div>
     </div>

@@ -1,9 +1,17 @@
 import React from 'react'
+import { Select, SelectCheckbox } from './Select'
 
 import GoogleLogo from '../../images/G-Logo.png'
 
-
 const CardAdChannel = (props) =>{
+
+    const injectionTest = ["Airfare", "Airline", "Destination city name", "Destination airport code", "Origin temperature", "Destination temperature", "Snow", "Origin city name", "Destination city name"]
+    const cityTest = ["Miami, FL", "Phoenix, AZ", "Austin, TX"]
+    const channelTypeTest = ["Google", "Facebook"]
+    const actionTypeTest = ["Action Type #1", "Action Type #2"]
+    const campaignTest = ["Campaign #1", "Campaign #2"]
+    const rulesTest = ["Rules #1", "Rules #2"]
+
     const {AdChannelId, AdChannelName, AdChannelBudget, AdGroupId, AdAccountId, BaseAdId, AdId, AdCreativeId, PixelId, Headline, injectionId1, injectionId2, injectionId3, injectionId4, injectionId5, injectionId6, injectionId7, injectionId8, injectionId9} = props
     return(
         <div className="card-container">
@@ -54,78 +62,40 @@ const CardAdChannel = (props) =>{
                 </div>
             </div>
             <div className="ad-channel-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Copy injection
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container">
-                        <div className="row"><input type="checkbox" id={injectionId1}/><label className="injection-option" htmlFor={injectionId1}>Airfare</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId2}/><label className="injection-option" htmlFor={injectionId2}>Airline</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId3}/><label className="injection-option" htmlFor={injectionId3}>Destination city name</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId4}/><label className="injection-option" htmlFor={injectionId4}>Destination airport code</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId5}/><label className="injection-option" htmlFor={injectionId5}>Origin temperature</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId6}/><label className="injection-option" htmlFor={injectionId6}>Destination temperature</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId7}/><label className="injection-option" htmlFor={injectionId7}>Snow</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId8}/><label className="injection-option" htmlFor={injectionId8}>Origin city name</label></div>
-                        <div className="row"><input type="checkbox" id={injectionId9}/><label className="injection-option" htmlFor={injectionId9}>Destination city name</label></div>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        City
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container">
-                        <label>Miami, FL</label>
-                        <label>Phoenix, AZ</label>
-                        <label>Austin, TX</label>
-                    </div>
-                </div>
+                <SelectCheckbox
+                    title="Copy injection"
+                    elementsName="Copy injections"
+                    options={injectionTest}
+                />
+                <Select 
+                    title="City"
+                    elementsName="Cities"
+                    options={cityTest}
+                />
             </div>
             <div className="ad-channel-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Channel type
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container channel-type">
-                        <label><img className="google-icon" src={GoogleLogo} />Google</label>
-                        <label><i className="facebook-icon fab fa-facebook-f"></i>Facebook</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        Action type
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container">
-                        <label>Action type #1</label>
-                        <label>Action type #2</label>
-                    </div>
-                </div>
+                <Select 
+                    title="Channel type"
+                    elementsName="Channel types"
+                    options={channelTypeTest}
+                />
+                <Select 
+                    title="Action types"
+                    elementsName="Channel types"
+                    options={actionTypeTest}
+                />
             </div>
             <div className="ad-channel-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Campaigns
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container">
-                        <label>Campaign #1</label>
-                        <label>Campaign #2</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        Rules
-                        <i className="select-icon fas fa-angle-down"></i>
-                    </button>
-                    <div className="list-container">
-                        <label>Rules #1</label>
-                        <label>Rules #2</label>
-                    </div>
-                </div>
+                <Select 
+                    title="Campaigns"
+                    elementsName="Campaigns"
+                    options={campaignTest}
+                />
+                <Select 
+                    title="Rules"
+                    elementsName="Rules"
+                    options={rulesTest}
+                />
             </div>
             <div className="blue-btn-container">
                 <button className="blue-btn">Update</button>

@@ -3,6 +3,7 @@ import SearchList from '../SearchList'
 import CardAdChannel from '../CardAdChannel'
 import useTabController from '../../../_helpers/UseTabController'
 import UserContext from '../../../Contexts/User'
+import { Select, SelectCheckbox } from '../Select'
 
 import GoogleLogo from '../../../images/G-Logo.png'
 
@@ -107,153 +108,129 @@ const MyAdChannels = () => (
     </>
 )
 
-const AdChannelConfiguration = () => (
-    <div className="ad-channel-config-container animated fadeInUp">
-        <div className="card-container">
-            <div className="ad-initial-container">
-                <div className="left">
-                    <div className="row">   
-                        <label>Ad channel ID:</label>
+const AdChannelConfiguration = () => {
+
+    const injectionTest = ["Airfare", "Airline", "Destination city name", "Destination airport code", "Origin temperature", "Destination temperature", "Snow", "Origin city name", "Destination city name"]
+    const cityTest = ["Miami, FL", "Phoenix, AZ", "Austin, TX"]
+    const channelTypeTest = ["Google", "Facebook"]
+    const actionTypeTest = ["Action Type #1", "Action Type #2"]
+    const campaignTest = ["Campaign #1", "Campaign #2"]
+    const rulesTest = ["Rules #1", "Rules #2"]
+
+    return(
+        <div className="ad-channel-config-container animated fadeInUp">
+            <div className="card-container">
+                <div className="ad-initial-container">
+                    <div className="left">
+                        <div className="row">   
+                            <label>Ad channel ID:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Name:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Base budget:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Ad group ID:</label>
+                            <input type="text" />
+                        </div>
+                    </div>
+                    <div className="right">
+                        <div className="row">
+                            <label>Ad account ID:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Base ad ID:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Ad ID:</label>
+                            <input type="text" />
+                        </div>
+                        <div className="row">
+                            <label>Ad creative ID:</label>
+                            <input type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div className="ad-description-container">
+                    <div className="row">
+                        <label>Headline:</label>
                         <input type="text" />
                     </div>
                     <div className="row">
-                        <label>Name:</label>
+                        <label>Headline 2:</label>
                         <input type="text" />
                     </div>
                     <div className="row">
-                        <label>Base budget:</label>
+                        <label>Headline 3:</label>
                         <input type="text" />
                     </div>
                     <div className="row">
-                        <label>Ad group ID:</label>
+                        <label>Description:</label>
+                        <input type="text" />
+                    </div>
+                    <div className="row">
+                        <label>Description 2:</label>
                         <input type="text" />
                     </div>
                 </div>
-                <div className="right">
-                    <div className="row">
-                        <label>Ad account ID:</label>
-                        <input type="text" />
-                    </div>
-                    <div className="row">
-                        <label>Base ad ID:</label>
-                        <input type="text" />
-                    </div>
-                    <div className="row">
-                        <label>Ad ID:</label>
-                        <input type="text" />
-                    </div>
-                    <div className="row">
-                        <label>Ad creative ID:</label>
-                        <input type="text" />
-                    </div>
+                <div className="ad-channel-selects">
+                    <SelectCheckbox
+                        title="Copy injection"
+                        elementsName="Copy injections"
+                        isSelectable
+                        options={injectionTest}
+                    />
+                    <Select 
+                        title="City"
+                        elementsName="Cities"
+                        isSelectable
+                        options={cityTest}
+                    />
+                </div>
+                <div className="ad-channel-selects">
+                    <Select 
+                        title="Channel type"
+                        elementsName="Channel types"
+                        isSelectable
+                        options={channelTypeTest}
+                    />
+                    <Select 
+                        title="Action types"
+                        elementsName="Channel types"
+                        isSelectable
+                        options={actionTypeTest}
+                    />
+                </div>
+                <div className="ad-channel-selects">
+                    <Select 
+                        title="Campaigns"
+                        elementsName="Campaigns"
+                        isSelectable
+                        options={campaignTest}
+                    />
+                    <Select 
+                        title="Rules"
+                        elementsName="Rules"
+                        isSelectable
+                        options={rulesTest}
+                    />
                 </div>
             </div>
-            <div className="ad-description-container">
-                <div className="row">
-                    <label>Headline:</label>
-                    <input type="text" />
-                </div>
-                <div className="row">
-                    <label>Headline 2:</label>
-                    <input type="text" />
-                </div>
-                <div className="row">
-                    <label>Headline 3:</label>
-                    <input type="text" />
-                </div>
-                <div className="row">
-                    <label>Description:</label>
-                    <input type="text" />
-                </div>
-                <div className="row">
-                    <label>Description 2:</label>
-                    <input type="text" />
-                </div>
-            </div>
-            <div className="ad-channel-selects-container">
-                <div className="ad-channel-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Copy injection
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <div className="row"><input type="checkbox" id="31" /><label className="injection-option" htmlFor="31">Airfare</label></div>
-                            <div className="row"><input type="checkbox" id="32" /><label className="injection-option" htmlFor="32">Airline</label></div>
-                            <div className="row"><input type="checkbox" id="33" /><label className="injection-option" htmlFor="33">Origin airport code</label></div>
-                            <div className="row"><input type="checkbox" id="34" /><label className="injection-option" htmlFor="34">Destination airport code</label></div>
-                            <div className="row"><input type="checkbox" id="35" /><label className="injection-option" htmlFor="35">Origin temperature</label></div>
-                            <div className="row"><input type="checkbox" id="36" /><label className="injection-option" htmlFor="36">Destination temperature</label></div>
-                            <div className="row"><input type="checkbox" id="37" /><label className="injection-option" htmlFor="37">Snow</label></div>
-                            <div className="row"><input type="checkbox" id="38" /><label className="injection-option" htmlFor="38">Origin city name</label></div>
-                            <div className="row"><input type="checkbox" id="39" /><label className="injection-option" htmlFor="39">Destination city name</label></div>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            City
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Miami, FL</label>
-                            <label>Phoenix, AZ</label>
-                            <label>Austin, TX</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="ad-channel-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Channel type
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container channel-type">
-                            <label><img className="google-icon" src={GoogleLogo} />Google</label>
-                            <label><i className="facebook-icon fab fa-facebook-f" />Facebook</label>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Action type
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Action type #1</label>
-                            <label>Action type #2</label>
-                        </div>
-                    </div>
-                </div>
-                <div className="ad-channel-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Campaigns
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Campaign #1</label>
-                            <label>Campaign #2</label>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Rules
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Rules #1</label>
-                            <label>Rules #2</label>
-                        </div>
-                    </div>
-                </div>
+            <div className="crud-btn-container">
+                <button className="crud-btn"><i className="crud-icon far fa-file-plus" />Create</button>
+                <button className="crud-btn"><i className="crud-icon fas fa-sync-alt" />Update</button>
+                <button className="crud-btn"><i className="crud-icon fas fa-trash-alt" />Delete</button>
             </div>
         </div>
-        <div className="crud-btn-container">
-            <button className="crud-btn"><i className="crud-icon far fa-file-plus" />Create</button>
-            <button className="crud-btn"><i className="crud-icon fas fa-sync-alt" />Update</button>
-            <button className="crud-btn"><i className="crud-icon fas fa-trash-alt" />Delete</button>
-        </div>
-    </div>
-)
+    )
+}
 
 export default () => {
     const { data } = React.useContext(UserContext)

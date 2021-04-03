@@ -1,7 +1,18 @@
 import React from 'react'
+import { Select } from './Select'
 
 const CardMap = (props) =>{
     const {mapId, priority, value1, value2, percentChange, days} = props
+
+    const connectorTest = ["None", "And", "Or"]
+    const operTest = ["<", "< =", ":", ">", "> ="]
+    const tenseTest = ["Historical", "Real time", "Forecast"]
+    const weatherTriggerTest = ["No weather trigger", "Temperature", "Snow", "Wind"]
+    const campaignTest = ["Campaign #1", "Campaign #2"]
+    const adChannelTest = ["Ad channel #1", "Ad channel #2"]
+    const rulesTest = ["Rules #1", "Rules #2"]
+    const modifierTest = ["Pause ad", "Increase budget", "Decrease budget"]
+
     return(
         <div className="card-container">
             <div className="row">
@@ -14,17 +25,11 @@ const CardMap = (props) =>{
                     <label className="data">{priority}</label>
                 </div>
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Connector
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>None</label>
-                            <label>And</label>
-                            <label>Or</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Connector"
+                        elementsName="Connectors"
+                        options={connectorTest}
+                    />
                 </div>
             </div>
             <div className="row operation">
@@ -39,19 +44,11 @@ const CardMap = (props) =>{
                     </div>
                 </div>
                 <div className="mid">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Oper
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>{'<'}</label>
-                            <label>{'< ='}</label>
-                            <label>{'[:]'}</label>
-                            <label>{'>'}</label>
-                            <label>{'> ='}</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Oper"
+                        elementsName="Opers"
+                        options={operTest}
+                    />
                 </div>
                 <div className="box">
                     <label>% change:</label>
@@ -60,91 +57,54 @@ const CardMap = (props) =>{
             </div>
             <div className="row">
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Tense
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Historical</label>
-                            <label>Real time</label>
-                            <label>Forecast</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Tense"
+                        elementsName="Tenses"
+                        options={tenseTest}
+                    />
                 </div>
                 <div className="mid">
                     <label>Days:</label>
                     <label className="data">{days}</label>
                 </div>
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Weather trigger
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>No weather trigger</label>
-                            <label>Temperature</label>
-                            <label>Snow</label>
-                            <label>Wind</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Weather trigger"
+                        elementsName="Weather triggers"
+                        options={weatherTriggerTest}
+                    />
                 </div>
             </div>
             <div className="row">
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Campaign
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Campaign ID</label>
-                            <label>Campaign ID</label>
-                            <label>Campaign ID</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Campaign"
+                        elementsName="Campaign"
+                        options={campaignTest}
+                    />
                 </div>
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Ad channel
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Ad channel ID</label>
-                            <label>Ad channel ID</label>
-                            <label>Ad channel ID</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Ad channel"
+                        elementsName="Ad channels"
+                        options={adChannelTest}
+                    />
                 </div>
             </div>
             <div className="row">
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Rule
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Rule ID</label>
-                            <label>Rule ID</label>
-                            <label>Rule ID</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Rules"
+                        elementsName="Rules"
+                        options={rulesTest}
+                    />
                 </div>
                 <div className="box">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Modifier action
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Pause ad</label>
-                            <label>Increase budget</label>
-                            <label>Decrease budget</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Modifier action"
+                        elementsName="Modifier actions"
+                        options={modifierTest}
+                    />
                 </div>
             </div>
             <div className="blue-btn-container">

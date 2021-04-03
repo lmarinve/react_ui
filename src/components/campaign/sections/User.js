@@ -6,6 +6,7 @@ import DashInput from '../DashInput'
 import SearchList from '../SearchList'
 import CardButton from '../../CardButton'
 import ErrorMessage from '../../ErrorMessage'
+import { Select, SelectCheckbox } from '../Select'
 import UserContext from '../../../Contexts/User'
 import useEntityHandler from '../../../_helpers/useEntityHandler'
 import { useLoader } from '../../../_helpers/Loader'
@@ -17,7 +18,6 @@ import ProfileImage from '../../../images/avatar.png'
 
 const NewUsersList = ({ users, setActiveTab, setEntity }) => (
   <>
-    <h3 className="section-title animated fadeInDown">select which type of user will be the new users registered</h3>
     <div className="user-list-container animated fadeInUp">
       <div className="new-user-list">
         {
@@ -26,12 +26,6 @@ const NewUsersList = ({ users, setActiveTab, setEntity }) => (
                 key={user.id}
                 username={user.username} 
                 email={user.email}
-                IdUserDemo={user.userId}
-                IdUserClient="client-1"
-                IdUserStaff="staff-1"
-                clientId1="1"
-                clientId2="2"
-                clientId3="3"
                 btnText="Set"
                 handleClick={() => {
                   setEntity(user)
@@ -346,6 +340,10 @@ const AccountConfiguration = (props) => {
         })
   }
 
+    // Elementos de prueba para las selects
+    const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
+    const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
+
   return (
     <div className="account-config-container animated fadeInUp">
     <div className="account-config-form">
@@ -371,34 +369,49 @@ const AccountConfiguration = (props) => {
                     <label>{user.firstName}</label>
                 </div>
                 <div className="row">
-                    <label>Last name name:</label>
+                    <label>Last name:</label>
                     <label>{user.lastName}</label>
                 </div>
             </div>
             <div className="right">
                 <label>User type:</label>
                 <div className="user-type">
-                    <label htmlFor="1"><i className="user-type-icon fas fa-user" />Demo</label>
+                    <input type="checkbox"/>
+                    <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
+                </div>
+                <div className="user-type">
+                    <input type="checkbox" />
+                    <label><i className="user-type-icon fas fa-user-tag" />Client</label>
+                </div>
+                <div className="user-type">
+                    <input type="checkbox" />
+                    <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
                 </div>
             </div>
           </div>
           <div className="user-selects">
-            <div className="select-container">
-              <button className="select-btn">
-                My Agency
-                <i className="select-icon fas fa-angle-down" />
-              </button>
-              <div className="list-container">
-                {
-                  /* <label className='agency-option active' tabIndex="1">demo1</label>
-                <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
-                <label className="agency-option" tabIndex="3">Agency Name</label> */
-                }
-                {/* <label className='agency-option active' tabIndex="1"> {user.agency_id} </label> */}
-                <label className='agency-option active' tabIndex="1"> {user.agencyName} </label>
-              </div>
-            </div>
-            <div className="select-container">
+            <Select 
+                title="My Agency"
+                elementsName="agencies"
+                isSelectable
+                options={agenciesTest}
+            />
+            {/* <div className="select-container">
+                <button className="select-btn">
+                    My Agency
+                    <i className="select-icon fas fa-angle-down" />
+                </button>
+                <div className="list-container">
+                    <label className='agency-option active' tabIndex="1"> {user.agencyName} </label>
+                </div>
+            </div> */}
+            <SelectCheckbox 
+                title="My Clients"
+                elementsName="clients"
+                isSelectable
+                options={clientsTest}
+            />
+            {/* <div className="select-container">
               <button className="select-btn">
                 My Clients
                 <i className="select-icon fas fa-angle-down" />
@@ -412,10 +425,16 @@ const AccountConfiguration = (props) => {
                     : <div className='row'> There are no clients </div>
                 }
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="user-selects">
-            <div className="select-container">
+            <SelectCheckbox 
+                title="Active campaigns"
+                elementsName="campaigns"
+                isSelectable
+                options={user.adfluence_campaigns}
+            />
+            {/* <div className="select-container">
               <button className="select-btn">
                 Active campaigns
                 <i className="select-icon fas fa-angle-down" />
@@ -428,11 +447,8 @@ const AccountConfiguration = (props) => {
                     ))
                     : <label className="agency-option" tabIndex="1"> There are no campaigns </label>
                 }
-                {/* // <label className="agency-option active" tabIndex="1">Demo</label>
-                // <label className="agency-option" tabIndex="2">Mediagistic Inc</label>
-                // <label className="agency-option" tabIndex="3">Agency Name</label> */}
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

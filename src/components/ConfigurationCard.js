@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-closing-tag-location */
 import React from 'react'
+import { Select } from './campaign/Select'
 import AgencyPhoto from '../images/pj_logo.jpg'
 import ClientPhoto from '../images/traneLogo.jpg'
 
@@ -7,6 +8,8 @@ const Photos = {
     'Agency': AgencyPhoto,
     'Client': ClientPhoto
 }
+
+const agenciesTest = ["Demo", "Advertiser", "Marketer"]
 
 const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies }) => (
     <div className="card-container">
@@ -53,7 +56,13 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                   <label>Active:</label>
                   <input type="checkbox" />
                 </div>
-                <div className="select-container">
+                <Select 
+                    title={`${entityName} Type`}
+                    elementsName="agencies type"
+                    isSelectable
+                    options={agenciesTest}
+                />
+                {/* <div className="select-container">
                   <button className="select-btn">
                     {entityName} Type
                     <i className="select-icon fas fa-angle-down" />
@@ -63,7 +72,7 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                     <label>Marketer</label>
                     <label>Advertiser</label>
                   </div>
-                </div>
+                </div> */}
               </div>
               {
                 (entityName === 'Client' && !isThereActiveEntity())

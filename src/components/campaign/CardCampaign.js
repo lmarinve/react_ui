@@ -1,8 +1,15 @@
 import React from 'react'
 import Campaign from './sections/Campaign'
+import { Select } from './Select'
 
 const Card = (props) => {
     const {campaignImage, CampaignId, CampaignName, CampaignStart, CampaignEnd, CampaignBudget, CampaignStatus, blueBtnText, handleClick} = props
+    
+    const clientsTest = ["Client ID", "Client ID", "Client ID"]
+    const injectionTest = ["Injection tags #1", "Injection  tags #2", "Injection tags #3"]
+    const adChannelTest = ["Ad channel #1", "Ad channel #2", "Ad channel #3"]
+    const usersTest = ["lmarinvera@mediagistic.com", "ray@mediagistic.com"]
+    
     return(
         <div className="card-container">
             <div className="campaign-photo-container">
@@ -32,55 +39,35 @@ const Card = (props) => {
                     <label>Base daily budget:</label>
                     <label>${CampaignBudget}</label>
                 </div>
-                <div className="row">
-                    <label>Status:</label>
-                    <label>{CampaignStatus}</label>
-                </div>
-                <div className="campaign-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Client
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Client ID</label>
-                            <label>Client ID</label>
-                            <label>Client ID</label>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Copy injection tags
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Copy injection tags #1</label>
-                            <label>Copy injection tags #2</label>
-                            <label>Copy injection tags #3</label>
-                        </div>
+                <div className="status-row">
+                    <div className="status">
+                        <label>Active:</label>
+                        <input type="checkbox" />
                     </div>
                 </div>
                 <div className="campaign-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Ad channel
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Ad channel #1</label>
-                            <label>Ad channel #2</label>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Users
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>lmarinvera@mediagistic.com</label>
-                            <label>ray@mediagistic.com</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Clients"
+                        elementsName="clients"
+                        options={clientsTest}
+                    />
+                    <Select 
+                        title="Copy injection tags"
+                        elementsName="Copy injection tags"
+                        options={injectionTest}
+                    />
+                </div>
+                <div className="campaign-selects">
+                    <Select 
+                        title="Ad channel"
+                        elementsName="Ad channels"
+                        options={adChannelTest}
+                    />
+                    <Select 
+                        title="Users"
+                        elementsName="users"
+                        options={usersTest}
+                    />
                 </div>
                 <div className="blue-btn-container">
                     <button className="blue-btn" onClick={handleClick}>{blueBtnText}</button>

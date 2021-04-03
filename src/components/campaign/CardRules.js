@@ -1,6 +1,12 @@
 import React from 'react'
+import { Select } from './Select'
 
 const CardRules = ({ruleId, ruleName, blueBtnText}) =>{
+
+    const rulesTypeTest = ["Flight", "Weather"]
+    const campaignTest = ["Campaign #1", "Campaign #2"]
+    const mapsTest = ["Maps ID #1", "Maps ID #2"]
+
     return(
         <div className="card-container">
             <div className="row">
@@ -12,39 +18,23 @@ const CardRules = ({ruleId, ruleName, blueBtnText}) =>{
                 <label>{ruleName}</label>
             </div>
             <div className="rules-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Rule Type
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container rule-type">
-                        <label><i className="rule-type-icon fas fa-plane"></i>Flight</label>
-                        <label><i className="rule-type-icon fas fa-cloud-sun"></i>Weather</label>
-                    </div>
-                </div>
-                <div className="select-container">
-                    <button className="select-btn">
-                        Campaigns
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label>Campaign ID #1</label>
-                        <label>Campaign ID #2</label>
-                        <label>Campaign ID #3</label>
-                    </div>
-                </div>
+                <Select 
+                    title="Rule Type"
+                    elementsName="Rule Types"
+                    options={rulesTypeTest}
+                />
+                <Select 
+                    title="Campaigns"
+                    elementsName="Campaigns"
+                    options={campaignTest}
+                />
             </div>
             <div className="rules-selects">
-                <div className="select-container">
-                    <button className="select-btn">
-                        Maps
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        <label>Maps ID #1</label>
-                        <label>Maps ID #2</label>
-                    </div>
-                </div>
+                <Select 
+                    title="Maps"
+                    elementsName="Maps"
+                    options={mapsTest}
+                />
                 <button className="blue-btn">{blueBtnText}</button>
             </div>
         </div>

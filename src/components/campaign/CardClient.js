@@ -1,8 +1,14 @@
 import React from 'react'
+import { Select } from './Select'
 
 import AgencyPhoto from '../../images/traneLogo.jpg'
 
 const CardCampaign = ({clientId, clientName, clientAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) => {
+    
+    const clientsTest = ["Demo", "Advertiser", "Marketer"]
+    const campaignsTest = ["Campaign #1", "Campaign #2", "Campaign #3"]
+    const usersTest = ["lmarinvera@mediagistic.com", "ray@mediagistic.com"]
+
     return(
         <div className="card-container">
             <div className="client-photo-container">
@@ -41,39 +47,23 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
                         <label>Active:</label>
                         <input type="checkbox" />
                     </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Client Type
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Demo</label>
-                            <label>Marketer</label>
-                            <label>Advertiser</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Client Type"
+                        elementsName="clients type"
+                        options={clientsTest}
+                    />
                 </div>
                 <div className="client-selects">
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Campaigns
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>Campaign #1</label>
-                            <label>Campaign #2</label>
-                        </div>
-                    </div>
-                    <div className="select-container">
-                        <button className="select-btn">
-                            Users
-                            <i className="select-icon fas fa-angle-down" />
-                        </button>
-                        <div className="list-container">
-                            <label>lmarinvera@mediagistic.com</label>
-                            <label>ray@mediagistic.com</label>
-                        </div>
-                    </div>
+                    <Select 
+                        title="Campaigns"
+                        elementsName="campaigns"
+                        options={campaignsTest}
+                    />
+                    <Select 
+                        title="Users"
+                        elementsName="users"
+                        options={usersTest}
+                    />
                 </div>
                 <div className="blue-btn-container">
                     <button className="blue-btn" onClick={handleClick}>{blueBtnText}</button>

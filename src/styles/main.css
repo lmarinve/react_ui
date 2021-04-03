@@ -83,15 +83,6 @@
 .main-container .campaign-timeline-container .campaign-timeline .actual .count-title{
     color: black;
 }
-.main-container .section-title{
-    display: block;
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-    color: #e4e4e4;
-    font-size: 15px;
-    font-weight: 500;
-}
 .main-container .search-container{
     position: relative;
     width: 100%;
@@ -161,67 +152,77 @@
 .main-container .card-container .select-container{
     position: relative;
 }
-.main-container .card-container .select-container:hover button{
-    border: 1px solid #EC115D;
-    transform: scale(1.1);
-}
 .main-container .card-container .select-container button{
+    box-sizing: border-box;
     position: relative;
     min-width: 180px;
     padding: 5px 10px;
-    background: transparent;
+    background-color: #1f1f1f;
     font-size: 14px;
     color: #fff;
     border-radius: 50px;
     border: 1px solid rgba(150, 150, 150, 0.5);
     transition: all 0.5s ease;
 
+
     /* FLEX */
     display: flex;
     align-items: center;
 }
+.main-container .card-container .select-container:hover button{
+    border: 1px solid #EC115D;
+    transform: scale(1.05);
+}
+.main-container .card-container .select-container:hover .list-container{
+    border: 1px solid #EC115D;
+    transform: scale(1.05);
+    top: 30px;
+}
 .main-container .card-container .select-container button:hover{
     cursor: pointer;
-    border: 1px solid #EC115D;
-    transform: scale(1.1);
 }
 .main-container .card-container .select-container button:focus{
     outline: none;
-    border: 1px solid #EC115D;
-    transform: scale(1.1);
 }
-.main-container .card-container .select-container button .select-icon{
+.main-container .card-container .select-container button .select-icon-container{
     position: absolute;
     font-size: 16px;
-    right: 5px;
+    right: 8px;
+    transition: all 0.25s ease;
+}
+.main-container .card-container .select-container button .rotate{
+    transform: rotate(90deg);
 }
 .main-container .card-container .select-container .list-container{
     box-sizing: border-box;
     position: absolute;
-    top: 32px;
+    top: 28px;
     width: 100%;
-    max-height: 76px;
+    max-height: 80px;
     padding: 0 10px;
     background-color: #1f1f1f;
-    border: 1px solid #EC115D;
+    border: 1px solid rgba(150, 150, 150, 0.5);
     border-radius: 10px;
     overflow-y: auto;
-    transform: scale(1.1);
-    z-index: 1;
+    transition: all 0.5s ease;
+    z-index: 10;
     display: none;
 }
-.main-container .card-container .select-container:hover .list-container{
+.main-container .card-container .select-container .deploy{
     display: block;
 }
-.main-container .card-container .select-container:hover .list-container::-webkit-scrollbar{
+.main-container .card-container .select-container .list-container::-webkit-scrollbar{
     width: 15px;
     border-radius: 20px;
     background-color: #1f1f1f;
 }
-.main-container .card-container .select-container:hover .list-container::-webkit-scrollbar-thumb{
-    background-color: #ec115d;
+.main-container .card-container .select-container .list-container::-webkit-scrollbar-thumb{
+    background-color:  rgba(150, 150, 150, 0.5);
     border-radius: 20px;
     border: solid 5px #1f1f1f;
+}
+.main-container .card-container .select-container:hover .list-container::-webkit-scrollbar-thumb{
+    background-color: #EC115D;
 }
 .main-container .card-container .select-container .list-container label{
     display: block;
@@ -232,14 +233,56 @@
     color: #fff;
     transition: all 0.5s ease;
 }
-.main-container .card-container .select-container .list-container label:hover{
-    cursor: pointer;
-    opacity: 0.7;
-    transform: scale(1.1);
+.main-container .card-container .select-container .list-container .row{
+    color: #fff;
+    margin: 5px 0;
+    transition: all 0.5s ease;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+}
+.main-container .card-container .select-container .list-container .row .check-option{
+    margin: 0 0 0 10px;
 }
 .main-container .card-container .select-container .list-container .active{
     color: #ec115d;
     font-weight: 800;
+}
+.main-container .card-container .selectable .list-container .row:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.main-container .card-container .selectable .list-container label:hover,
+.main-container .card-container .selectable .list-container .row .check-option:hover{
+    color: #6c757d;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+.main-container .card-container .blue-btn-container{
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: flex-end;
+}
+.main-container .card-container .blue-btn{
+    min-width: 200px;
+    padding: 5px 15px;
+    background: #496e79;
+    border: 1px solid #496e79;
+    color: #fff;
+    border-radius: 50px;
+    transition: all 0.5s ease;
+}
+.main-container .card-container .blue-btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    background: #25373d;
+    border: 1px solid #496e79;
+}
+.main-container .card-container .blue-btn:focus{
+    outline: none;
 }
 .main-container .input-dash-container{
     position: relative;
@@ -438,8 +481,8 @@
     align-items: center;
 }
 .create-new-card-box h2{
-    margin-bottom: 30px;
-    font-size: 20px;
+    margin-bottom: 20px;
+    font-size: 18px;
     text-transform: uppercase;
     color: #e4e4e4;
     font-weight: 500;
@@ -688,20 +731,12 @@
     display: flex;
     align-items: center;
 }
-.main-container .user-section-container .card-container .user-data-container .user-type:hover{
-    cursor: pointer;
-    opacity: 0.7;
-    transform: scale(1.1);
-}
 .main-container .user-section-container .card-container .user-data-container .user-type-icon{
     color: #fff;
     margin: 0 10px;
 }
 .main-container .user-section-container .card-container .user-data-container .user-type label{
     color: #fff;
-}
-.main-container .user-section-container .card-container .user-data-container .user-type label:hover{
-    cursor: pointer;
 }
 .main-container .user-section-container .card-container .user-selects{
     width: 100%;
@@ -716,44 +751,6 @@
 }
 .main-container .user-section-container .card-container .user-selects .select-container .list-container .active{
     color: #ec115d;
-}
-.main-container .user-section-container .card-container .user-selects .select-container .list-container .row{
-    color: #fff;
-    transition: all 0.5s ease;
-
-    /* FLEX */
-    display: flex;
-    align-items: center;
-}
-.main-container .user-section-container .card-container .user-selects .select-container .list-container .row:hover{
-    cursor: pointer;
-    opacity: 0.7;
-    transform: scale(1.1);
-}
-.main-container .user-section-container .card-container .user-selects .select-container .list-container .row .client-option{
-    margin-left: 10px;
-}
-.main-container .user-section-container .card-container .blue-btn-container{
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content: flex-end;
-}
-.main-container .user-section-container .card-container .blue-btn-container .blue-btn{
-    min-width: 200px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .user-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .user-section-container .account-config-container{
     width: 100%;
@@ -806,7 +803,7 @@
     width: 80%;
 }
 .main-container .user-section-container .account-config-container .account-config-form .card-container .user-information-container .user-data-container .user-type-icon{
-    margin: 0 10px 0 0;
+    margin: 0 10px;
 }
 .main-container .user-section-container .account-config-container .account-config-form .blue-btn{
     position: static;
@@ -1080,33 +1077,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .agency-section-container .agency-select-container .card-container .select-container .list-container label:hover{
-    cursor: initial;
-    opacity: 1;
-    transform: scale(1);
-}
-.main-container .agency-section-container .card-container .blue-btn-container{
-    position: relative;
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content: flex-end;
-}
 .main-container .agency-section-container .card-container .blue-btn-container .blue-btn{
     min-width: 180px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .agency-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .agency-section-container .agency-btn{
     min-width: 100px;
@@ -1373,33 +1345,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .client-section-container .client-select-container .card-container .select-container .list-container label:hover{
-    cursor: initial;
-    opacity: 1;
-    transform: scale(1);
-}
-.main-container .client-section-container .card-container .blue-btn-container{
-    position: relative;
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content: flex-end;
-}
 .main-container .client-section-container .card-container .blue-btn-container .blue-btn{
     min-width: 180px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .client-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .client-section-container .client-btn{
     min-width: 100px;
@@ -1621,32 +1568,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .campaign-section-container .campaign-select-container .card-container .select-container .list-container label:hover{
-    cursor: initial;
-    opacity: 1;
-    transform: scale(1);
-}
-.main-container .campaign-section-container .card-container .blue-btn-container{
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content: flex-end;
-}
 .main-container .campaign-section-container .card-container .blue-btn-container .blue-btn{
     min-width: 180px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .campaign-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .campaign-section-container .campaign-config-container .card-container .campaign-data-container .row input{
     box-sizing: border-box;
@@ -1684,7 +1607,7 @@
     border: none;
     border-bottom: 1px solid #EC115D;
 }
-.main-container .campaign-section-container .campaign-config-container .card-container .campaign-data-container .status-row{
+.main-container .campaign-section-container .card-container .campaign-data-container .status-row{
     margin-top: 10px;
 
     /* FLEX */
@@ -1692,10 +1615,10 @@
     align-items: center;
     justify-content: space-between;
 }
-.main-container .campaign-section-container .campaign-config-container .card-container .campaign-data-container .status-row .status label{
+.main-container .campaign-section-container .card-container .campaign-data-container .status-row .status label{
     color: #b7b7b7;
 }
-.main-container .campaign-section-container .campaign-config-container .card-container .campaign-data-container .status-row .status input{
+.main-container .campaign-section-container .card-container .campaign-data-container .status-row .status input{
     margin-left: 10px;
 }
 .main-container .campaign-section-container .campaign-config-container .campaign-btn{
@@ -1943,60 +1866,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container label .google-icon{
-    width: 18px;
-    margin-right: 10px;
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container label .facebook-icon{
-    margin-right: 10px;
-    font-size: 20px;
-    color: #3b5998;
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container .row{
-    margin: 0 0 0 5px;
-    color: #fff;
-    transition: all 0.5s ease;
-
-    /* FLEX */
-    display: flex;
-    align-items: center;
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container .row:hover{
-    cursor: pointer;
-    opacity: 0.7;
-    transform: scale(1.1);
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container .row label:hover{
-    transform: scale(1);
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .list-container .row .injection-option{
-    margin-left: 10px;
-}
-.main-container .ad-channel-section-container .card-container .blue-btn-container{
-    width: 100%;
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content:flex-end;
-}
-.main-container .ad-channel-section-container .card-container .blue-btn-container .blue-btn{
-    min-width: 200px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .ad-channel-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
-}
 .main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container button{
-    min-width: 200px;
+    min-width: 230px;
 }
 .main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .channel-type label{
     /* FLEX */
@@ -2062,9 +1933,6 @@
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-channel-selects-container{
     width: 85%;
     margin: auto;
-}
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-channel-selects .select-container button{
-    min-width: 235px;
 }
 .main-container .ad-channel-section-container .ad-channel-btn{
     min-width: 100px;
@@ -2190,11 +2058,6 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .rules-section-container .rules-select-container  .card-container .select-container .list-container label:hover{
-    cursor: initial;
-    opacity: 1;
-    transform: scale(1);
-}
 .main-container .rules-section-container .card-container .rules-selects button{
     min-width: 160px;
 }
@@ -2242,21 +2105,6 @@
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #EC115D;
-}
-.main-container .rules-section-container .card-container .blue-btn{
-    min-width: 200px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .rules-section-container .card-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .rules-section-container .rules-btn{
     min-width: 100px;
@@ -2493,43 +2341,8 @@
     font-weight: 500;
     margin-left: 10px;
 }
-.main-container .maps-section-container .card-container .blue-btn-container{
-    position: relative;
-    margin-top: 20px;
-
-    /* FLEX */
-    display: flex;
-    justify-content: flex-end;
-}
 .main-container .maps-section-container .card-container .blue-btn-container .blue-btn{
     min-width: 180px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .maps-section-container .card-container .blue-btn-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
-}
-.main-container .maps-section-container .card-container .blue-btn{
-    min-width: 200px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
-}
-.main-container .maps-section-container .card-container .blue-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
 }
 .main-container .maps-section-container .maps-btn{
     min-width: 100px;

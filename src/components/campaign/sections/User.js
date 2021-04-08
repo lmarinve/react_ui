@@ -376,7 +376,7 @@ const AccountConfiguration = (props) => {
             <div className="right">
                 <label>User type:</label>
                 <div className="user-type">
-                    <input type="checkbox"/>
+                    <input type="checkbox" />
                     <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
                 </div>
                 <div className="user-type">
@@ -391,10 +391,10 @@ const AccountConfiguration = (props) => {
           </div>
           <div className="user-selects">
             <Select 
-                title="My Agency"
-                elementsName="agencies"
-                isSelectable
-                options={agenciesTest}
+              title="My Agency"
+              elementsName="agencies"
+              isSelectable
+              options={agenciesTest}
             />
             {/* <div className="select-container">
                 <button className="select-btn">
@@ -406,10 +406,10 @@ const AccountConfiguration = (props) => {
                 </div>
             </div> */}
             <SelectCheckbox 
-                title="My Clients"
-                elementsName="clients"
-                isSelectable
-                options={clientsTest}
+              title="My Clients"
+              elementsName="clients"
+              isSelectable
+              options={clientsTest}
             />
             {/* <div className="select-container">
               <button className="select-btn">
@@ -429,10 +429,10 @@ const AccountConfiguration = (props) => {
           </div>
           <div className="user-selects">
             <SelectCheckbox 
-                title="Active campaigns"
-                elementsName="campaigns"
-                isSelectable
-                options={user.adfluence_campaigns}
+              title="Active campaigns"
+              elementsName="campaigns"
+              isSelectable
+              options={user.adfluence_campaigns}
             />
             {/* <div className="select-container">
               <button className="select-btn">
@@ -499,10 +499,15 @@ const User = ({ setAlert }) =>{
     const { myInfo, agencies, clients, adfluence_campaigns, users } = data
 
     const tabs = [
-      { name: 'New users list', Component: NewUsersList, props: {} },
-      { name: 'Users list', Component: UsersList, props: {} },
       { name: 'Account configuration', Component: AccountConfiguration, props: {} }
     ]
+
+    if (users) {
+      tabs.unshift(
+        { name: 'New users list', Component: NewUsersList, props: {} },
+        { name: 'Users list', Component: UsersList, props: {} },
+      )
+    }
 
     const useTabController = (tabs) => {
         const [activeTab, setActiveTab] = useState(0)
@@ -534,7 +539,6 @@ const User = ({ setAlert }) =>{
         <div className="user-section-container animated fadeInUp">
 
         {/* CASO: si el usuario es STAFF */}
-        {console.log(data)}
           <div className="user-section-menu">
             <div className="user-menu-box" style={tabController.tabs().length > 1 ? {} : { flexDirection: 'column', alignItems: 'center' }}>
               {tabController.tabs().map((tab, index) => (

@@ -19,9 +19,11 @@ import Alert from '../components/campaign/Alert'
 import { navigate } from '@reach/router'
 import UserContext from '../Contexts/User'
 import { 
+  getUsers as getUsersRequest,
   getUserAgencies as getUserAgenciesRequest, 
   getUserClients as getUserClientsRequest,
-  getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest 
+  getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest ,
+  getMyInfo as getMyInfoRequest
 } from '../_services'
 import { useLoader } from '../_helpers/Loader'
 import '../styles/main.css'
@@ -29,8 +31,15 @@ import '../styles/main.css'
 const MainMenu = ({ path }) => {
   const token = localStorage.getItem('token')
   const { mockedData, data, setData } = useContext(UserContext)
+  const { agencies, clients, adfluence_campaigns } = data
   const MenuLoader = useLoader()
 
+  const getMyInfo = () => {
+      return getMyInfoRequest(token)
+  }
+  const getUsers = () => {
+      return getUsersRequest(token)
+  }
   const getUserAgencies = () => {
       return getUserAgenciesRequest(token)
   }
@@ -41,21 +50,6 @@ const MainMenu = ({ path }) => {
       return getUserAdfluenceCampaignsRequest(token)
   }
 
-  useEffect(() => {
-      MenuLoader.loading()
-      let requests = [getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns()]
-      Promise.all(requests)
-        .then(responses => {
-            setData({
-              ...data,
-              agencies: responses[0].data,
-              clients: responses[1].data,
-              adfluence_campaigns: responses[2].data
-            })
-        })
-        .finally(MenuLoader.loaded)
-  }, [])
-
   const cleanedUrlPath = path.replace('/', '')
   const Agencies = AgenciesComponents[cleanedUrlPath] || AgenciesComponents['campaign-wizard']
   const Clients = ClientsComponents[cleanedUrlPath] || ClientsComponents ['campaign-wizard']
@@ -65,22 +59,15 @@ const MainMenu = ({ path }) => {
     // CASO: si el usuario selecciona Campaign Wizard
     {
         name: 'Agencies',
-        module: Agencies,
-        props: {
-          agencies: mockedData.agencies.push(data.agencies)
-        }
+        module: Agencies
     },
     {
         name: 'Clients',
         module: Clients,
-        props: {
-          clients: mockedData.agencies[0].clients
-        }
     },
     {
         name: 'Campaigns',
         module: Campaigns,
-        props: {}
     }
   ]
 
@@ -128,7 +115,7 @@ const MainMenu = ({ path }) => {
 
   const MenuTabs = Tabs[cleanedUrlPath]
 
-  const { activeTab, setActiveTab, tabs, activeProps, activeIndex } = UseTabController(MenuTabs, mockedData)
+  const { activeTab, setActiveTab, tabs, activeIndex } = UseTabController(MenuTabs)
 
   const ActiveTab = activeTab().module
 
@@ -167,6 +154,24 @@ const MainMenu = ({ path }) => {
   } 
 
   const [alert, setAlert] = useState({})
+
+  useEffect(() => {
+    console.log('holaa')
+    MenuLoader.loading()
+    let requests = [getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns()]
+    Promise.allSettled(requests)
+      .then(responses => {
+          setData({
+            ...data,
+            users: responses[1].status === 'rejected' ? null : responses[1].value.data,
+            agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
+            clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,
+            adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
+          })
+      })
+      .catch(console.log)
+      .finally(MenuLoader.loaded)
+  }, [])
 
   return (
     <div className="main-container animated fadeIn">
@@ -209,7 +214,12 @@ const MainMenu = ({ path }) => {
           ? <div className="loading-section-container">
               <LoadingComp />
             </div> 
-          : <ActiveTab {...activeProps()} setAlert={setAlert} />
+          : <ActiveTab 
+            agencies={agencies}
+            clients={clients}
+            campaigns={adfluence_campaigns}
+            setAlert={setAlert}
+            />
       }
       <div className='navigation-buttons-container'>
         {canShowPrevOrNextButton('previous')

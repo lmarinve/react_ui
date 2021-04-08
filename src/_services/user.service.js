@@ -74,12 +74,23 @@ export function getForgottenPassword (email) {
   })
 }
 
+export function getMyInfo (token) {
+  return Axios({
+    method: 'get',
+    baseURL: `${process.env.API_URL}/api/v1/rest-auth/user/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
 export function getUsers (token) {
   return Axios({
     method: 'get',
-    baseURL: `${process.env.API_URL}/user`,
+    baseURL: `${process.env.API_URL}/users/users/`,
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': `Token ${token}`,
       'Content-Type': 'application/json'
     }
   })

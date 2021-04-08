@@ -35,7 +35,7 @@ export default () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    if (Validator(UserInfo.username, 'text') !== 1 || Validator(UserInfo.email, 'email') !== 1 || Validator(UserInfo.password, 'password') !== 1) {
+    if (Validator(UserInfo.username, 'text') !== 1 || Validator(UserInfo.email, 'email') !== 1 /*|| Validator(UserInfo.password, 'password') !== 1*/) {
           const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : Validator(UserInfo.password, 'password')
           return setMessageError(setMessage)
     } else {
@@ -90,6 +90,10 @@ export default () => {
           Loader.loaded()
           navigator(`/forgot-password?email=${UserInfo.email}`, { replace: true }) 
         })
+    }
+
+    return () => {
+      Loader.loaded()
     }
   }, [invalidCredentialsCount])
 

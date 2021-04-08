@@ -7,6 +7,9 @@ const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
 
 const CardNewUser = (props) =>{
     const {username, email, btnText, handleClick} = props
+    const handleCheckboxClick = (event) => {
+        event.preventDefault()
+    }
 
     return(
         <div className="card-container">
@@ -24,29 +27,29 @@ const CardNewUser = (props) =>{
                 <div className="right">
                     <label>User type:</label>
                     <div className="user-type">
-                        <input type="checkbox"/>
+                        <input type="checkbox" checked onClick={handleCheckboxClick} />
                         <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" />
+                        <input type="checkbox" onClick={handleCheckboxClick} />
                         <label><i className="user-type-icon fas fa-user-tag" />Client</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" />
+                        <input type="checkbox" onClick={handleCheckboxClick} />
                         <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
                     </div>
                 </div>
             </div>
             <div className="user-selects">
                 <Select 
-                    title="My Agency"
-                    elementsName="agencies"
-                    options={agenciesTest}
+                  title="My Agency"
+                  elementsName="agencies"
+                  options={agenciesTest}
                 />
                 <SelectCheckbox 
-                    title="My Clients"
-                    elementsName="clients"
-                    options={clientsTest}
+                  title="My Clients"
+                  elementsName="clients"
+                  options={clientsTest}
                 />
             </div>
             <div className="blue-btn-container">
@@ -58,6 +61,9 @@ const CardNewUser = (props) =>{
 
 const CardUser = (props) => {
     const { handleClick, username, email, firstName, lastName, lastLogin, dateJoined, IdUserDemo, IdUserClient, IdUserStaff, clientId1, clientId2, clientId3, btnText} = props
+    const handleCheckboxClick = (event) => {
+        event.preventDefault()
+    }
     return(
         <div className="card-container">
             <div className="user-data-container">
@@ -82,15 +88,15 @@ const CardUser = (props) => {
                 <div className="right">
                     <label>User type:</label>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserDemo} />
+                        <input type="checkbox" id={IdUserDemo} onClick={handleCheckboxClick} />
                         <label htmlFor={IdUserDemo}><i className="user-type-icon fas fa-user" />Demo</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserClient} />
+                        <input type="checkbox" id={IdUserClient} checked onClick={handleCheckboxClick} />
                         <label htmlFor={IdUserClient}><i className="user-type-icon fas fa-user-check" />Client</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserStaff} />
+                        <input type="checkbox" id={IdUserStaff} onClick={handleCheckboxClick} />
                         <label htmlFor={IdUserStaff}><i className="user-type-icon fas fa-user-cog" />Staff</label>
                     </div>
                 </div>
@@ -119,14 +125,14 @@ const CardUser = (props) => {
             </div>
             <div className="user-selects">
                 <Select 
-                    title="My Agency"
-                    elementsName="agencies"
-                    options={agenciesTest}
+                  title="My Agency"
+                  elementsName="agencies"
+                  options={agenciesTest}
                 />
                 <SelectCheckbox 
-                    title="My Clients"
-                    elementsName="clients"
-                    options={clientsTest}
+                  title="My Clients"
+                  elementsName="clients"
+                  options={clientsTest}
                 />
             </div>
             <div className="blue-btn-container">

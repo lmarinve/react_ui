@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Router, Redirect } from '@reach/router'
 import Context from './Context'
 import UserContext, { UserProvider } from './Contexts/User'
@@ -10,12 +10,9 @@ import Main from './pages/Main'
 import WelcomeSignup from './pages/WelcomeSignup'
 import WaitingActivation from './pages/WaitingActivation'
 import ValidateAccount from './pages/ValidateAccount'
-import { useState } from 'react'
 
 export default () => {
-  
-  // const { isAuth } = useContext(Context)
-  const [isAuth, setIsAuth] = useState(true) 
+  const { isAuth } = useContext(Context)
   const { data } = useContext(UserContext)
   useEffect(() => {
     !isAuth && window.localStorage.getItem('token')

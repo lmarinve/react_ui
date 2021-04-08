@@ -201,10 +201,10 @@ const CampaignConfiguration = (props) => {
             </div>
             <div className="campaign-selects">
                 <Select 
-                    title="Clients"
-                    elementsName="clients"
-                    isSelectable
-                    options={clientsTest}
+                  title="Clients"
+                  elementsName="clients"
+                  isSelectable
+                  options={clientsTest}
                 />
                 {/* <div className="select-container">
                     <button className="select-btn">
@@ -220,24 +220,24 @@ const CampaignConfiguration = (props) => {
                     </div>
                 </div> */}
                 <Select 
-                    title="Copy injection tags"
-                    elementsName="Copy injection tags"
-                    isSelectable
-                    options={injectionTest}
+                  title="Copy injection tags"
+                  elementsName="Copy injection tags"
+                  isSelectable
+                  options={injectionTest}
                 />
             </div>
             <div className="campaign-selects">
                 <Select 
-                    title="Ad channel"
-                    elementsName="Ad channels"
-                    isSelectable
-                    options={adChannelTest}
+                  title="Ad channel"
+                  elementsName="Ad channels"
+                  isSelectable
+                  options={adChannelTest}
                 />
                 <Select 
-                    title="Users"
-                    elementsName="users"
-                    isSelectable
-                    options={usersTest}
+                  title="Users"
+                  elementsName="users"
+                  isSelectable
+                  options={usersTest}
                 />
             </div>
         </div>

@@ -11,7 +11,9 @@ import UserContext from '../../../Contexts/User'
 import useEntityHandler from '../../../_helpers/useEntityHandler'
 import { useLoader } from '../../../_helpers/Loader'
 import {
-  request
+  request,
+  editUser as editUserRequest,
+  getUsers as getUsersRequest
 } from '../../../_services'
 
 import ProfileImage from '../../../images/avatar.png'
@@ -21,7 +23,9 @@ const NewUsersList = ({ users, setActiveTab, setEntity }) => (
     <div className="user-list-container animated fadeInUp">
       <div className="new-user-list">
         {
-            users.map((user, i) => (
+            users
+              .filter(user => !user.is_superuser && !user.is_staff)
+              .map((user, i) => (
               <CardNewUser
                 key={user.id}
                 username={user.username} 
@@ -111,8 +115,12 @@ const UsersList = ({ users, setEntity, setActiveTab }) => (
       <div className="user-list-container animated fadeInUp">
         <div className="user-list">
           {
-            users.map((user, i) => (
+            users
+              .filter(user => user.is_staff || user.is_superuser)
+              .map((user, i) => (
               <CardUser
+                isStaff={user.is_staff}
+                isSuperuser={user.is_superuser}
                 key={user.id}
                 username={user.username}
                 email={user.email}
@@ -133,90 +141,6 @@ const UsersList = ({ users, setEntity, setActiveTab }) => (
               />
             ))
           }
-          {/* <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-1"
-            IdUserStaff="staff-1"
-            clientId1="1"
-            clientId2="2"
-            clientId3="3"
-            btnText="Modify" 
-          />
-          <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-2"
-            IdUserStaff="staff-2"
-            clientId1="4"
-            clientId2="5"
-            clientId3="6"
-            btnText="Modify" 
-          />
-          <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-3"
-            IdUserStaff="staff-3"
-            clientId1="7"
-            clientId2="8"
-            clientId3="9"
-            btnText="Modify" 
-          />
-          <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-4"
-            IdUserStaff="staff-4"
-            clientId1="10"
-            clientId2="11"
-            clientId3="12"
-            btnText="Modify" 
-          />
-          <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-5"
-            IdUserStaff="staff-5"
-            clientId1="13"
-            clientId2="14"
-            clientId3="15"
-            btnText="Modify" 
-          />
-          <CardUser
-            username="Test username" 
-            email="lmarinvera@mediagistic.com"
-            firstName="Test first name"
-            lastName="Test last name"
-            lastLogin="10/10/2021"
-            dateJoined="10/10/2021"
-            IdUserClient="client-6"
-            IdUserStaff="staff-6"
-            clientId1="16"
-            clientId2="17"
-            clientId3="18"
-            btnText="Modify" 
-          /> */}
         </div>
       </div>
   </>
@@ -226,7 +150,7 @@ const AccountConfiguration = (props) => {
   const { 
     myInfo, isThereActiveEntity, entity, 
     setEntity, clients, adfluence_campaigns, 
-    data, setData, sendToMyUsers, setAlert, removeUser 
+    data, setData, sendToMyUsers, setAlert, removeUser,token
   } = props
 
   const [user, setUser] = React.useState(() => {
@@ -264,12 +188,36 @@ const AccountConfiguration = (props) => {
     })
   }
 
+  const setUserAsDemo = () => {
+    setUser({
+      ...user,
+      is_staff: false,
+      is_superuser: false,
+      modified: true
+    })
+  }
+  const setUserAsClient = () => {
+    setUser({
+      ...user,
+      is_staff: true,
+      is_superuser: false,
+      modified: true
+    })
+  }
+  const setUserAsStaff = () => {
+    setUser({
+      ...user,
+      is_superuser: true,
+      modified: true
+    })
+  }
+
   const update = () => {
     if (!user.modified)
       return 0
     
     if (isThereActiveEntity()) {
-        return 0
+      return 0
     }
     else {
       if (user.password !== user.currentPassword || user.newPassword !== user.confirmedPassword)
@@ -317,6 +265,29 @@ const AccountConfiguration = (props) => {
 
   }
 
+  const editUser = () => {
+    loaders['update'].loading()
+    editUserRequest(token, user)
+      .then(response => {
+        loaders['update'].loaded()
+        sendToMyUsers()
+        setAlert({
+          title: 'Success!',
+          message: 'The user was deleted',
+          icon: 'fas fa-sync-alt'
+        })
+      })
+      .catch(error => {
+        console.log(error.response)
+        loaders['update'].loaded()
+        setAlert({
+          title: 'Oops...',
+          message: 'Something went wrong',
+          icon: 'fas fa-sync-alt'
+        })
+      })
+  }
+
   const remove = () => {
     loaders['remove'].loading()
     request(() => null)
@@ -346,6 +317,7 @@ const AccountConfiguration = (props) => {
 
   return (
     <div className="account-config-container animated fadeInUp">
+      {console.log(entity())}
     <div className="account-config-form">
       <div className="card-container">
         <div className="user-avatar-container">
@@ -366,25 +338,25 @@ const AccountConfiguration = (props) => {
                 </div>
                 <div className="row">
                     <label>First name:</label>
-                    <label>{user.firstName}</label>
+                    <label>{user.first_name}</label>
                 </div>
                 <div className="row">
                     <label>Last name:</label>
-                    <label>{user.lastName}</label>
+                    <label>{user.last_name}</label>
                 </div>
             </div>
             <div className="right">
                 <label>User type:</label>
                 <div className="user-type">
-                    <input type="checkbox" />
+                    <input onClick={setUserAsDemo} type="checkbox" checked={!user.is_superuser && !user.is_staff} />
                     <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
                 </div>
                 <div className="user-type">
-                    <input type="checkbox" />
+                    <input onClick={setUserAsClient} type="checkbox" checked={user.is_staff && !user.is_superuser} />
                     <label><i className="user-type-icon fas fa-user-tag" />Client</label>
                 </div>
                 <div className="user-type">
-                    <input type="checkbox" />
+                    <input onClick={setUserAsStaff} type="checkbox" checked={user.is_superuser} />
                     <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
                 </div>
             </div>
@@ -482,9 +454,14 @@ const AccountConfiguration = (props) => {
     <div className="crud-btn-container">
       {
         isThereActiveEntity()
-          ? <CardButton
-            text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
+          ? <>
+            <CardButton 
+              text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={editUser}
             />
+            <CardButton
+              text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
+            />
+            </>
           : <CardButton 
             text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
             />
@@ -495,6 +472,7 @@ const AccountConfiguration = (props) => {
 }
 
 const User = ({ setAlert }) =>{
+    const token = localStorage.getItem('token')
     const { data, setData } = React.useContext(UserContext)
     const { myInfo, agencies, clients, adfluence_campaigns, users } = data
 
@@ -524,7 +502,14 @@ const User = ({ setAlert }) =>{
     const ActiveTab = tabController.activeTab().Component
     const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
     const sendToMyUsers = () => {
-      tabController.setActiveTab(1)
+      getUsersRequest(token)
+        .then(response => {
+          setData({
+            ...data,
+            users: response.data
+          })
+          tabController.setActiveTab(1)
+        })
     }
     const removeUser = () => {
       const newUsers = data.users.filter(user => user.userId !== entity().userId)
@@ -571,6 +556,7 @@ const User = ({ setAlert }) =>{
             users={users}
             setActiveTab={tabController.setActiveTab}
             removeUser={removeUser}
+            token={token}
           />
         </div>
     )

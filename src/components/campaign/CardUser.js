@@ -60,7 +60,11 @@ const CardNewUser = (props) =>{
 }
 
 const CardUser = (props) => {
-    const { handleClick, username, email, firstName, lastName, lastLogin, dateJoined, IdUserDemo, IdUserClient, IdUserStaff, clientId1, clientId2, clientId3, btnText} = props
+    const { 
+        handleClick, username, email, firstName, lastName, lastLogin, 
+        dateJoined, IdUserDemo, IdUserClient, IdUserStaff, clientId1, 
+        clientId2, clientId3, btnText, isStaff, isSuperuser
+    } = props
     const handleCheckboxClick = (event) => {
         event.preventDefault()
     }
@@ -92,11 +96,11 @@ const CardUser = (props) => {
                         <label htmlFor={IdUserDemo}><i className="user-type-icon fas fa-user" />Demo</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserClient} checked onClick={handleCheckboxClick} />
+                        <input type="checkbox" id={IdUserClient} checked={isStaff && !isSuperuser} onClick={handleCheckboxClick} />
                         <label htmlFor={IdUserClient}><i className="user-type-icon fas fa-user-check" />Client</label>
                     </div>
                     <div className="user-type">
-                        <input type="checkbox" id={IdUserStaff} onClick={handleCheckboxClick} />
+                        <input type="checkbox" id={IdUserStaff} checked={isSuperuser} onClick={handleCheckboxClick} />
                         <label htmlFor={IdUserStaff}><i className="user-type-icon fas fa-user-cog" />Staff</label>
                     </div>
                 </div>

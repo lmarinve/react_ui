@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from '@reach/router'
 import { Link } from '@reach/router'
 import LogInput from './LogInput'
+import LogSelect from './LogSelect'
 import LogButton from './LogButton'
 import { register, getEmailAvailability } from '../../_services/user.service'
 import ErrorMessage from '../ErrorMessage'
@@ -77,6 +78,9 @@ export default () => {
     }
   }
 
+  const paises = ["United States", "Canada", "Mexico"];
+  const ciudades = ["Texas", "California", "Aragua"];
+
   return (
     <div className='register-form'>
       <img className='register-logo animated fadeInDown' src={Logo2} />
@@ -85,6 +89,20 @@ export default () => {
         <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
         <LogInput animation="animated fadeInLeft" icon='fal fa-lock' typeInput="password" nameId='confirmedPassword' placeHolderText='Confirm Password' onChange={onChange} />
+        <LogInput animation="animated fadeInRight" icon='far fa-id-card-alt' typeInput="text" nameId='firstName' placeHolderText='First Name' onChange={onChange} />
+        <LogInput animation="animated fadeInLeft" icon='far fa-id-card-alt' typeInput="text" nameId='lastName' placeHolderText='Last Name' onChange={onChange} />
+        <div className="date-group-container animated fadeInRight" tabIndex="1">
+            <div className="date-group">
+                <i className="date-group-icon far fa-calendar-alt"/>
+                <label>Date of Born</label>
+            </div>
+            <input type="date" id="dateOfBorn" name="dateOfBorn" onInput={onChange} />
+        </div>
+        {/* <LogInput animation="animated fadeInRight" icon='far fa-calendar-alt' typeInput="date" nameId='dateOfBorn' onChange={onChange} /> */}
+        <LogInput animation="animated fadeInLeft" icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
+        <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title ="Country" options={paises} elementsName="contries" />
+        <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title ="City" options={ciudades} elementsName="contries" />
+        <LogInput animation="animated fadeInRight" icon='fal fa-location' typeInput="text" nameId='zipCode' placeHolderText='Zip Code' onChange={onChange} />
         {messageError !== ''
           ? <ErrorMessage message={messageError} marginBottom='0.5rem' />
           : null}

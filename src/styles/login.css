@@ -23,7 +23,6 @@
 .login-container .login-form .disable-account-container{
     width: 100%;
     color: #f86c6b;
-    font-family: 'Arial';
     font-size: 12px;
 }
 .login-container .login-form .btn{
@@ -34,7 +33,6 @@
 }
 .login-container .login-form .login-option a{
     font-size: 12px;
-    font-family: 'Arial';
     text-decoration: none;
     color: white;  
 }

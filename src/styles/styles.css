@@ -65,6 +65,7 @@ body::-webkit-scrollbar-thumb{
     position: relative;
     width: 100%;
     margin: 20px 0;
+    font-family: 'arial';
 
     /* FLEX */
     display: flex;
@@ -111,6 +112,176 @@ body::-webkit-scrollbar-thumb{
     color: #fff;
 }
 
+
+/* LogDate syles */
+
+
+.date-group-container{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    font-family: 'arial';
+    border: none;
+    border-bottom: 1px solid #838383;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 0 5px 25px;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.date-group-container:focus{
+    outline: none;
+    border-bottom: 1px solid #EC115D;
+}
+.date-group-container .date-group label{
+    margin-right: 10px;
+    background-color: transparent;
+    color: #818181;
+}
+.date-group-container input{
+    box-sizing: border-box;
+    position: absolute;
+    right: 0;
+    padding-left: 50%;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+}
+.date-group-container input:-webkit-autofill,
+.date-group-container input:-webkit-autofill:hover, 
+.date-group-container input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+}
+.date-group-container input:-webkit-autofill:focus{
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+}
+.date-group-container input:focus{
+    outline: 0;
+    background-color: transparent;
+    border-color: #EC115D;
+}
+.input-group-container .input-group::placeholder{
+    color: #838383;
+    text-align: left;
+}
+
+.date-group-container .date-group-icon{
+    position: absolute;
+    left: 0;
+    margin: 0 5px;
+    font-size: 15px;
+    color: #fff;
+}
+
+
+/* LogSelect styles */
+
+
+.select-group-container{
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+    font-family: 'arial';
+}
+.select-group-container .select-group{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    padding: 10px 0 5px 25px;
+    background-color: transparent;
+    text-align: left;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #838383;
+    
+    /* FLEX */
+    display: flex;
+    align-items: center;
+}
+.select-group-container .red-border{
+    border-bottom: none;
+}
+.select-group-container .select-group label{
+    font-size: 18px;
+    color: #838383;
+    border: none;
+    font-weight: 500;
+    text-align: left;
+}
+.select-group-container .select-group .select-group-icon-l{
+    position: absolute;
+    left: 0;
+    margin: 0 5px;
+    font-size: 15px;
+    color: #fff;
+}
+.select-group-container .select-group .select-group-icon-r{
+    position: absolute;
+    right: 0;
+    margin: 0 5px;
+    font-size: 15px;
+    color: #fff;
+    transition: all 0.25s ease;
+}
+.select-group-container .select-group .select-group-icon-r:hover{
+    cursor: pointer;
+}
+.select-group-container .select-group .rotate{
+    transform: rotate(90deg);
+}
+.select-group-container .option-container{
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    background-color: #1f1f1f;
+    text-align: left;
+    border: solid 1px #fff;
+    border-top: solid 1px #ec115d;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow-y: auto;
+    z-index: 10;
+    display: none;
+}
+.select-group-container .option-container::-webkit-scrollbar{
+    width: 15px;
+    background-color: #1f1f1f;
+}
+.select-group-container .option-container::-webkit-scrollbar-thumb{
+    background-color: #ec115d;
+    border-radius: 20px;
+    border: solid 5px #1f1f1f;
+}
+.select-group-container .deploy{
+    display: block;
+}
+.select-group-container .option-container label{
+    box-sizing: border-box;
+    display: block;
+    padding: 5px 0 5px 10px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    transition: all 0.5s ease;
+}
+.select-group-container .option-container label:hover{
+    cursor: pointer;
+    color: #838383;
+    border-bottom: solid 1px #838383;
+}
 
 /* MustContainItem styles */
 

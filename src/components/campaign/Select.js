@@ -30,12 +30,12 @@ const Select = ({title, isSelectable, elementsName, options}) => {
             <button className="select-btn">
                 {title}
                 <div className={`select-icon-container ${show.icon}`}>
-                    <i className={`fas fa-angle-right`} />
+                    <i className="fas fa-angle-right" />
                 </div>
             </button>
             <div className={`list-container ${show.list}`}>
             {
-                options.length
+                options && options.length
                 ? options.map((element, i) => (
                     <label className="" key={i}>{element}</label>
                 ))
@@ -71,17 +71,17 @@ const SelectCheckbox = ({title, isSelectable, elementsName, options}) => {
 
     return(
         <div className={`select-container ${selectableStatus}`} onClick={onClick} onMouseLeave={onBlur}>
-            <button className="select-btn" >
+            <button className="select-btn">
                 {title}
                 <div className={`select-icon-container ${show.icon}`}>
-                    <i className={`fas fa-angle-right`} />
+                    <i className="fas fa-angle-right" />
                 </div>
             </button>
             <div className={`list-container ${show.list}`}>
             {
                 options.length
                 ? options.map((element, i) => (
-                    <div key={i} className="row"><input type="checkbox"/><label className="check-option">{element}</label></div>
+                    <div key={i} className="row"><input type="checkbox" /><label className="check-option">{element}</label></div>
                 ))
                 : <label> There are no {elementsName} </label>
             }

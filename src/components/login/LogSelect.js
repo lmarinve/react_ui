@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const LogSelect = ({title, animation, icon, elementsName, options}) => {
+const LogSelect = ({title, animation, icon, elementsName, options, value, onChange}) => {
     const [show, setShow] = useState({status: false, list: "", icon: "", border: ""})
 
     const onBlur = () => {
@@ -18,20 +18,27 @@ const LogSelect = ({title, animation, icon, elementsName, options}) => {
        }
     }
 
+    const handleOptionChange = (e, value) => {
+        e.stopPropagation()
+        e.nativeEvent.stopImmediatePropagation()
+        onChange(value)
+        setShow({status: false, list: "", icon: "", border: ""})
+    }
+
     return(
         <div className="select-group-container" onClick={onClick} onMouseLeave={onBlur}>
             <div className={`select-group ${animation} ${show.border}`}>
                 <i className={`select-group-icon-l ${icon}`} />
-                <label>{title}</label>
+                <label>{value || title}</label>
                 <div className={`select-group-icon-r ${show.icon}`}>
-                    <i className="fas fa-angle-right"/>                
+                    <i className="fas fa-angle-right" />                
                 </div>
             </div>
             <div className={`option-container ${show.list}`}>
                 {
                     options.length
                     ? options.map((element, i) => (
-                        <label key={i}>{element}</label>
+                        <label key={i} onClick={(e) => handleOptionChange(e, element)}>{element}</label>
                     ))
                     : <label> There are no {elementsName} </label>
                 }

@@ -1,11 +1,9 @@
 import React from 'react'
 import { Select, SelectCheckbox } from './Select'
 
-// Elementos de prueba para las selects
-const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
-const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
-
 const CardNewUser = (props) =>{
+    const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
+    const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
     const {username, email, btnText, handleClick} = props
     const handleCheckboxClick = (event) => {
         event.preventDefault()
@@ -60,6 +58,8 @@ const CardNewUser = (props) =>{
 }
 
 const CardUser = (props) => {
+    const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
+    const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
     const { 
         handleClick, username, email, firstName, lastName, lastLogin, 
         dateJoined, IdUserDemo, IdUserClient, IdUserStaff, clientId1, 

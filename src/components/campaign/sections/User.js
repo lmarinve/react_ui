@@ -273,7 +273,7 @@ const AccountConfiguration = (props) => {
         sendToMyUsers()
         setAlert({
           title: 'Success!',
-          message: 'The user was deleted',
+          message: 'The user was updated',
           icon: 'fas fa-sync-alt'
         })
       })

@@ -21,6 +21,17 @@ export default () => {
     email: '',
     password: '',
     confirmedPassword: '',
+    first_name: '',
+    last_name: '',
+    address: '',
+    is_staff: false,
+    is_superuser: false,
+    is_active: true,
+    role: 'D',
+    country: null,
+    city: null,
+    zip: null,
+    dateOfBorn: null
   })
   const [messageError, setMessageError] = useState('')
   const Loader = useLoader()
@@ -57,8 +68,21 @@ export default () => {
   }
 
   const onSubmit = e => {
+    console.log(UserInfo)
     e.preventDefault()
-    if (Validator(UserInfo.username, 'text') !== 1 || Validator(UserInfo.email, 'email') !== 1 || Validator(UserInfo.password, 'password') !== 1 || Validator(UserInfo.confirmedPassword, 'password') !== 1) {
+    const canSubmit = () => {
+      return Validator(UserInfo.username, 'text') !== 1 || 
+             Validator(UserInfo.email, 'email') !== 1 || 
+             Validator(UserInfo.password, 'password') !== 1 || 
+             Validator(UserInfo.confirmedPassword, 'password') !== 1 ||
+             !UserInfo.first_name.length ||
+             !UserInfo.last_name.length ||
+             !UserInfo.country ||
+             !UserInfo.city ||
+             !UserInfo.dateOfBorn ||
+             !UserInfo.zip
+    }
+    if (canSubmit()) {
       const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a password with at least one lowercase, one uppercase, a number and a special character'
       return setMessageError(setMessage)
     } else {
@@ -79,7 +103,19 @@ export default () => {
   }
 
   const paises = ["United States", "Canada", "Mexico"];
+  const handleCountryChange = value => {
+    setUserInfo({
+      ...UserInfo,
+      country: value
+    })
+  }
   const ciudades = ["Texas", "California", "Aragua"];
+  const handleCityChange = (value) => {
+    setUserInfo({
+      ...UserInfo,
+      city: value
+    })
+  }
 
   return (
     <div className='register-form'>
@@ -89,20 +125,20 @@ export default () => {
         <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
         <LogInput animation="animated fadeInLeft" icon='fal fa-lock' typeInput="password" nameId='confirmedPassword' placeHolderText='Confirm Password' onChange={onChange} />
-        <LogInput animation="animated fadeInRight" icon='far fa-id-card-alt' typeInput="text" nameId='firstName' placeHolderText='First Name' onChange={onChange} />
-        <LogInput animation="animated fadeInLeft" icon='far fa-id-card-alt' typeInput="text" nameId='lastName' placeHolderText='Last Name' onChange={onChange} />
+        <LogInput animation="animated fadeInRight" icon='far fa-id-card-alt' typeInput="text" nameId='first_name' placeHolderText='First Name' onChange={onChange} />
+        <LogInput animation="animated fadeInLeft" icon='far fa-id-card-alt' typeInput="text" nameId='last_name' placeHolderText='Last Name' onChange={onChange} />
         <div className="date-group-container animated fadeInRight" tabIndex="1">
             <div className="date-group">
-                <i className="date-group-icon far fa-calendar-alt"/>
+                <i className="date-group-icon far fa-calendar-alt" />
                 <label>Date of Born</label>
             </div>
             <input type="date" id="dateOfBorn" name="dateOfBorn" onInput={onChange} />
         </div>
         {/* <LogInput animation="animated fadeInRight" icon='far fa-calendar-alt' typeInput="date" nameId='dateOfBorn' onChange={onChange} /> */}
         <LogInput animation="animated fadeInLeft" icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
-        <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title ="Country" options={paises} elementsName="contries" />
-        <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title ="City" options={ciudades} elementsName="contries" />
-        <LogInput animation="animated fadeInRight" icon='fal fa-location' typeInput="text" nameId='zipCode' placeHolderText='Zip Code' onChange={onChange} />
+        <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title="Country" options={paises} elementsName="contries" value={UserInfo.country} onChange={handleCountryChange} />
+        <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title="City" options={ciudades} elementsName="contries" value={UserInfo.city} onChange={handleCityChange} />
+        <LogInput animation="animated fadeInRight" icon='fal fa-location' typeInput="text" nameId='zip' placeHolderText='Zip Code' onChange={onChange} />
         {messageError !== ''
           ? <ErrorMessage message={messageError} marginBottom='0.5rem' />
           : null}

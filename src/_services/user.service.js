@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-export function register (user) {
+export function oldRegister (user) {
   return Axios({
     method: 'post',
     baseURL: `${process.env.API_URL}/api/v1/rest-auth/registration/`,
@@ -12,6 +12,34 @@ export function register (user) {
       email: user.email,
       password1: user.password,
       password2: user.confirmedPassword
+    })
+  })
+}
+
+export function register (user) {
+  return Axios({
+    method: 'post',
+    baseURL: `${process.env.API_URL}/users/users/`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+      email: user.email,
+      password: user.password,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      is_active: true,
+      is_staff: false,
+      is_superuser: false,
+      profile: {
+        role: 'D',
+        title: 'Mr',
+        dob: user.dateOfBorn,
+        address: user.address,
+        country: user.country,
+        city: user.city,
+        zip: user.zip
+      }
     })
   })
 }

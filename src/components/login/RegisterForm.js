@@ -89,13 +89,14 @@ export default () => {
       Loader.loading()
       return register(UserInfo)
         .then((response) => {
-          if (response.data.key) 
-            Loader.loaded( () => activateUser(response.data.key) ) 
-            // navigator('/dashboard', { replace: true }) 
-          else if (response.data.message && response.data.message.length) 
-            Loader.loaded( () => navigator('/welcome-signup', { replace: true }) )
-          else
-            Loader.loaded( () => setMessageError('An error occurred, please contact support@adfluencepro.com') )
+          Loader.loaded(() => navigator('/sign-in', { replace: true }))
+          // if (response.data.key) 
+          //   Loader.loaded( () => activateUser(response.data.key) ) 
+          //   // navigator('/dashboard', { replace: true }) 
+          // else if (response.data.message && response.data.message.length) 
+          //   Loader.loaded( () => navigator('/welcome-signup', { replace: true }) )
+          // else
+          //   Loader.loaded( () => setMessageError('An error occurred, please contact support@adfluencepro.com') )
           
         })
         .catch(() => Loader.loaded( setMessageError('An error occurred, please try again') ) )

@@ -14,6 +14,7 @@ const DashModal = () => {
   const token = localStorage.getItem('token')
   const { mockedData, data, setData } = useContext(UserContext)
   const { agencies, clients, adfluence_campaigns } = data
+  const [showDashboard, setShowDashboard] = useState(false)
 
   useEffect(() => {
     let requests = [getMyInfoRequest(token), getUsersRequest(token), getUserAgenciesRequest(token), getUserClientsRequest(token), getUserAdfluenceCampaignsRequest(token)]
@@ -21,57 +22,60 @@ const DashModal = () => {
       .then(responses => {
           setData({
             ...data,
+            myInfo: responses[0].status === 'rejected' || responses[1].status === 'rejected' ? data.myInfo : responses[1].value.data.find(user => responses[0].value.data.email === user.email),
             users: responses[1].status === 'rejected' ? null : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,
             adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
           })
+          setShowDashboard(true)
       })
       .catch(console.log)
   }, [])
 
     return(
-        <div className="dash-modal-container">
-            <div className="dash-modal-body">
-                <div className="top">
-                    <h5 className="modal-title">Welcome back !</h5>
-                    <h3>What would you like to do first?</h3>
-                </div>
-                <div className="center">
-                    <div className="row">
-                        <Choice
-                          frontStatus="front" 
-                          iconFront="dashboard-icons far fa-tachometer-alt"
-                          textFront="My Dashboard"
-                          linkPath='my-dashboard'
-                        />
-                        <Choice 
-                          backStatus="back" 
-                          iconBackLeft="dashboard-icons fal fa-store" 
-                          textBackLeft="My campaigns"
-                          leftLinkPath='my-campaigns'
-                          iconBackRight="dashboard-icons far fa-wand-magic"
-                          textBackRight="Wizard"
-                          linkPath='campaign-wizard'
-                        />
-                    </div>
-                    <div className="row">
-                        <Choice
-                          frontStatus="front" 
-                          iconFront="dashboard-icons far fa-user-secret"
-                          textFront="My Account"
-                          linkPath='my-account'
-                        />             
-                        <Choice
-                          frontStatus="front" 
-                          iconFront="dashboard-icons icon-api-docs-logo-svg"
-                          textFront="API Docs"
-                          linkPath='https://adfluencepro.com/api/v1/schema/swagger-ui/'
-                          newWindow
-                        />                           
-                    </div>
-                </div>
-            </div>
+        <div className="dash-modal-container"> 
+          {showDashboard &&
+              <div className="dash-modal-body">
+              <div className="top">
+                  <h5 className="modal-title">Welcome back !</h5>
+                  <h3>What would you like to do first?</h3>
+              </div>
+              <div className="center">
+                  <div className="row">
+                      <Choice
+                        frontStatus="front" 
+                        iconFront="dashboard-icons far fa-tachometer-alt"
+                        textFront="My Dashboard"
+                        linkPath='my-dashboard'
+                      />
+                      <Choice 
+                        backStatus="back" 
+                        iconBackLeft="dashboard-icons fal fa-store" 
+                        textBackLeft="My campaigns"
+                        leftLinkPath='my-campaigns'
+                        iconBackRight="dashboard-icons far fa-wand-magic"
+                        textBackRight="Wizard"
+                        linkPath='campaign-wizard'
+                      />
+                  </div>
+                  <div className="row">
+                      <Choice
+                        frontStatus="front" 
+                        iconFront="dashboard-icons far fa-user-secret"
+                        textFront="My Account"
+                        linkPath='my-account'
+                      />             
+                      <Choice
+                        frontStatus="front" 
+                        iconFront="dashboard-icons icon-api-docs-logo-svg"
+                        textFront="API Docs"
+                        linkPath='https://adfluencepro.com/api/v1/schema/swagger-ui/'
+                        newWindow
+                      />                           
+                  </div>
+              </div>
+              </div>}
         </div>
     )
 

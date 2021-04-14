@@ -79,26 +79,24 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
       [event.target.name]: event.target.value
     })
   }
-  const responseHandler = () => {
+  const responseHandler = (successMessage) => {
       try {
+        setAlert({
+          title: 'Success!',
+          message: successMessage,
+          icon: 'fas fa-sync-alt'
+        })
         setMyAgenciesAsActive()
       } catch (error) {
         console.log(error)
+        throw new Error('Something went wrong')
       }
   }
   const createUserAgency = () => {
     if (agency.name.length) {
       loaders['create'].loading()
-      request()
-        .then(() => {
-          addAgency(agency.name)
-          setAlert({
-            title: 'Success!',
-            message: 'The agency was created',
-            icon: 'fas fa-sync-alt'
-          })
-          setMyAgenciesAsActive()
-        })
+      createUserAgencyRequest(token, agency)
+        .then(responseHandler.bind(this, 'The agency was created!'))
         .finally(loaders['create'].loaded)
 
     }
@@ -107,16 +105,8 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
   const updateUserAgency = () => {
     if (agency.name.length) {
       loaders['update'].loading()
-      request()
-        .then(() => {
-          updateAgency(entity().id, agency.name)
-          setAlert({
-            title: 'Success!',
-            message: 'The agency was updated',
-            icon: 'fas fa-sync-alt'
-          })
-          setMyAgenciesAsActive()
-        })
+      updateUserAgencyRequest(token, agency)
+        .then(responseHandler.bind(this, 'The agency was updated'))
         .finally(loaders['update'].loaded)
 
     }
@@ -124,16 +114,8 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
   }
   const removeUserAgency = () => {
       loaders['remove'].loading()
-      request()
-        .then(() => {
-          removeAgency(entity().id)
-          setAlert({
-            title: 'Success!',
-            message: 'The agency was removed',
-            icon: 'fas fa-sync-alt'
-          })
-          setMyAgenciesAsActive()
-        })
+      removeUserAgencyRequest(token, entity().id)
+        .then(responseHandler.bind(this, 'The agency was removed!'))
         .finally(loaders['remove'].loaded)
 
   }
@@ -179,15 +161,14 @@ const AgencyMyAccount = ({ setAlert }) => {
   const ActiveTab = activeTab().Component
   const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
   const setMyAgenciesAsActive = () => {
-      // getUserAgenciesRequest(token)
-      //   .then((response) => {
-      //     setData({
-      //       ...data,
-      //       agencies: response.data 
-      //     })
-      //     setActiveTab(0)
-      //   })
-      setActiveTab(0)
+      getUserAgenciesRequest(token)
+        .then((response) => {
+          setData({
+            ...data,
+            agencies: response.data 
+          })
+          setActiveTab(0)
+        })
   }
   const addAgency = agencyName => {
     const newAgency = {

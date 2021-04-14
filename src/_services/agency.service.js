@@ -31,7 +31,7 @@ export function updateUserAgency (token, agency) {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`
       },
-      data: JSON.stringify({ name: agency.name })
+      data: JSON.stringify({ name: agency.name, users: agency.users })
   })
 }
 

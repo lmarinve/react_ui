@@ -12,6 +12,7 @@ import useEntityHandler from '../../../_helpers/useEntityHandler'
 import { useLoader } from '../../../_helpers/Loader'
 import {
   request,
+  changeMyPassword as changeMyPasswordRequest,
   editUser as editUserRequest,
   getUsers as getUsersRequest
 } from '../../../_services'
@@ -38,72 +39,6 @@ const NewUsersList = ({ users, setActiveTab, setEntity }) => (
               />
             ))
         }
-        {/* <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-1"
-          IdUserClient="client-1"
-          IdUserStaff="staff-1"
-          clientId1="1"
-          clientId2="2"
-          clientId3="3"
-          btnText="Set"
-        />
-        <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-2"
-          IdUserClient="client-2"
-          IdUserStaff="staff-2"
-          clientId1="4"
-          clientId2="5"
-          clientId3="6"
-          btnText="Set" 
-        />
-        <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-3"
-          IdUserClient="client-3"
-          IdUserStaff="staff-3"
-          clientId1="7"
-          clientId2="8"
-          clientId3="9"
-          btnText="Set" 
-        />
-        <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-4"
-          IdUserClient="client-4"
-          IdUserStaff="staff-4"
-          clientId1="10"
-          clientId2="11"
-          clientId3="12"
-          btnText="Set" 
-        />
-        <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-5"
-          IdUserClient="client-5"
-          IdUserStaff="staff-5"
-          clientId1="13"
-          clientId2="14"
-          clientId3="15"
-          btnText="Set" 
-        />
-        <CardNewUser
-          username="Test username" 
-          email="lmarinvera@mediagistic.com"
-          IdUserDemo="demo-6"
-          IdUserClient="client-6"
-          IdUserStaff="staff-6"
-          clientId1="16"
-          clientId2="17"
-          clientId3="18"
-          btnText="Set" 
-        /> */}
       </div>
     </div> 
   </>
@@ -150,7 +85,7 @@ const AccountConfiguration = (props) => {
   const { 
     myInfo, isThereActiveEntity, entity, 
     setEntity, clients, adfluence_campaigns, 
-    data, setData, sendToMyUsers, setAlert, removeUser,token
+    data, setData, sendToMyUsers, setAlert, removeUser,token, users
   } = props
 
   const [user, setUser] = React.useState(() => {
@@ -220,7 +155,7 @@ const AccountConfiguration = (props) => {
       return 0
     }
     else {
-      if (user.password !== user.currentPassword || user.newPassword !== user.confirmedPassword)
+      if (user.newPassword !== user.confirmedPassword)
         return setShowBadPasswordMessage(true)
 
       loaders['update'].loading()
@@ -240,7 +175,7 @@ const AccountConfiguration = (props) => {
           confirmedPassword: '',
         })
       }
-      request(dispatch)
+      changeMyPasswordRequest(token, user)
         .then((response) => {
           dispatch()
           loaders['update'].loaded()
@@ -254,6 +189,7 @@ const AccountConfiguration = (props) => {
           })
         })
         .catch(error => {
+          loaders['update'].loaded()
           console.log(error)
           setAlert({
             title: 'Oops...',
@@ -475,12 +411,13 @@ const User = ({ setAlert }) =>{
     const token = localStorage.getItem('token')
     const { data, setData } = React.useContext(UserContext)
     const { myInfo, agencies, clients, adfluence_campaigns, users } = data
+    const isSuperuser = users.filter(user => user.is_superuser).find(user => myInfo.email === user.email)
 
     const tabs = [
       { name: 'Account configuration', Component: AccountConfiguration, props: {} }
     ]
 
-    if (users) {
+    if (isSuperuser) {
       tabs.unshift(
         { name: 'New users list', Component: NewUsersList, props: {} },
         { name: 'Users list', Component: UsersList, props: {} },

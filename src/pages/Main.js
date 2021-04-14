@@ -163,6 +163,7 @@ const MainMenu = ({ path }) => {
       .then(responses => {
           setData({
             ...data,
+            myInfo: responses[0].status === 'rejected' || responses[1].status === 'rejected' ? data.myInfo : responses[1].value.data.find(user => responses[0].value.data.email === user.email),
             users: responses[1].status === 'rejected' ? null : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,

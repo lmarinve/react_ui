@@ -74,7 +74,10 @@ export function login (user) {
     headers: {
       'Content-Type': 'application/json'
     },
-    data: JSON.stringify(user)
+    data: JSON.stringify({
+      username: user.email,
+      password: user.password
+    })
   })
 }
 
@@ -110,6 +113,21 @@ export function getMyInfo (token) {
       'Authorization': `Token ${token}`,
       'Content-Type': 'application/json'
     }
+  })
+}
+
+export function changeMyPassword (token, passwords) {
+  return Axios({
+    method: 'post',
+    baseURL: `${process.env.API_URL}/users/auth/password/change/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+      new_password1: passwords.newPassword, 
+      new_password2: passwords.confirmedPassword
+    })
   })
 }
 

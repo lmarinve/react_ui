@@ -7,7 +7,7 @@ import {
   getUserClients as getUserClientsRequest,
   createUserClient as createUserClientRequest,
   updateUserClient as updateUserClientRequest,
-  removeUserClient as removeUserAgencyRequest,
+  removeUserClient as removeUserClientRequest,
   request
 } from '../../../_services'
 import useEntityHandler from '../../../_helpers/useEntityHandler'
@@ -16,7 +16,7 @@ import ConfigurationCard from '../../ConfigurationCard'
 import CreateNewCard from '../CreateNewCard'
 import { useLoader } from '../../../_helpers/Loader'
 
-const ClientsList = ({ clients, goToUpdateClient, setActiveTab }) => (
+const ClientsList = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
             {
@@ -34,13 +34,20 @@ const ClientsList = ({ clients, goToUpdateClient, setActiveTab }) => (
                       handleClick={() => goToUpdateClient(client)}
                     /> 
                 ))
-                : <CreateNewCard title='There are no clients' entity='Client' handleClick={() => setActiveTab(2)} />
+                : <CreateNewCard 
+                  title='There are no clients' 
+                  entity='Client' 
+                  handleClick={() => {
+                  setEntity({})
+                  setActiveTab(2)
+                  }}
+                  />
             }
         </div>
     </div>
 )
 
-const MyClients = ({ clients, goToUpdateClient, setActiveTab }) => (
+const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
              {
@@ -58,7 +65,14 @@ const MyClients = ({ clients, goToUpdateClient, setActiveTab }) => (
                       handleClick={() => goToUpdateClient(client)}
                     /> 
                 ))
-                : <CreateNewCard title='There are no clients' entity='Client' handleClick={() => setActiveTab(2)} />
+                : <CreateNewCard 
+                  title='There are no clients' 
+                  entity='Client' 
+                  handleClick={() => {
+                    setEntity({})
+                    setActiveTab(2)
+                    }}
+                  />
              }
         </div>
     </div>
@@ -69,9 +83,9 @@ const ClientConfiguration = (props) => {
     const { isThereActiveEntity, entity, setMyClientsAsActive, agencies, setAlert, createClient, updateClient,removeClient } = props
     const [client, setClient] = useState(() => {
         if (!isThereActiveEntity())
-          return {  name: '' }
+          return { name: '', agencyId: null }
         else
-          return { ...entity() }
+          return { ...entity(), agencyId: entity().agency }
     })
     const loaders = {
       'create': useLoader(),
@@ -84,62 +98,52 @@ const ClientConfiguration = (props) => {
           [event.target.name]: event.target.value
         })
     }
-    const handleResponse = () => {
+    const handleResponse = (successMessage) => {
         try {
-            setMyClientsAsActive()
+          setAlert({
+            title: 'Success!',
+            message: successMessage,
+            icon: 'fas fa-sync-alt'
+          })
+          setMyClientsAsActive()
         } catch (error) {
             console.log(error)
+            throw new Error('something went wrong')
         }
     }
     const createUserClient = () => {
-        if (client.name.length && agenciesToChoose.activeTab()) {
+        if (client.name.length && client.agencyId) {
             loaders['create'].loading()
-            request()
-              .then(() => {
-                  createClient({ name: client.name, agencyId: agenciesToChoose.activeTab().id })
-                  setAlert({
-                    title: 'Success!',
-                    message: 'The client was created',
-                    icon: 'fas fa-sync-alt'
-                  })
-                  setMyClientsAsActive()
-              })
+            createUserClientRequest(token, client)
+              .then(handleResponse.bind(this, 'The client was created!'))
               .finally(loaders['create'].loaded)
+        } else {
+          return 0
         }
     }
     const canUpdateClient = () => (client.name.length && client.agencyId)
     const updateUserClient = () => { 
         if (canUpdateClient()) {
             loaders['update'].loading()
-            request()
-              .then(() => {
-                updateClient(client.id, client.name)
-                setAlert({
-                    title: 'Success!',
-                    message: 'The client was updated',
-                    icon: 'fas fa-sync-alt'
-                })
-                  setMyClientsAsActive()
-              })
+            updateUserClientRequest(token, client)
+              .then(handleResponse.bind(this, 'the client was updated!'))
               .finally(loaders['update'].loaded)    
         }
     }
     const removeUserClient = () => {
         loaders['remove'].loading()
-        request()
-          .then(() => {
-            removeClient(client.id)
-            setAlert({
-                title: 'Success!',
-                message: 'The client was removed',
-                icon: 'fas fa-sync-alt'
-            })
-            setMyClientsAsActive()
-          })
+        removeUserClientRequest(token, client.id)
+          .then(handleResponse.bind(this, 'the client was removed!'))
           .finally(loaders['remove'].loaded)
     }
 
-    const agenciesToChoose = useTabController([null, ...agencies])
+    const agenciesToChoose = agencies.map(agency => agency.name)
+    const handleOptionsChange = value => {
+      setClient({
+        ...client,
+        agencyId: agencies.find(agency => agency.name === value).id,
+      })
+    }
 
     useEffect(() => {
         if (!isThereActiveEntity())
@@ -156,7 +160,16 @@ const ClientConfiguration = (props) => {
       }, [entity()])
 
     return <div className="client-config-container animated fadeInUp">
-        <ConfigurationCard agencies={agenciesToChoose} entity={client} handleChange={handleChange} itemsName='Campaigns' entityName='Client' isThereActiveEntity={isThereActiveEntity} />
+        <ConfigurationCard 
+          agencies={agenciesToChoose} 
+          activeOption={agencies.find(agency => agency.id === client.agencyId) ? agencies.find(agency => agency.id === client.agencyId).name : null} 
+          handleOptionsChange={handleOptionsChange} 
+          entity={client} 
+          handleChange={handleChange} 
+          itemsName='Campaigns' 
+          entityName='Client' 
+          isThereActiveEntity={isThereActiveEntity}
+        />
         <div className="crud-btn-container">
         { 
             !isThereActiveEntity()
@@ -185,15 +198,14 @@ const ClientMyAccount = ({ setAlert }) => {
     const ActiveTab = activeTab().Component
     const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
     const setMyClientsAsActive = () => {
-        // getUserClientsRequest(token)
-        //   .then((response) => {
-        //     setData({
-        //       ...data,
-        //       clients: response.data 
-        //     })
-        //     setActiveTab(1)
-        //   })
-        setActiveTab(1)
+        getUserClientsRequest(token)
+          .then((response) => {
+            setData({
+              ...data,
+              clients: response.data 
+            })
+            setActiveTab(1)
+          })
     }
     const createClient = (client) => {
       const newClient = {
@@ -263,6 +275,7 @@ const ClientMyAccount = ({ setAlert }) => {
               createClient={createClient}
               updateClient={updateClient}
               removeClient={removeClient}
+              token={token}
             />
         </div>
     )

@@ -33,20 +33,20 @@ const MyMaps = () => (
         <div className="maps-list-container animated fadeInUp">
             <div className="maps-list">
                 <CardMap 
-                mapId="Test ID"
-                priority="10"
-                value1="20"
-                value2="30"
-                percentChange="2"
-                days="50"
+                  mapId="Test ID"
+                  priority="10"
+                  value1="20"
+                  value2="30"
+                  percentChange="2"
+                  days="50"
                 />
                 <CardMap 
-                mapId="Test ID"
-                priority="1"
-                value1="20"
-                value2="30"
-                percentChange="2"
-                days="5"
+                  mapId="Test ID"
+                  priority="1"
+                  value1="20"
+                  value2="30"
+                  percentChange="2"
+                  days="5"
                 />
             </div>
         </div>
@@ -77,10 +77,10 @@ const MapsConfigutation = () => {
                         </div>
                         <div className="box">
                             <Select 
-                                title="Connector"
-                                elementsName="Connectors"
-                                isSelectable
-                                options={connectorTest}
+                              title="Connector"
+                              elementsName="Connectors"
+                              isSelectable
+                              options={connectorTest}
                             />
                         </div>
                     </div>
@@ -97,10 +97,10 @@ const MapsConfigutation = () => {
                         </div>
                         <div className="mid">
                             <Select 
-                                title="Oper"
-                                elementsName="Opers"
-                                isSelectable
-                                options={operTest}
+                              title="Oper"
+                              elementsName="Opers"
+                              isSelectable
+                              options={operTest}
                             />
                         </div>
                         <div className="box">
@@ -111,10 +111,10 @@ const MapsConfigutation = () => {
                     <div className="row">
                         <div className="box">
                             <Select 
-                                title="Tense"
-                                elementsName="Tenses"
-                                isSelectable
-                                options={tenseTest}
+                              title="Tense"
+                              elementsName="Tenses"
+                              isSelectable
+                              options={tenseTest}
                             />
                         </div>
                         <div className="mid">
@@ -123,46 +123,46 @@ const MapsConfigutation = () => {
                         </div>
                         <div className="box">
                             <Select 
-                                title="Weather trigger"
-                                elementsName="Weather triggers"
-                                isSelectable
-                                options={weatherTriggerTest}
+                              title="Weather trigger"
+                              elementsName="Weather triggers"
+                              isSelectable
+                              options={weatherTriggerTest}
                             />
                         </div>
                     </div>
                     <div className="row">
                         <div className="box">
                             <Select 
-                                title="Campaign"
-                                elementsName="Campaign"
-                                isSelectable
-                                options={campaignTest}
+                              title="Campaign"
+                              elementsName="Campaign"
+                              isSelectable
+                              options={campaignTest}
                             />
                         </div>
                         <div className="box">
                             <Select 
-                                title="Ad channel"
-                                elementsName="Ad channels"
-                                isSelectable
-                                options={adChannelTest}
+                              title="Ad channel"
+                              elementsName="Ad channels"
+                              isSelectable
+                              options={adChannelTest}
                             />
                         </div>
                     </div>
                     <div className="row">
                         <div className="box">
                             <Select 
-                                title="Rules"
-                                elementsName="Rules"
-                                isSelectable
-                                options={rulesTest}
+                              title="Rules"
+                              elementsName="Rules"
+                              isSelectable
+                              options={rulesTest}
                             />
                         </div>
                         <div className="box">
                             <Select 
-                                title="Modifier action"
-                                elementsName="Modifier actions"
-                                isSelectable
-                                options={modifierTest}
+                              title="Modifier action"
+                              elementsName="Modifier actions"
+                              isSelectable
+                              options={modifierTest}
                             />
                         </div>
                     </div>
@@ -172,7 +172,7 @@ const MapsConfigutation = () => {
                     <button className="crud-btn"><i className="crud-icon fas fa-sync-alt" />Update</button>
                     <button className="crud-btn"><i className="crud-icon fas fa-trash-alt" />Delete</button>
                 </div>
-        </div>
+    </div>
     )
 }
 
@@ -191,7 +191,7 @@ const Maps = () =>{
                 <div className="maps-menu-box">
                     {
                         tabs().map((tab, index) => (
-                            <button className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
+                            <button key={UUIDGenerator()} className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
                         ))
                     }
                 </div>

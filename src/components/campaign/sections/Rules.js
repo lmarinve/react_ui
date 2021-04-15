@@ -9,64 +9,64 @@ const RulesList = () => (
     <div className="rules-list-container animated fadeInUp">
         <div className="rules-list">
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
             <CardRules
-                ruleId="Test ID"
-                ruleName="Saint Lucia Weather rule 1"
-                blueBtnText="Update"
+              ruleId="Test ID"
+              ruleName="Saint Lucia Weather rule 1"
+              blueBtnText="Update"
             />
         </div>
     </div>
@@ -78,64 +78,64 @@ const MyRules = () => (
         <div className="rules-list-container animated fadeInUp">
             <div className="rules-list">
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Update"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Update"
                 />
             </div>
         </div>
@@ -161,24 +161,24 @@ const RulesConfiguration = () => {
             </div>
             <div className="rules-selects">
                 <Select 
-                    title="Rule Type"
-                    elementsName="Rule Types"
-                    isSelectable
-                    options={rulesTypeTest}
+                  title="Rule Type"
+                  elementsName="Rule Types"
+                  isSelectable
+                  options={rulesTypeTest}
                 />
                 <Select 
-                    title="Campaigns"
-                    elementsName="Campaigns"
-                    isSelectable
-                    options={campaignTest}
+                  title="Campaigns"
+                  elementsName="Campaigns"
+                  isSelectable
+                  options={campaignTest}
                 />
             </div>
             <div className="rules-selects">
                 <Select 
-                    title="Maps"
-                    elementsName="Maps"
-                    isSelectable
-                    options={mapsTest}
+                  title="Maps"
+                  elementsName="Maps"
+                  isSelectable
+                  options={mapsTest}
                 />
             </div>
         </div>
@@ -206,7 +206,7 @@ const RulesMyAccount = () => {
                 <div className="rules-menu-box">
                     {
                         tabs().map((tab, index) => (
-                            <button className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
+                            <button key={UUIDGenerator()} className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
                         ))
                     }
                 </div>
@@ -221,34 +221,34 @@ const RulesWizzard = () => (
         <div className="rules-select-container animated fadeInUp">
             <div className="rules-list">
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
                 <CardRules
-                    ruleId="Test ID"
-                    ruleName="Saint Lucia Weather rule 1"
-                    blueBtnText="Select"
+                  ruleId="Test ID"
+                  ruleName="Saint Lucia Weather rule 1"
+                  blueBtnText="Select"
                 />
             </div>
         </div>

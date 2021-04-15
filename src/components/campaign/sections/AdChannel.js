@@ -62,46 +62,46 @@ const MyAdChannels = () => (
         <div className="ad-channel-list-container animated fadeInUp">
             <div className="ad-channel-list">
                 <CardAdChannel
-                AdChannelId="Test ID"
-                AdChannelName="Facebook Adset Coconut Bay January 2021"
-                AdChannelBudget="5.00"
-                AdGroupId="Test ID"
-                AdAccountId="Test ID"
-                BaseAdId="Test ID"
-                AdId="Test ID"
-                AdCreativeId="Test ID"
-                Headline=" Test Headline"
-                PixelId="Test ID"
-                injectionId1="1"
-                injectionId2="2"
-                injectionId3="3"
-                injectionId4="4"
-                injectionId5="5"
-                injectionId6="6"
-                injectionId7="7"
-                injectionId8="8"
-                injectionId9="9"
+                  AdChannelId="Test ID"
+                  AdChannelName="Facebook Adset Coconut Bay January 2021"
+                  AdChannelBudget="5.00"
+                  AdGroupId="Test ID"
+                  AdAccountId="Test ID"
+                  BaseAdId="Test ID"
+                  AdId="Test ID"
+                  AdCreativeId="Test ID"
+                  Headline=" Test Headline"
+                  PixelId="Test ID"
+                  injectionId1="1"
+                  injectionId2="2"
+                  injectionId3="3"
+                  injectionId4="4"
+                  injectionId5="5"
+                  injectionId6="6"
+                  injectionId7="7"
+                  injectionId8="8"
+                  injectionId9="9"
                 />
                 <CardAdChannel
-                AdChannelId="Test ID"
-                AdChannelName="Facebook Adset Coconut Bay January 2021"
-                AdChannelBudget="5.00"
-                AdGroupId="Test ID"
-                AdAccountId="Test ID"
-                BaseAdId="Test ID"
-                AdId="Test ID"
-                AdCreativeId="Test ID"
-                Headline=" Test Headline"
-                PixelId="Test ID"
-                injectionId1="10"
-                injectionId2="11"
-                injectionId3="12"
-                injectionId4="13"
-                injectionId5="14"
-                injectionId6="15"
-                injectionId7="16"
-                injectionId8="17"
-                injectionId9="18"
+                  AdChannelId="Test ID"
+                  AdChannelName="Facebook Adset Coconut Bay January 2021"
+                  AdChannelBudget="5.00"
+                  AdGroupId="Test ID"
+                  AdAccountId="Test ID"
+                  BaseAdId="Test ID"
+                  AdId="Test ID"
+                  AdCreativeId="Test ID"
+                  Headline=" Test Headline"
+                  PixelId="Test ID"
+                  injectionId1="10"
+                  injectionId2="11"
+                  injectionId3="12"
+                  injectionId4="13"
+                  injectionId5="14"
+                  injectionId6="15"
+                  injectionId7="16"
+                  injectionId8="17"
+                  injectionId9="18"
                 />
             </div>
         </div>
@@ -182,44 +182,44 @@ const AdChannelConfiguration = () => {
                 </div>
                 <div className="ad-channel-selects">
                     <SelectCheckbox
-                        title="Copy injection"
-                        elementsName="Copy injections"
-                        isSelectable
-                        options={injectionTest}
+                      title="Copy injection"
+                      elementsName="Copy injections"
+                      isSelectable
+                      options={injectionTest}
                     />
                     <Select 
-                        title="City"
-                        elementsName="Cities"
-                        isSelectable
-                        options={cityTest}
-                    />
-                </div>
-                <div className="ad-channel-selects">
-                    <Select 
-                        title="Channel type"
-                        elementsName="Channel types"
-                        isSelectable
-                        options={channelTypeTest}
-                    />
-                    <Select 
-                        title="Action types"
-                        elementsName="Channel types"
-                        isSelectable
-                        options={actionTypeTest}
+                      title="City"
+                      elementsName="Cities"
+                      isSelectable
+                      options={cityTest}
                     />
                 </div>
                 <div className="ad-channel-selects">
                     <Select 
-                        title="Campaigns"
-                        elementsName="Campaigns"
-                        isSelectable
-                        options={campaignTest}
+                      title="Channel type"
+                      elementsName="Channel types"
+                      isSelectable
+                      options={channelTypeTest}
                     />
                     <Select 
-                        title="Rules"
-                        elementsName="Rules"
-                        isSelectable
-                        options={rulesTest}
+                      title="Action types"
+                      elementsName="Channel types"
+                      isSelectable
+                      options={actionTypeTest}
+                    />
+                </div>
+                <div className="ad-channel-selects">
+                    <Select 
+                      title="Campaigns"
+                      elementsName="Campaigns"
+                      isSelectable
+                      options={campaignTest}
+                    />
+                    <Select 
+                      title="Rules"
+                      elementsName="Rules"
+                      isSelectable
+                      options={rulesTest}
                     />
                 </div>
             </div>
@@ -256,7 +256,7 @@ export default () => {
                 <div className="ad-channel-menu-box" style={tabs().length > 1 ? {} : { flexDirection: 'column', alignItems: 'center' }}>
                     { 
                       tabs().map((tab, index) => (
-                          <button className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
+                          <button key={UUIDGenerator()} className={isActiveTab(index) ? 'active' : ''} onClick={() => setActiveTab(index)}> {tab.name} </button>
                       ))
                     }
                 </div>

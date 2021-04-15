@@ -206,19 +206,6 @@ const CampaignConfiguration = (props) => {
                   isSelectable
                   options={clientsTest}
                 />
-                {/* <div className="select-container">
-                    <button className="select-btn">
-                        Client
-                        <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                        {
-                            clientsToChoose.tabs().map((client, i) => (
-                                <label key={client.id} onClick={() => clientsToChoose.setActiveTab(i)} className={clientsToChoose.isActiveTab(i) ? 'active' : ''}> {client.name} </label>
-                            ))
-                        }
-                    </div>
-                </div> */}
                 <Select 
                   title="Copy injection tags"
                   elementsName="Copy injection tags"

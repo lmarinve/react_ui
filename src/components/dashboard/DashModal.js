@@ -70,7 +70,7 @@ const DashModal = () => {
                         frontStatus="front" 
                         iconFront="dashboard-icons icon-api-docs-logo-svg"
                         textFront="API Docs"
-                        linkPath='https://adfluencepro.com/api/v1/schema/swagger-ui/'
+                        linkPath='https://adfluencedev.com/api/v1/schema/swagger-ui/'
                         newWindow
                       />                           
                   </div>

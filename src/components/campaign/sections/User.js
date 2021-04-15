@@ -304,36 +304,12 @@ const AccountConfiguration = (props) => {
               isSelectable
               options={agenciesTest}
             />
-            {/* <div className="select-container">
-                <button className="select-btn">
-                    My Agency
-                    <i className="select-icon fas fa-angle-down" />
-                </button>
-                <div className="list-container">
-                    <label className='agency-option active' tabIndex="1"> {user.agencyName} </label>
-                </div>
-            </div> */}
             <SelectCheckbox 
               title="My Clients"
               elementsName="clients"
               isSelectable
               options={clientsTest}
             />
-            {/* <div className="select-container">
-              <button className="select-btn">
-                My Clients
-                <i className="select-icon fas fa-angle-down" />
-              </button>
-              <div className="list-container">
-                {
-                  user.clients.length
-                    ? user.clients.map((client, i) => (
-                      <div key={client.id} className='row'><input type="checkbox" /><label className='client-option'>{client.name}</label></div>
-                    ))
-                    : <div className='row'> There are no clients </div>
-                }
-              </div>
-            </div> */}
           </div>
           <div className="user-selects">
             <SelectCheckbox 
@@ -342,21 +318,6 @@ const AccountConfiguration = (props) => {
               isSelectable
               options={user.adfluence_campaigns}
             />
-            {/* <div className="select-container">
-              <button className="select-btn">
-                Active campaigns
-                <i className="select-icon fas fa-angle-down" />
-              </button>
-              <div className="list-container">
-                {
-                  user.adfluence_campaigns.length
-                    ? user.adfluence_campaigns.map((campaign, i) => (
-                      <label key={campaign.id} className="agency-option" tabIndex="1">{campaign.name}</label>
-                    ))
-                    : <label className="agency-option" tabIndex="1"> There are no campaigns </label>
-                }
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

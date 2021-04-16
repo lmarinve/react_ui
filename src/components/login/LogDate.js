@@ -1,12 +1,13 @@
 import React, { useState }from 'react'
 
-const LogDate = ({animation}) => {
+const LogDate = ({animation, name, setter}) => {
 
     const [date, setDate] = useState({ value: '' })
     const [display, setDisplay] = useState({ status: false, label: 'display-block', input: 'display-none'})
 
     const dateOnInput = (e) => {
         setDate({value: e.target.value}) 
+        setter(e)
     }
 
     const dateOnClick = () => {

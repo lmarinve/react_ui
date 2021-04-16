@@ -71,7 +71,7 @@ export default () => {
   const onSubmit = e => {
     console.log(UserInfo)
     e.preventDefault()
-    const canSubmit = () => {
+    const cantSubmit = () => {
       return Validator(UserInfo.username, 'text') !== 1 || 
              Validator(UserInfo.email, 'email') !== 1 || 
              Validator(UserInfo.password, 'password') !== 1 || 
@@ -83,7 +83,7 @@ export default () => {
              !UserInfo.dateOfBorn ||
              !UserInfo.zip
     }
-    if (canSubmit()) {
+    if (cantSubmit()) {
       const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a password with at least one lowercase, one uppercase, a number and a special character'
       return setMessageError(setMessage)
     } else {
@@ -132,10 +132,10 @@ export default () => {
         {/* <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title="Country" options={paises} elementsName="contries" value={UserInfo.country} onChange={handleCountryChange} /> */}
         {/* <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title="City" options={ciudades} elementsName="cities" value={UserInfo.city} onChange={handleCityChange} /> */}
         <LogInput animation="animated fadeInDown" icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
-        <LogInput animation="animated fadeInUp" icon='far fa-globe-americas' typeInput="text" nameId='Country' placeHolderText='Country' onChange={onChange} />
-        <LogInput animation="animated fadeInUp" icon='fas fa-search-location' typeInput="text" nameId='City' placeHolderText='City' onChange={onChange} />
+        <LogInput animation="animated fadeInUp" icon='far fa-globe-americas' typeInput="text" nameId='country' placeHolderText='Country' onChange={onChange} />
+        <LogInput animation="animated fadeInUp" icon='fas fa-search-location' typeInput="text" nameId='city' placeHolderText='City' onChange={onChange} />
         <LogInput animation="animated fadeInUp" icon='fal fa-location' typeInput="text" nameId='zip' placeHolderText='Zip Code' onChange={onChange} />
-        <LogDate animation="animated fadeInUp" />
+        <LogDate animation="animated fadeInUp" setter={onChange} />
         {messageError !== ''
           ? <ErrorMessage message={messageError} />
           : null}

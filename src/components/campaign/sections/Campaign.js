@@ -13,7 +13,11 @@ import CampaignPhoto from '../../../images/lucia3.jpg'
 import CreateNewCard from '../CreateNewCard'
 import { useLoader } from '../../../_helpers/Loader'
 import {
-  request
+  getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest,
+  createAdfluenceCampaign as createAdfluenceCampaignRequest,
+  updateAdfluenceCampaign as updateAdfluenceCampaignRequest,
+  removeAdfluenceCampaign as removeAdfluenceCampaignRequest,
+  request,
 } from '../../../_services'
 
 const CampaignsList = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) => (
@@ -78,6 +82,7 @@ const MyCampaigns = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) 
 )
 
 const CampaignConfiguration = (props) => {
+    const token = localStorage.getItem('token')
 
     const clientsTest = ["Client ID", "Client ID", "Client ID"]
     const injectionTest = ["Injection tags #1", "Injection  tags #2", "Injection tags #3"]
@@ -87,9 +92,9 @@ const CampaignConfiguration = (props) => {
     const { isThereActiveEntity, entity, clients, setAlert, createCampaign, updateCampaign, removeCampaign, setMyCampaignsAsActive } = props
     const [campaign, setCampaign] = React.useState(() => {
         if (!isThereActiveEntity())
-          return { name: '' }
+          return { name: '', clientId: null }
         else
-          return { ...entity() }
+          return { ...entity(), clientId: entity().client }
     })
     const loaders = {
         'create': useLoader(),
@@ -102,59 +107,53 @@ const CampaignConfiguration = (props) => {
           [event.target.name]: event.target.value
         })
     }
+    const handleResponse = successMessage => {
+      try {
+        setAlert({
+          title: 'Success!',
+          message: successMessage,
+          icon: 'fas fa-sync-alt'
+        })
+        setMyCampaignsAsActive()
+      } catch (error) {
+        throw new Error('Something went wrong')
+      }
+    }
     const create = () => {
-        if (campaign.name.length && clientsToChoose.activeTab()) {
+        if (campaign.name.length && campaign.clientId) {
             loaders['create'].loading()
-            request()
-              .then(() => {
-                  createCampaign({ name: campaign.name, clientId: clientsToChoose.activeTab().id })
-                  setAlert({
-                    title: 'Success!',
-                    message: 'The campaign was created',
-                    icon: 'fas fa-sync-alt'
-                  })
-                  setMyCampaignsAsActive()
-              })
+            createAdfluenceCampaignRequest(token, campaign)
+              .then(handleResponse.bind(this, 'The campaign was succesfully created!!'))
               .finally(loaders['create'].loaded)
         }
     }
     const update = () => {
-        if (campaign.name.length) {
+        if (campaign.name.length && campaign.clientId) {
             loaders['update'].loading()
-            request()
-              .then(() => {
-                updateCampaign(campaign.id, campaign.name)
-                setAlert({
-                    title: 'Success!',
-                    message: 'The campaign was updated',
-                    icon: 'fas fa-sync-alt'
-                })
-                  setMyCampaignsAsActive()
-              })
+            updateAdfluenceCampaignRequest(token, campaign)
+              .then(handleResponse.bind(this, 'The campaign was succesfully updated!!'))
               .finally(loaders['update'].loaded)    
         }
     }
     const remove = () => {
         loaders['remove'].loading()
-        request()
-          .then(() => {
-            removeCampaign(campaign.id)
-            setAlert({
-                title: 'Success!',
-                message: 'The campaign was removed',
-                icon: 'fas fa-sync-alt'
-            })
-            setMyCampaignsAsActive()
-          })
+        removeAdfluenceCampaignRequest(token, campaign.id)
+          .then(handleResponse.bind(this, 'The campaign was succesfully removed!'))
           .finally(loaders['remove'].loaded)
     }
-    const clientsToChoose = UseTabController(clients)
+    
+    const handleCampaignChange = value => {
+      setCampaign({
+        ...campaign,
+        clientId: clients.find(client => client.name === value).id
+      })
+    }
 
     useEffect(() => {
         if (!isThereActiveEntity())
-          setCampaign({ name: '', })
+          setCampaign({ name: '', clientId: null })
         else
-          setCampaign({ ...entity() })
+          setCampaign({ ...entity(), clientId: entity().client })
     
         return () => {
           setCampaign({})
@@ -204,7 +203,9 @@ const CampaignConfiguration = (props) => {
                   title="Clients"
                   elementsName="clients"
                   isSelectable
-                  options={clientsTest}
+                  options={clients.map(client => client.name)}
+                  activeOption={clients.find(client => client.id === campaign.clientId) ? clients.find(client => client.id === campaign.clientId).name : null}
+                  handleOptionsChange={handleCampaignChange}
                 />
                 <Select 
                   title="Copy injection tags"
@@ -243,6 +244,7 @@ const CampaignConfiguration = (props) => {
 }
 
 const CampaignMyAccount = ({ setAlert }) => {
+    const token = localStorage.getItem('token')
     const { data, setData } = React.useContext(UserContext)
     const { adfluence_campaigns, clients } = data
 
@@ -256,7 +258,14 @@ const CampaignMyAccount = ({ setAlert }) => {
     const ActiveTab = activeTab().Component
     const { entity, setEntity, isThereActiveEntity } = useEntityHandler({})
     const setMyCampaignsAsActive = () => {
-        setActiveTab(1)
+        getUserAdfluenceCampaignsRequest(token)
+          .then(response => {
+            setData({
+              ...data,
+              adfluence_campaigns: response.data
+            })
+            setActiveTab(1)
+          })
     }
     const createCampaign = (campaign) => {
         const newCampaign = {
@@ -326,7 +335,7 @@ const CampaignMyAccount = ({ setAlert }) => {
     )
 }
 
-const CampaignWizzard = ({ adfluence_campaigns, setActiveTab }) => (
+const CampaignWizzard = ({ adfluence_campaigns, clients, setActiveTab }) => (
     <div className="campaign-section-container animated fadeInUp">
         <div className="campaign-select-container">
             <div className="campaign-list">

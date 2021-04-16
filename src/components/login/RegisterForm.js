@@ -3,6 +3,7 @@ import { useNavigate } from '@reach/router'
 import { Link } from '@reach/router'
 import LogInput from './LogInput'
 import LogSelect from './LogSelect'
+import LogDate from './LogDate'
 import LogButton from './LogButton'
 import { register, getEmailAvailability } from '../../_services/user.service'
 import ErrorMessage from '../ErrorMessage'
@@ -103,52 +104,46 @@ export default () => {
     }
   }
 
-  const paises = ["United States", "Canada", "Mexico"];
-  const handleCountryChange = value => {
-    setUserInfo({
-      ...UserInfo,
-      country: value
-    })
-  }
-  const ciudades = ["Texas", "California", "Aragua"];
-  const handleCityChange = (value) => {
-    setUserInfo({
-      ...UserInfo,
-      city: value
-    })
-  }
+//   const paises = ["United States", "Canada", "Mexico"];
+//   const handleCountryChange = value => {
+//     setUserInfo({
+//       ...UserInfo,
+//       country: value
+//     })
+//   }
+//   const ciudades = ["Texas", "California", "Aragua"];
+//   const handleCityChange = (value) => {
+//     setUserInfo({
+//       ...UserInfo,
+//       city: value
+//     })
+//   }
+
 
   return (
-    <div className='register-form'>
-      <img className='register-logo animated fadeInDown' src={Logo2} />
-      <form>
-        <LogInput animation="animated fadeInRight" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
-        <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
-        <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
-        <LogInput animation="animated fadeInLeft" icon='fal fa-lock' typeInput="password" nameId='confirmedPassword' placeHolderText='Confirm Password' onChange={onChange} />
-        <LogInput animation="animated fadeInRight" icon='far fa-id-card-alt' typeInput="text" nameId='first_name' placeHolderText='First Name' onChange={onChange} />
-        <LogInput animation="animated fadeInLeft" icon='far fa-id-card-alt' typeInput="text" nameId='last_name' placeHolderText='Last Name' onChange={onChange} />
-        <div className="date-group-container animated fadeInRight" tabIndex="1">
-            <div className="date-group">
-                <i className="date-group-icon far fa-calendar-alt" />
-                <label>Date of Born</label>
-            </div>
-            <input type="date" id="dateOfBorn" name="dateOfBorn" onInput={onChange} />
-        </div>
-        {/* <LogInput animation="animated fadeInRight" icon='far fa-calendar-alt' typeInput="date" nameId='dateOfBorn' onChange={onChange} /> */}
-        <LogInput animation="animated fadeInLeft" icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
-        <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title="Country" options={paises} elementsName="contries" value={UserInfo.country} onChange={handleCountryChange} />
-        <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title="City" options={ciudades} elementsName="contries" value={UserInfo.city} onChange={handleCityChange} />
-        <LogInput animation="animated fadeInRight" icon='fal fa-location' typeInput="text" nameId='zip' placeHolderText='Zip Code' onChange={onChange} />
+    <form className='register-form'>
+        <img className='register-logo animated fadeInDown' src={Logo2} />
+        <LogInput animation="animated fadeInDown" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
+        <LogInput animation="animated fadeInDown" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
+        <LogInput animation="animated fadeInDown" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
+        <LogInput animation="animated fadeInDown" icon='fal fa-lock' typeInput="password" nameId='confirmedPassword' placeHolderText='Confirm Password' onChange={onChange} />
+        <LogInput animation="animated fadeInDown" icon='far fa-id-card-alt' typeInput="text" nameId='first_name' placeHolderText='First Name' onChange={onChange} />
+        <LogInput animation="animated fadeInDown" icon='far fa-id-card-alt' typeInput="text" nameId='last_name' placeHolderText='Last Name' onChange={onChange} />
+        {/* <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title="Country" options={paises} elementsName="contries" value={UserInfo.country} onChange={handleCountryChange} /> */}
+        {/* <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title="City" options={ciudades} elementsName="cities" value={UserInfo.city} onChange={handleCityChange} /> */}
+        <LogInput animation="animated fadeInDown" icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
+        <LogInput animation="animated fadeInUp" icon='far fa-globe-americas' typeInput="text" nameId='Country' placeHolderText='Country' onChange={onChange} />
+        <LogInput animation="animated fadeInUp" icon='fas fa-search-location' typeInput="text" nameId='City' placeHolderText='City' onChange={onChange} />
+        <LogInput animation="animated fadeInUp" icon='fal fa-location' typeInput="text" nameId='zip' placeHolderText='Zip Code' onChange={onChange} />
+        <LogDate animation="animated fadeInUp" />
         {messageError !== ''
-          ? <ErrorMessage message={messageError} marginBottom='0.5rem' />
+          ? <ErrorMessage message={messageError} />
           : null}
-        <MustContainItem animation="animated fadeInRight" passwordCheck={get} UserInfo={UserInfo} />
-        <LogButton onClick={onSubmit} animation="animated bounceInUp" goText="Sign up" loading={Loader.isLoading()} />
-        <div className='register-option animated bounceInUp'>
-          <Link to="/sign-in">Already have an account? Log in</Link>
+        <LogButton onClick={onSubmit} animation="animated fadeInUp" goText="Sign up" loading={Loader.isLoading()} />
+        <div className="register-option animated fadeInUp">
+            <Link to="/sign-in">Already have an account? Log in</Link>
         </div>
-      </form>
-    </div>
+        <MustContainItem animation="animated fadeInUp" passwordCheck={get} UserInfo={UserInfo} />
+    </form>
   )
 }

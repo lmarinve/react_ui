@@ -98,9 +98,8 @@ export default () => {
   }, [invalidCredentialsCount])
 
   return (
-    <div className='login-form'>
-      <img className='login-logo animated fadeInDown' src={Logo2} />
-      <form>
+    <form className='login-form'>
+        <img className='login-logo animated fadeInDown' src={Logo2} />
         <LogInput animation="animated fadeInRight" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
         <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
@@ -121,7 +120,6 @@ export default () => {
         <div className='login-option animated fadeInLeft'>
           <Link to="/sign-up" style={{ fontFamily: 'Arial', fontWeight: '500', fontSize: '12px' }}>Does not have an account? Sign Up</Link>
         </div>
-      </form>
-    </div>
+    </form>
   )
 }

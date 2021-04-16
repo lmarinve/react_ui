@@ -17,6 +17,9 @@ body::-webkit-scrollbar-thumb{
 .display-none{
     display: none;
 }
+.display-block{
+    display: block;
+}
 .mt-2{
     margin-top: 20px;
 }
@@ -64,7 +67,6 @@ body::-webkit-scrollbar-thumb{
 .input-group-container{
     position: relative;
     width: 100%;
-    margin: 20px 0;
     font-family: 'arial';
 
     /* FLEX */
@@ -95,6 +97,9 @@ body::-webkit-scrollbar-thumb{
     border: none;
     border-bottom: 1px solid #EC115D;
 }
+.input-group-container .input-group:hover{
+    border-color: #EC115D;
+}
 .input-group-container .input-group:focus{
     outline: 0;
     background-color: transparent;
@@ -120,11 +125,9 @@ body::-webkit-scrollbar-thumb{
     box-sizing: border-box;
     position: relative;
     width: 100%;
-    margin: 20px 0;
     font-family: 'arial';
     border: none;
     border-bottom: 1px solid #838383;
-    text-align: left;
     font-size: 18px;
     font-weight: 500;
     padding: 10px 0 5px 25px;
@@ -132,27 +135,34 @@ body::-webkit-scrollbar-thumb{
     /* FLEX */
     display: flex;
     align-items: center;
-    justify-content: space-between;
+}
+.date-group-container:hover{
+    cursor: text;
+    border-color: #EC115D;
 }
 .date-group-container:focus{
     outline: none;
     border-bottom: 1px solid #EC115D;
 }
-.date-group-container .date-group label{
-    margin-right: 10px;
-    background-color: transparent;
+.date-group-container label{
     color: #818181;
 }
+.date-group-container label:hover{
+    cursor: text;
+}
 .date-group-container input{
-    box-sizing: border-box;
-    position: absolute;
-    right: 0;
-    padding-left: 50%;
+    width: 100%;
+    height: 18px;
     background-color: transparent;
     font-size: 18px;
     font-weight: 500;
     color: #fff;
     border: none;
+}
+@media (max-width: 730px){
+    .date-group-container input{
+        max-width: 165px;
+    }
 }
 .date-group-container input:-webkit-autofill,
 .date-group-container input:-webkit-autofill:hover, 
@@ -170,6 +180,7 @@ body::-webkit-scrollbar-thumb{
     outline: 0;
     background-color: transparent;
     border-color: #EC115D;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.12);
 }
 .input-group-container .input-group::placeholder{
     color: #838383;
@@ -191,7 +202,6 @@ body::-webkit-scrollbar-thumb{
 .select-group-container{
     position: relative;
     width: 100%;
-    margin: 20px 0;
     font-family: 'arial';
 }
 .select-group-container .select-group{

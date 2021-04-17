@@ -8,6 +8,7 @@ import ClientsComponents from '../components/campaign/sections/Client'
 import CampaignsComponents from '../components/campaign/sections/Campaign'
 import Collector from '../components/campaign/sections/Collector'
 import AdChannel from '../components/campaign/sections/AdChannel'
+import Location from '../components/campaign/sections/Location'
 import { RulesMyAccount, RulesWizzard } from '../components/campaign/sections/Rules'
 import Maps from '../components/campaign/sections/Maps'
 import Review from '../components/campaign/sections/Review'
@@ -93,6 +94,10 @@ const MainMenu = ({ path }) => {
       {
         name: 'Ad Channel',
         module: AdChannel
+      },
+      {
+        name: 'Location',
+        module: Location
       },
       {
         name: 'Rules',

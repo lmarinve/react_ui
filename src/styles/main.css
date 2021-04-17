@@ -25,7 +25,7 @@
     justify-content: center;
 }
 .main-container .campaign-timeline-container .campaign-timeline{
-    width: 80%;
+    width: 90%;
     height: 40px;
     background-color: transparent;
     border-radius: 50px;
@@ -1819,25 +1819,9 @@
 .main-container .ad-channel-section-container .card-container{
     width: 40%;
     height: initial;
-    min-width: 500px;
-    max-width: 540px;
+    min-width: 450px;
+    max-width: 500px;
     margin: 20px;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container{
-    margin-bottom: 10px;
-    /* FLEX */
-    display: flex;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container .left{
-    overflow: hidden;
-    margin-right: 10px;
-    /* FLEX */
-    flex: 1 1;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container .right{
-    margin-left: 10px;
-    /* FLEX */
-    flex: 1 1;
 }
 .main-container .ad-channel-section-container .card-container .row{
     white-space: nowrap;
@@ -1847,10 +1831,10 @@
     display: flex;
     align-items: flex-end;
 }
-.main-container .ad-channel-section-container .card-container .ad-initial-container .row label{
+.main-container .ad-channel-section-container .card-container .row label{
     color: #b7b7b7;
 }
-.main-container .ad-channel-section-container .ad-channel-list-container .ad-channel-list .card-container .ad-initial-container .row label:last-of-type{
+.main-container .ad-channel-section-container .ad-channel-list-container .ad-channel-list .card-container .row label:last-of-type{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1866,13 +1850,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container button{
-    min-width: 230px;
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .channel-type label{
-    /* FLEX */
-    display: flex;
-    align-items: center;
+.main-container .ad-channel-section-container .card-container .blue-btn-container .blue-btn{
+    min-width: 180px;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container{
     width: 100%;
@@ -1886,8 +1865,8 @@
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container{
     width: 60%;
-    min-width: 550px;
-    max-width: 750px;
+    min-width: 400px;
+    max-width: 450px;
     height: initial;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-description-container{
@@ -1896,7 +1875,8 @@
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row label{
     color: #b7b7b7;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"],
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]{
     box-sizing: border-box;
     margin-left: 10px;
     padding: 5px 5px 0 5px;
@@ -1912,27 +1892,28 @@
     /* FLEX */
     flex: 1 1;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:focus{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:focus,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:focus{
     outline: 0;
     border-color: #EC115D;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill,
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:hover, 
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:active  {
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:hover, 
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:active, 
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:active{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #838383;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:focus{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:focus,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:focus{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #EC115D;
-}
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-channel-selects-container{
-    width: 85%;
-    margin: auto;
 }
 .main-container .ad-channel-section-container .ad-channel-btn{
     min-width: 100px;

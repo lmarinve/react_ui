@@ -7,8 +7,9 @@ import AgenciesComponents from '../components/campaign/sections/Agency'
 import ClientsComponents from '../components/campaign/sections/Client'
 import CampaignsComponents from '../components/campaign/sections/Campaign'
 import Collector from '../components/campaign/sections/Collector'
-import AdChannel from '../components/campaign/sections/AdChannel'
-import Location from '../components/campaign/sections/Location'
+import GoogleCampaign from '../components/campaign/sections/GoogleCampaign'
+import facebookCampaign from '../components/campaign/sections/facebookCampaign'
+import Locations from '../components/campaign/sections/locations'
 import { RulesMyAccount, RulesWizzard } from '../components/campaign/sections/Rules'
 import Maps from '../components/campaign/sections/Maps'
 import Review from '../components/campaign/sections/Review'
@@ -92,12 +93,16 @@ const MainMenu = ({ path }) => {
       },
       ...commonTabs,
       {
-        name: 'Ad Channel',
-        module: AdChannel
+        name: 'Google',
+        module: GoogleCampaign
       },
       {
-        name: 'Location',
-        module: Location
+        name: 'Facebook',
+        module: facebookCampaign
+      },
+      {
+        name: 'Locations',
+        module: Locations
       },
       {
         name: 'Rules',

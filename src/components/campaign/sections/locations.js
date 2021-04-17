@@ -3,7 +3,7 @@ import useTabController from '../../../_helpers/UseTabController'
 import CardLocation from '../CardLocation'
 import { Select } from '../Select'
 
-const LocationList = () =>{
+const LocationsList = () =>{
     return(
         <div className="location-list-container animated fadeInUp">
             <div className="location-list">
@@ -32,7 +32,7 @@ const LocationList = () =>{
     )
 }
 
-const LocationConfiguration = () =>{
+const LocationsConfiguration = () =>{
     const countriesTest = ["United States", "Canada", "Mexico"]
     const citiesTest = ["Chicago", "Miami", "New York", "Tampa"]
 
@@ -67,11 +67,11 @@ const LocationConfiguration = () =>{
     )
 }
 
-const Location = () => {
+const Locations = () => {
 
     const { tabs, activeTab, setActiveTab, isActiveTab } = useTabController([
-        { name: 'Location list', Component: LocationList },
-        { name: 'Location configuration', Component: LocationConfiguration  }
+        { name: 'Locations list', Component: LocationsList },
+        { name: 'Location configuration', Component: LocationsConfiguration  }
     ])
     const ActiveTab = activeTab()
 
@@ -91,4 +91,4 @@ const Location = () => {
     )
 }
 
-export default Location
+export default Locations

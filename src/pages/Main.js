@@ -26,7 +26,9 @@ import {
   getUserAgencies as getUserAgenciesRequest, 
   getUserClients as getUserClientsRequest,
   getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest ,
-  getMyInfo as getMyInfoRequest
+  getMyInfo as getMyInfoRequest,
+  getFacebookCampaigns as getFacebookCampaignsRequest,
+  getGoogleCampaigns as getGoogleCampaignsRequest
 } from '../_services'
 import { useLoader } from '../_helpers/Loader'
 import '../styles/main.css'
@@ -51,6 +53,12 @@ const MainMenu = ({ path }) => {
   }
   const getUserAdfluenceCampaigns = () => {
       return getUserAdfluenceCampaignsRequest(token)
+  }
+  const getGoogleCampaigns = () => {
+      return getGoogleCampaignsRequest(token)
+  }
+  const getFacebookCampaigns = () => {
+      return getFacebookCampaignsRequest(token)
   }
 
   const cleanedUrlPath = path.replace('/', '')
@@ -177,7 +185,7 @@ const MainMenu = ({ path }) => {
   useEffect(() => {
     console.log('holaa')
     MenuLoader.loading()
-    let requests = [getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns()]
+    let requests = [getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns(), getFacebookCampaigns(), getGoogleCampaigns()]
     Promise.allSettled(requests)
       .then(responses => {
           setData({
@@ -186,7 +194,9 @@ const MainMenu = ({ path }) => {
             users: responses[1].status === 'rejected' ? [] : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,
-            adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
+            adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data,
+            facebookCampaigns: responses[5].status === 'rejected' ? [] : responses[5].value.data,
+            googleCampaigns: responses[6].status === 'rejected' ? [] : responses[6].value.data,
           })
       })
       .catch(console.log)

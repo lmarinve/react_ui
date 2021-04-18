@@ -6,7 +6,7 @@ const CardAdChannel = (props) =>{
     const injectionTest = ["Airfare", "Airline", "Destination city name", "Destination airport code", "Origin temperature", "Destination temperature", "Snow", "Origin city name", "Destination city name"]
     const campaignTest = ["Campaign #1", "Campaign #2"]
 
-    const {AdChannelName, AdChannelStart, AdChannelEnd, AdAccountId, AdChannelBudget} = props
+    const {AdChannelName, AdChannelStart, AdChannelEnd, AdAccountId, AdChannelBudget, handleUpdate} = props
     return(
         <div className="card-container">
             <div className="row">
@@ -31,18 +31,18 @@ const CardAdChannel = (props) =>{
             </div>
             <div className="ad-channel-selects">
                 <SelectCheckbox
-                    title="Copy injection"
-                    elementsName="Copy injections"
-                    options={injectionTest}
+                  title="Copy injection"
+                  elementsName="Copy injections"
+                  options={injectionTest}
                 />
                 <Select 
-                    title="Campaigns"
-                    elementsName="Campaigns"
-                    options={campaignTest}
+                  title="Campaigns"
+                  elementsName="Campaigns"
+                  options={campaignTest}
                 />
             </div>
             <div className="blue-btn-container">
-                <button className="blue-btn">Update</button>
+                <button className="blue-btn" onClick={handleUpdate}>Update</button>
             </div>
         </div>
     )

@@ -40,7 +40,9 @@ export const UserProvider = ({ children }) => {
     ],
     agencies: [],
     clients: [],
-    adfluence_campaigns: []
+    adfluence_campaigns: [],
+    googleCampaigns: [],
+    facebookCampaigns: []
   })
   const [alert, setAlert] = useState({})
   const [activeMenu, setActiveMenu] = useState('')

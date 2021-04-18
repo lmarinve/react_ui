@@ -10,7 +10,8 @@ import Collector from '../components/campaign/sections/Collector'
 import GoogleCampaign from '../components/campaign/sections/GoogleCampaign'
 import facebookCampaign from '../components/campaign/sections/facebookCampaign'
 import Locations from '../components/campaign/sections/locations'
-import { RulesMyAccount, RulesWizzard } from '../components/campaign/sections/Rules'
+import { FlightRulesMyAccount, FlightRulesWizzard } from '../components/campaign/sections/FlightRules'
+import { WeatherRulesMyAccount, WeatherRulesWizzard } from '../components/campaign/sections/WeatherRules'
 import Maps from '../components/campaign/sections/Maps'
 import Review from '../components/campaign/sections/Review'
 import Launch from '../components/campaign/sections/Launch'
@@ -82,8 +83,12 @@ const MainMenu = ({ path }) => {
         module: Collector
       },
       {
-        name: 'Rules',
-        module: RulesWizzard
+        name: 'Flight Rules',
+        module: FlightRulesWizzard
+      },
+      {
+        name: 'Weather Rules',
+        module: WeatherRulesWizzard
       }
     ],
     'my-account': [
@@ -105,8 +110,12 @@ const MainMenu = ({ path }) => {
         module: Locations
       },
       {
-        name: 'Rules',
-        module: RulesMyAccount
+        name: 'Flight Rules',
+        module: FlightRulesMyAccount
+      },
+      {
+        name: 'Weather Rules',
+        module: WeatherRulesMyAccount
       },
       {
         name: 'Maps',

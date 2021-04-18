@@ -2184,35 +2184,71 @@
 .main-container .rules-section-container .rules-select-container .card-selected{
     box-shadow: 2px 3px 15px 2px rgba(226, 34, 100, 0.412);
 }
+.main-container .rules-section-container .card-container{
+    width: 48%;
+    height: initial;
+    min-width: 490px;
+    max-width: 530px;
+    margin: 20px;
+}
 .main-container .rules-section-container .card-container .row{
-    margin: 5px 0;
-
-    /* FLEX */
-    display: flex;
-    align-items: flex-end;
-}
-.main-container .rules-section-container .card-container .row label{
-    color: #b7b7b7;
-}
-.main-container .rules-section-container .card-container .rules-selects{
     width: 100%;
     margin-top: 20px;
 
     /* FLEX */
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.main-container .rules-section-container .card-container .rules-selects button{
-    min-width: 160px;
+.main-container .rules-section-container .card-container .row:first-child{
+    margin-top: 0;
 }
-.main-container .rules-section-container .rules-list-container .rules-list .card-container .row label:last-of-type,
-.main-container .rules-section-container .rules-select-container .rules-list .card-container .row label:last-of-type{
+.main-container .rules-section-container .card-container .row .box{
+    width: 180px;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+}
+.main-container .rules-section-container .card-container .row .mid{
+    width: 20%;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .data{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #fff;
     font-weight: 500;
     margin-left: 10px;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box{    
+    /* FLEX */
+    flex-direction: row;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid{    
+    /* FLEX */
+    flex-direction: row;
+    justify-content: center;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box .select-container,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid .select-container{
+    width: 100%;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box .select-container button,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid .select-container button,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .blue-btn{
+    width: 100%;
+    min-width: initial;
+}
+.main-container .rules-section-container .card-container .mid .select-container .list-container label{
+    text-align: center;
+}
+.main-container .rules-section-container .card-container .row label{
+    color: #b7b7b7;
 }
 .main-container .rules-section-container .rules-config-container .card-container .row input{
     box-sizing: border-box;
@@ -2247,24 +2283,18 @@
     border: none;
     border-bottom: 1px solid #EC115D;
 }
-.main-container .rules-section-container .rules-btn{
-    min-width: 100px;
-    margin: 20px 20px 0 20px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
+.main-container .rules-section-container .card-container .row .box input,
+.main-container .rules-section-container .card-container .row .mid input{
+    margin: 0;
 }
-.main-container .rules-section-container .rules-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
+.main-container .rules-section-container .card-container .row .box label,
+.main-container .rules-section-container .card-container .row .mid label{
+    color: #b7b7b7;
 }
-.main-container .rules-section-container .rules-btn:focus{
-    outline: none;
+.main-container .rules-section-container .card-container .row .box .select-container button,
+.main-container .rules-section-container .card-container .row .mid .select-container button{
+    width: 100%;
+    min-width: initial;
 }
 
 

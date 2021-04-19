@@ -9,10 +9,12 @@ import CampaignsComponents from '../components/campaign/sections/Campaign'
 import Collector from '../components/campaign/sections/Collector'
 import GoogleCampaign from '../components/campaign/sections/GoogleCampaign'
 import facebookCampaign from '../components/campaign/sections/facebookCampaign'
-import Locations from '../components/campaign/sections/locations'
 import { FlightRulesMyAccount, FlightRulesWizzard } from '../components/campaign/sections/FlightRules'
 import { WeatherRulesMyAccount, WeatherRulesWizzard } from '../components/campaign/sections/WeatherRules'
 import Maps from '../components/campaign/sections/Maps'
+import Locations from '../components/campaign/sections/locations'
+import Flights from '../components/campaign/sections/Flights'
+import Weather from '../components/campaign/sections/Weather'
 import Review from '../components/campaign/sections/Review'
 import Launch from '../components/campaign/sections/Launch'
 import UseTabController from '../_helpers/UseTabController'
@@ -97,6 +99,14 @@ const MainMenu = ({ path }) => {
       {
         name: 'Weather Rules',
         module: WeatherRulesWizzard
+      },
+      {
+        name: 'Review',
+        module: Review
+      },
+      {
+        name: 'Launch',
+        module: Launch
       }
     ],
     'my-account': [
@@ -114,10 +124,6 @@ const MainMenu = ({ path }) => {
         module: facebookCampaign
       },
       {
-        name: 'Locations',
-        module: Locations
-      },
-      {
         name: 'Flight Rules',
         module: FlightRulesMyAccount
       },
@@ -130,12 +136,16 @@ const MainMenu = ({ path }) => {
         module: Maps
       },
       {
-        name: 'Review',
-        module: Review
+        name: 'Locations',
+        module: Locations
       },
       {
-        name: 'Launch',
-        module: Launch
+        name: 'Flights',
+        module: Flights
+      },
+      {
+        name: 'Weather',
+        module: Weather
       }
     ]
   }

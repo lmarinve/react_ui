@@ -183,34 +183,36 @@ const FlightRulesWizzard = () => (
         <div className="rules-select-container animated fadeInUp">
             <div className="rules-list">
                 <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
-                />
-                <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
-                />
-                <CardFlightRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
             </div>
         </div>

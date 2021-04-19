@@ -214,35 +214,41 @@ const WeatherRulesWizzard = () => (
     <div className="rules-section-container animated fadeInUp">
         <div className="rules-select-container animated fadeInUp">
             <div className="rules-list">
-                <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+            <CardWeatherRules
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    days="10"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    days="10"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    days="10"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
                 <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
-                />
-                <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
-                />
-                <CardWeatherRules
-                  ruleId="Test ID"
-                  ruleName="Saint Lucia Weather rule 1"
-                  blueBtnText="Select"
+                    name="Saint Lucia Weather rule 1"
+                    priority="1"
+                    days="10"
+                    lowPrice="5$"
+                    highPrice="20$" 
+                    percentChange="2"
+                    blueBtnText="Select"
                 />
             </div>
         </div>

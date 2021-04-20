@@ -4,7 +4,7 @@ import '../styles/register.css'
 
 export default () => {
   return (
-    <div className='registerContainer'>
+    <div className='register-container'>
       <RegisterForm />
     </div>
   )

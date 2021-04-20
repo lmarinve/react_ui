@@ -11,6 +11,17 @@ export function getUserClients (token) {
     })
 }
 
+export function getUserClient (token, clientId) {
+  return Axios({
+    method: 'get',
+    baseURL: `${process.env.API_URL}/api/v1/client/${clientId}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Token ${token}`
+    }
+  })
+}
+
 export function createUserClient (token, client) {
   return Axios({
       method: 'post',
@@ -31,7 +42,7 @@ export function updateUserClient (token, client) {
         'Content-Type': 'application/json',
         'Authorization': `Token ${token}`
       },
-      data: JSON.stringify({ name: client.name, agency: { name: client.agencyName } })
+      data: JSON.stringify({ name: client.name, agency: client.agencyId, users: client.users })
   })
 }
 

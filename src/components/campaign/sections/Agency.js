@@ -207,6 +207,7 @@ const AgencyMyAccount = ({ setAlert }) => {
             tabs().map((tab, index) => (
               // eslint-disable-next-line react/jsx-key
               <button 
+                key={UUIDGenerator()}
                 className={isActiveTab(index) ? 'active' : ''} 
                 onClick={() => {
                   if (index === 1) 

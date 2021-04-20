@@ -6,7 +6,7 @@ const Step = (props) => {
 // status = "previous" si los botones esta a la izquierda del seleccionado
   return (
     <div className={`step ${status}`} onClick={handleClick}>
-      <div className='count-title'>{name}</div>
+      <div className='count-title' title={name}>{name}</div>
     </div>
   )
 }

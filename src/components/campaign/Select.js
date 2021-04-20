@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 
-const Select = ({title, isSelectable, elementsName, options}) => {
+const Select = ({title, isSelectable, elementsName, options, activeOption, handleOptionsChange}) => {
     let selectableStatus = ''
     const [show, setShow] = useState({status: false, list: "", icon: ""})
 
@@ -24,11 +24,18 @@ const Select = ({title, isSelectable, elementsName, options}) => {
        }
     }
 
+    const handleOptionChange = (e, value) => {
+        e.stopPropagation()
+        e.nativeEvent.stopImmediatePropagation()
+        handleOptionsChange(value)
+        setShow({status: false, list: "", icon: "", border: ""})
+    }
+
 
     return(
         <div className={`select-container ${selectableStatus}`} onClick={onClick} onMouseLeave={onBlur}>
             <button className="select-btn">
-                {title}
+                {activeOption || title}
                 <div className={`select-icon-container ${show.icon}`}>
                     <i className="fas fa-angle-right" />
                 </div>
@@ -37,7 +44,7 @@ const Select = ({title, isSelectable, elementsName, options}) => {
             {
                 options && options.length
                 ? options.map((element, i) => (
-                    <label className="" key={i}>{element}</label>
+                    <label className="" key={UUIDGenerator()} onClick={(e) => handleOptionChange(e, element)}>{element}</label>
                 ))
                 : <label> There are no {elementsName} </label>
             }
@@ -81,7 +88,12 @@ const SelectCheckbox = ({title, isSelectable, elementsName, options}) => {
             {
                 options.length
                 ? options.map((element, i) => (
-                    <div key={i} className="row"><input type="checkbox" /><label className="check-option">{element}</label></div>
+                    <div key={UUIDGenerator()} className="row">
+                        <input type="checkbox" />
+                        <label className="check-option">
+                            {element}
+                        </label>
+                    </div>
                 ))
                 : <label> There are no {elementsName} </label>
             }

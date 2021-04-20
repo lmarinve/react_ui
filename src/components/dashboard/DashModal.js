@@ -23,7 +23,7 @@ const DashModal = () => {
           setData({
             ...data,
             myInfo: responses[0].status === 'rejected' || responses[1].status === 'rejected' ? data.myInfo : responses[1].value.data.find(user => responses[0].value.data.email === user.email),
-            users: responses[1].status === 'rejected' ? null : responses[1].value.data,
+            users: responses[1].status === 'rejected' ? [] : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,
             adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
@@ -70,7 +70,7 @@ const DashModal = () => {
                         frontStatus="front" 
                         iconFront="dashboard-icons icon-api-docs-logo-svg"
                         textFront="API Docs"
-                        linkPath='https://adfluencepro.com/api/v1/schema/swagger-ui/'
+                        linkPath='https://adfluencedev.com/api/v1/schema/swagger-ui/'
                         newWindow
                       />                           
                   </div>

@@ -15,10 +15,15 @@
     min-width: 300px;
     max-width: 400px;  
     text-align: center;
+
+    /* GRID */
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
 }
 .login-container .login-form .login-logo{
     width: 250px;
-    padding: 15px;
+    justify-self: center;
 }
 .login-container .login-form .disable-account-container{
     width: 100%;
@@ -26,10 +31,7 @@
     font-size: 12px;
 }
 .login-container .login-form .btn{
-    margin-top: 20px;
-}
-.login-container .login-form .login-option{
-    margin: 20px 0;
+    justify-self: center;
 }
 .login-container .login-form .login-option a{
     font-size: 12px;

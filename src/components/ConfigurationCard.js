@@ -9,9 +9,7 @@ const Photos = {
     'Client': ClientPhoto
 }
 
-const agenciesTest = ["Demo", "Advertiser", "Marketer"]
-
-const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies }) => (
+const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies, activeOption, handleOptionsChange }) => (
     <div className="card-container">
             <div className={`${entityName.toLowerCase()}-photo-container`}>
               <div className={`${entityName.toLowerCase()}-photo pointer`}>
@@ -57,46 +55,20 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                   <input type="checkbox" />
                 </div>
                 <Select 
-                    title={`${entityName} Type`}
-                    elementsName="agencies type"
-                    isSelectable
-                    options={agenciesTest}
+                  title={`${entityName} Type`}
+                  elementsName="agencies type"
+                  isSelectable
+                  options={["Demo", "Advertiser", "Marketer"]}
                 />
-                {/* <div className="select-container">
-                  <button className="select-btn">
-                    {entityName} Type
-                    <i className="select-icon fas fa-angle-down" />
-                  </button>
-                  <div className="list-container">
-                    <label>Demo</label>
-                    <label>Marketer</label>
-                    <label>Advertiser</label>
-                  </div>
-                </div> */}
               </div>
-              {
-                (entityName === 'Client' && !isThereActiveEntity())
-                  && <div className={`${entityName.toLowerCase()}-selects`}>
-                    <div className="select-container">
-                    {console.log(agencies.tabs())}
-                      <button className="select-btn">
-                        {agencies.activeTab() ? agencies.activeTab().name : 'Choose client agency'}
-                        <i className="select-icon fas fa-angle-down" />
-                      </button>
-                      {agencies.tabs().length > 0
-                        && <div className="list-container">
-                        {
-                            agencies.tabs().map((agency, i) => {
-                            if (!agencies.isActiveTab(i) && agency)
-                              return <label onClick={() => agencies.setActiveTab(i)}> {agency.name} </label>
-                            else
-                              return null
-                            })
-                        }
-                      </div>}
-                    </div>
-                  </div>
-              }
+              <Select
+                title="Select an agency"
+                elementsName='agencies'
+                isSelectable
+                options={agencies}
+                activeOption={activeOption}
+                handleOptionsChange={handleOptionsChange}
+              />
               {
                 isThereActiveEntity()
                   && <div className={`${entityName.toLowerCase()}-selects`}>

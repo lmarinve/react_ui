@@ -25,7 +25,7 @@
     justify-content: center;
 }
 .main-container .campaign-timeline-container .campaign-timeline{
-    width: 80%;
+    width: 90%;
     height: 40px;
     background-color: transparent;
     border-radius: 50px;
@@ -1819,25 +1819,9 @@
 .main-container .ad-channel-section-container .card-container{
     width: 40%;
     height: initial;
-    min-width: 500px;
-    max-width: 540px;
+    min-width: 450px;
+    max-width: 500px;
     margin: 20px;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container{
-    margin-bottom: 10px;
-    /* FLEX */
-    display: flex;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container .left{
-    overflow: hidden;
-    margin-right: 10px;
-    /* FLEX */
-    flex: 1 1;
-}
-.main-container .ad-channel-section-container .card-container .ad-initial-container .right{
-    margin-left: 10px;
-    /* FLEX */
-    flex: 1 1;
 }
 .main-container .ad-channel-section-container .card-container .row{
     white-space: nowrap;
@@ -1847,10 +1831,10 @@
     display: flex;
     align-items: flex-end;
 }
-.main-container .ad-channel-section-container .card-container .ad-initial-container .row label{
+.main-container .ad-channel-section-container .card-container .row label{
     color: #b7b7b7;
 }
-.main-container .ad-channel-section-container .ad-channel-list-container .ad-channel-list .card-container .ad-initial-container .row label:last-of-type{
+.main-container .ad-channel-section-container .ad-channel-list-container .ad-channel-list .card-container .row label:last-of-type{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1866,13 +1850,8 @@
     display: flex;
     justify-content: space-between;
 }
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container button{
-    min-width: 230px;
-}
-.main-container .ad-channel-section-container .card-container .ad-channel-selects .select-container .channel-type label{
-    /* FLEX */
-    display: flex;
-    align-items: center;
+.main-container .ad-channel-section-container .card-container .blue-btn-container .blue-btn{
+    min-width: 180px;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container{
     width: 100%;
@@ -1886,8 +1865,8 @@
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container{
     width: 60%;
-    min-width: 550px;
-    max-width: 750px;
+    min-width: 400px;
+    max-width: 450px;
     height: initial;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-description-container{
@@ -1896,7 +1875,8 @@
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row label{
     color: #b7b7b7;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"],
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]{
     box-sizing: border-box;
     margin-left: 10px;
     padding: 5px 5px 0 5px;
@@ -1912,27 +1892,28 @@
     /* FLEX */
     flex: 1 1;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:focus{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:focus,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:focus{
     outline: 0;
     border-color: #EC115D;
 }
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill,
 .main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:hover, 
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:active  {
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:hover, 
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:active, 
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:active{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #838383;
 }
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:focus{
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="text"]:-webkit-autofill:focus,
+.main-container .ad-channel-section-container .ad-channel-config-container .card-container .row input[type="date"]:-webkit-autofill:focus{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #EC115D;
-}
-.main-container .ad-channel-section-container .ad-channel-config-container .card-container .ad-channel-selects-container{
-    width: 85%;
-    margin: auto;
 }
 .main-container .ad-channel-section-container .ad-channel-btn{
     min-width: 100px;
@@ -2040,38 +2021,79 @@
 .main-container .rules-section-container .rules-select-container .card-selected{
     box-shadow: 2px 3px 15px 2px rgba(226, 34, 100, 0.412);
 }
+.main-container .rules-section-container .card-container{
+    width: 48%;
+    height: initial;
+    min-width: 490px;
+    max-width: 530px;
+    margin: 20px;
+}
 .main-container .rules-section-container .card-container .row{
-    margin: 5px 0;
-
-    /* FLEX */
-    display: flex;
-    align-items: flex-end;
-}
-.main-container .rules-section-container .card-container .row label{
-    color: #b7b7b7;
-}
-.main-container .rules-section-container .card-container .rules-selects{
     width: 100%;
     margin-top: 20px;
 
     /* FLEX */
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.main-container .rules-section-container .card-container .rules-selects button{
-    min-width: 160px;
+.main-container .rules-section-container .card-container .row:first-child{
+    margin-top: 0;
 }
-.main-container .rules-section-container .card-container .rules-selects .select-container .rule-type .rule-type-icon{
-    margin-right: 10px;
+.main-container .rules-section-container .card-container .row .box{
+    width: 180px;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
 }
-.main-container .rules-section-container .rules-list-container .rules-list .card-container .row label:last-of-type,
-.main-container .rules-section-container .rules-select-container .rules-list .card-container .row label:last-of-type{
+.main-container .rules-section-container .card-container .row .mid{
+    width: 20%;
+
+    /* FLEX */
+    display: flex;
+    flex-direction: column;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .data,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .data{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: #fff;
     font-weight: 500;
     margin-left: 10px;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .box{    
+    /* FLEX */
+    flex-direction: row;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .mid{    
+    /* FLEX */
+    flex-direction: row;
+    justify-content: center;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box .select-container,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid .select-container,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .box .select-container,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .mid .select-container{
+    width: 100%;
+}
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .box .select-container button,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .mid .select-container button,
+.main-container .rules-section-container .rules-list-container .rules-list .card-container .row .blue-btn,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .box .select-container button,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .box .select-container button,
+.main-container .rules-section-container .rules-select-container .rules-list .card-container .row .blue-btn{
+    width: 100%;
+    min-width: initial;
+}
+.main-container .rules-section-container .card-container .mid .select-container .list-container label{
+    text-align: center;
+}
+.main-container .rules-section-container .card-container .row label{
+    color: #b7b7b7;
 }
 .main-container .rules-section-container .rules-config-container .card-container .row input{
     box-sizing: border-box;
@@ -2106,24 +2128,18 @@
     border: none;
     border-bottom: 1px solid #EC115D;
 }
-.main-container .rules-section-container .rules-btn{
-    min-width: 100px;
-    margin: 20px 20px 0 20px;
-    padding: 5px 15px;
-    background: #496e79;
-    border: 1px solid #496e79;
-    color: #fff;
-    border-radius: 50px;
-    transition: all 0.5s ease;
+.main-container .rules-section-container .card-container .row .box input,
+.main-container .rules-section-container .card-container .row .mid input{
+    margin: 0;
 }
-.main-container .rules-section-container .rules-btn:hover{
-    cursor: pointer;
-    transform: scale(1.1);
-    background: #25373d;
-    border: 1px solid #496e79;
+.main-container .rules-section-container .card-container .row .box label,
+.main-container .rules-section-container .card-container .row .mid label{
+    color: #b7b7b7;
 }
-.main-container .rules-section-container .rules-btn:focus{
-    outline: none;
+.main-container .rules-section-container .card-container .row .box .select-container button,
+.main-container .rules-section-container .card-container .row .mid .select-container button{
+    width: 100%;
+    min-width: initial;
 }
 
 
@@ -2365,90 +2381,439 @@
 }
 
 
-/* Channel section styles */
 
 
-.campaign-type{
-    position: relative;
-    text-align: center;
+/* Location section styles */
+
+
+.main-container .location-section-container{
+    width: 100%;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
 }
-.campaign-type .list-types{
-    text-align: center;
-    display:inline-block;
-    margin-top: 5%;
-    position: relative;
+.main-container .location-section-container .location-section-menu{
+    width: 100%;
+    margin-bottom: 10px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
 }
-.campaign-type .list-types .types{
-    transition: all 0.4s ease;
-    text-align: center;
-    position: relative;
-    float: left;
-    margin: 25px 44px;
+.main-container .location-section-container .location-section-menu .location-menu-box{
+    width: 80%;
+    max-width: 600px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: space-between;
 }
-.campaign-type .list-types .types .title{
-    color: #b7b7b7;
-    margin-top: 10px;
+.main-container .location-section-container .location-section-menu .location-menu-box button{
+    width: 35%;
+    padding: 5px 10px;
     background: transparent;
+    font-size: 14px;
+    color: #fff;
     border-radius: 50px;
-    padding: 3px;
-    font-size: 12px;
-    opacity: 0.2;
+    border: 1px solid rgba(150, 150, 150, 0.5);
+    opacity: 0.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.5s ease;
 }
-.campaign-type .list-types .types .type-icon{
-    position: relative;
-    transition: all 0.4s ease;
-    width: 140px;
-    height: 140px;
-    overflow: visible;
-    border: 1px solid rgba(97, 97, 97, 0.22);
-    border-radius: 99em;
-    padding: 30px 30px;
-    color: rgba(97, 97, 97, 0.22);
-    transform: scale(1);
-    transform: rotate(0deg);
+.main-container .location-section-container .location-section-menu .location-menu-box .active{
+    opacity: 1;
+    border: 1px solid #EC115D;
+}
+.main-container .location-section-container .location-section-menu .location-menu-box button:hover{
+    cursor: pointer;
+    opacity: 1;
+    color: #fff;
+    border: 1px solid #EC115D;
+    transform: scale(1.1);
+}
+.main-container .location-section-container .location-section-menu .location-menu-box button:focus{
+    outline: none;
+}
+.main-container .location-section-container .location-list-container{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+}
+.main-container .location-section-container .location-list-container .location-list{
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.main-container .location-section-container .card-container{
+    min-width: 210px;
+    max-width: 270px;
+}
+.main-container .location-section-container .card-container .row{
+    margin: 5px 0;
+
+    /* FLEX */
+    display: flex;
+    align-items: flex-end;
+}
+.main-container .location-section-container .card-container .row label{
+    color: #b7b7b7;
+}
+.main-container .location-section-container .location-list-container .location-list .card-container .row label:last-of-type{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.main-container .location-section-container .card-container .blue-btn-container{
+    justify-content: center;
+}
+.main-container .location-section-container .card-container .blue-btn-container .blue-btn{
+    min-width: initial;
+    width: 95%;
+}
+.main-container .location-section-container .location-config-container{
+    width: 100%;
+    margin-bottom: 20px;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-container .location-section-container .location-config-container .card-container{
+    width: 28%;
+    min-width: 340px;
+    max-width: 400px;
+    height: 110px;
+    justify-content: center;
+}
+.main-container .location-section-container .location-config-container .card-container .row input{
+    box-sizing: border-box;
+    margin-left: 10px;
+    padding: 5px 5px 0 5px;
+    font-weight: 300;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(183, 183, 183, 0.588);
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.5s ease;
+
+    /* FLEX */
+    flex: 1 1;
+}
+.main-container .location-section-container .location-config-container .card-container .row input:focus{
+    outline: 0;
+    border-color: #EC115D;
+}
+.main-container .location-section-container .location-config-container .card-container .row input:-webkit-autofill,
+.main-container .location-section-container .location-config-container .card-container .row input:-webkit-autofill:hover, 
+.main-container .location-section-container .location-config-container .card-container .row input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #838383;
+}
+.main-container .location-section-container .location-config-container .card-container .row input:-webkit-autofill:focus{
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #EC115D;
+}
+.main-container .location-section-container .card-container .location-selects{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: space-between;
+}
+.main-container .location-section-container .card-container .location-selects button{
+    min-width: 160px;
+}
+
+
+/* Flights section styles */
+
+
+.main-container .flight-section-container{
+    width: 100%;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+}
+.main-container .flight-section-container .flight-section-menu{
+    width: 100%;
+    margin-bottom: 10px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+}
+.main-container .flight-section-container .flight-section-menu .flight-menu-box{
+    width: 80%;
+    max-width: 600px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: space-between;
+}
+.main-container .flight-section-container .flight-section-menu .flight-menu-box button{
+    width: 35%;
+    padding: 5px 10px;
     background: transparent;
-    box-shadow: 2px 2px 15px 2px rgba(0, 0, 0, 0.12);
-}
-.campaign-type .list-types .types .type-icon:hover{
-    cursor: pointer;
-    font-size: 70px;
-    transform: rotate(360deg);
-    transform-origin: 50% 50%;
-    cursor: pointer;
-    box-shadow: none;
-    padding: 40px;
+    font-size: 14px;
     color: #fff;
-    background: linear-gradient(45deg, #EC115D 0%, #FE6D03 100%);
+    border-radius: 50px;
+    border: 1px solid rgba(150, 150, 150, 0.5);
+    opacity: 0.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.5s ease;
+}
+.main-container .flight-section-container .flight-section-menu .flight-menu-box .active{
+    opacity: 1;
     border: 1px solid #EC115D;
 }
-.campaign-type .list-types .types .selected{
-    font-size: 70px;
-    transform: rotate(360deg);
-    transform-origin: 50% 50%;
-    padding: 30px 30px;
+.main-container .flight-section-container .flight-section-menu .flight-menu-box button:hover{
     cursor: pointer;
-    box-shadow: none;
+    opacity: 1;
     color: #fff;
-    background: linear-gradient(45deg, #EC115D 0%, #FE6D03 100%);
     border: 1px solid #EC115D;
-    animation: pulse 2s infinite;
+    transform: scale(1.1);
+}
+.main-container .flight-section-container .flight-section-menu .flight-menu-box button:focus{
+    outline: none;
+}
+.main-container .flight-section-container .flight-list-container{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+}
+.main-container .flight-section-container .flight-list-container .flight-list{
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.main-container .flight-section-container .flight-config-container{
+    width: 100%;
+    margin-bottom: 20px;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-container .flight-section-container .card-container .row{
+    margin: 5px 0;
+
+    /* FLEX */
+    display: flex;
+    align-items: flex-end;
+}
+.main-container .flight-section-container .card-container .row label{
+    color: #b7b7b7;
+}
+.main-container .flight-section-container .flight-list-container .flight-list .card-container .row label:last-of-type{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.main-container .flight-section-container .flight-config-container .card-container .row input{
+    box-sizing: border-box;
+    margin-left: 10px;
+    padding: 5px 5px 0 5px;
+    font-weight: 300;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(183, 183, 183, 0.588);
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.5s ease;
+
+    /* FLEX */
+    flex: 1 1;
+}
+.main-container .flight-section-container .flight-config-container .card-container .row input:focus{
+    outline: 0;
+    border-color: #EC115D;
+}
+.main-container .flight-section-container .flight-config-container .card-container .row input:-webkit-autofill,
+.main-container .flight-section-container .flight-config-container .card-container .row input:-webkit-autofill:hover, 
+.main-container .flight-section-container .flight-config-container .card-container .row input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #838383;
+}
+.main-container .flight-section-container .flight-config-container .card-container .row input:-webkit-autofill:focus{
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #EC115D;
+}
+.main-container .flight-section-container .card-container .flight-selects{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: space-between;
+}
+.main-container .flight-section-container .card-container .flight-selects .select-container button,
+.main-container .flight-section-container .card-container .flight-selects .blue-btn{
+    min-width: 180px;
 }
 
 
-/* Type section styles */
+/* Weather section styles */
 
 
-.campaign-type{
-    position: relative;
-    text-align: center;
+.main-container .weather-section-container{
+    width: 100%;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
 }
-.campaign-type .list-types{
-    text-align: center;
-    display: inline-block;
-    margin-top: 5%;
-    position: relative;
+.main-container .weather-section-container .weather-section-menu{
+    width: 100%;
+    margin-bottom: 10px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
 }
-.campaign-type .list-types .list-center{
-    width: 90%;
-    margin: auto;
+.main-container .weather-section-container .weather-section-menu .weather-menu-box{
+    width: 80%;
+    max-width: 600px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: space-between;
+}
+.main-container .weather-section-container .weather-section-menu .weather-menu-box button{
+    width: 35%;
+    padding: 5px 10px;
+    background: transparent;
+    font-size: 14px;
+    color: #fff;
+    border-radius: 50px;
+    border: 1px solid rgba(150, 150, 150, 0.5);
+    opacity: 0.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all 0.5s ease;
+}
+.main-container .weather-section-container .weather-section-menu .weather-menu-box .active{
+    opacity: 1;
+    border: 1px solid #EC115D;
+}
+.main-container .weather-section-container .weather-section-menu .weather-menu-box button:hover{
+    cursor: pointer;
+    opacity: 1;
+    color: #fff;
+    border: 1px solid #EC115D;
+    transform: scale(1.1);
+}
+.main-container .weather-section-container .weather-section-menu .weather-menu-box button:focus{
+    outline: none;
+}
+.main-container .weather-section-container .weather-list-container{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+}
+.main-container .weather-section-container .weather-list-container .weather-list{
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.main-container .weather-section-container .weather-config-container{
+    width: 100%;
+    margin-bottom: 20px;
+
+    /* FLEX */
+    flex: 1 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.main-container .weather-section-container .card-container{
+    min-width: 150PX;
+    max-width: 200px;
+}
+.main-container .weather-section-container .card-container .row{
+    margin: 5px 0;
+
+    /* FLEX */
+    display: flex;
+    align-items: flex-end;
+}
+.main-container .weather-section-container .card-container .row label{
+    color: #b7b7b7;
+}
+.main-container .weather-section-container .weather-list-container .weather-list .card-container .row label:last-of-type{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.main-container .weather-section-container .card-container .weather-selects{
+    width: 100%;
+    margin-top: 20px;
+
+    /* FLEX */
+    display: flex;
+    justify-content: center;
+}
+.main-container .weather-section-container .card-container .weather-selects:first-child{
+    margin-top: 0;
+}
+.main-container .weather-section-container .card-container .blue-btn-container{
+    justify-content: center;
+}
+.main-container .weather-section-container .card-container .weather-selects .select-container,
+.main-container .weather-section-container .card-container .blue-btn-container{
+    width: 100%;
+}
+.main-container .weather-section-container .card-container .weather-selects .select-container button,
+.main-container .weather-section-container .card-container .blue-btn-container .blue-btn{
+    width: 100%;
 }

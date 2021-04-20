@@ -7,9 +7,14 @@ import AgenciesComponents from '../components/campaign/sections/Agency'
 import ClientsComponents from '../components/campaign/sections/Client'
 import CampaignsComponents from '../components/campaign/sections/Campaign'
 import Collector from '../components/campaign/sections/Collector'
-import AdChannel from '../components/campaign/sections/AdChannel'
-import { RulesMyAccount, RulesWizzard } from '../components/campaign/sections/Rules'
+import GoogleCampaign from '../components/campaign/sections/GoogleCampaign'
+import facebookCampaign from '../components/campaign/sections/facebookCampaign'
+import { FlightRulesMyAccount, FlightRulesWizzard } from '../components/campaign/sections/FlightRules'
+import { WeatherRulesMyAccount, WeatherRulesWizzard } from '../components/campaign/sections/WeatherRules'
 import Maps from '../components/campaign/sections/Maps'
+import Locations from '../components/campaign/sections/locations'
+import Flights from '../components/campaign/sections/Flights'
+import Weather from '../components/campaign/sections/Weather'
 import Review from '../components/campaign/sections/Review'
 import Launch from '../components/campaign/sections/Launch'
 import UseTabController from '../_helpers/UseTabController'
@@ -23,7 +28,14 @@ import {
   getUserAgencies as getUserAgenciesRequest, 
   getUserClients as getUserClientsRequest,
   getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest ,
-  getMyInfo as getMyInfoRequest
+  getMyInfo as getMyInfoRequest,
+  getFacebookCampaigns as getFacebookCampaignsRequest,
+  getGoogleCampaigns as getGoogleCampaignsRequest,
+  getFlightRules as getFlightRulesRequest,
+  getWeatherRules as getWeatherRulesRequest,
+  getLocations as getLocationsRequest,
+  getFlights as getFlightsRequest,
+  getWeather as getWeatherRequest
 } from '../_services'
 import { useLoader } from '../_helpers/Loader'
 import '../styles/main.css'
@@ -33,6 +45,9 @@ const MainMenu = ({ path }) => {
   const { mockedData, data, setData } = useContext(UserContext)
   const { agencies, clients, adfluence_campaigns } = data
   const MenuLoader = useLoader()
+  const pageLoaders = {
+    'weatherRules': useLoader()
+  }
 
   const getMyInfo = () => {
       return getMyInfoRequest(token)
@@ -48,6 +63,35 @@ const MainMenu = ({ path }) => {
   }
   const getUserAdfluenceCampaigns = () => {
       return getUserAdfluenceCampaignsRequest(token)
+  }
+  const getGoogleCampaigns = () => {
+      return getGoogleCampaignsRequest(token)
+  }
+  const getFacebookCampaigns = () => {
+      return getFacebookCampaignsRequest(token)
+  }
+  const getFlightRules = () => {
+      return getFlightRulesRequest(token)
+        .then((response) => {
+           return response
+        })
+  }
+  const getWeatherRules = () => {
+    pageLoaders['weatherRules'].loading()
+    return getWeatherRulesRequest(token)
+      .then((response) => {
+         pageLoaders['weatherRules'].loaded()
+         return response
+      })
+  }
+  const getLocations = () => {
+    return getLocationsRequest(token)
+  }
+  const getFlights = () => {
+    return getFlightsRequest(token)
+  }
+  const getWeather = () => {
+    return getWeatherRequest(token)
   }
 
   const cleanedUrlPath = path.replace('/', '')
@@ -80,8 +124,20 @@ const MainMenu = ({ path }) => {
         module: Collector
       },
       {
-        name: 'Rules',
-        module: RulesWizzard
+        name: 'Flight Rules',
+        module: FlightRulesWizzard
+      },
+      {
+        name: 'Weather Rules',
+        module: WeatherRulesWizzard
+      },
+      {
+        name: 'Review',
+        module: Review
+      },
+      {
+        name: 'Launch',
+        module: Launch
       }
     ],
     'my-account': [
@@ -91,24 +147,36 @@ const MainMenu = ({ path }) => {
       },
       ...commonTabs,
       {
-        name: 'Ad Channel',
-        module: AdChannel
+        name: 'Google',
+        module: GoogleCampaign
       },
       {
-        name: 'Rules',
-        module: RulesMyAccount
+        name: 'Facebook',
+        module: facebookCampaign
+      },
+      {
+        name: 'Flight Rules',
+        module: FlightRulesMyAccount
+      },
+      {
+        name: 'Weather Rules',
+        module: WeatherRulesMyAccount
       },
       {
         name: 'Maps',
         module: Maps
       },
       {
-        name: 'Review',
-        module: Review
+        name: 'Locations',
+        module: Locations
       },
       {
-        name: 'Launch',
-        module: Launch
+        name: 'Flights',
+        module: Flights
+      },
+      {
+        name: 'Weather',
+        module: Weather
       }
     ]
   }
@@ -158,16 +226,27 @@ const MainMenu = ({ path }) => {
   useEffect(() => {
     console.log('holaa')
     MenuLoader.loading()
-    let requests = [getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns()]
+    let requests = [
+      getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns(), 
+      getFacebookCampaigns(), getGoogleCampaigns(), getFlightRules(), getWeatherRules(),
+      getLocations(), getFlights(), getWeather()
+    ]
     Promise.allSettled(requests)
       .then(responses => {
           setData({
             ...data,
             myInfo: responses[0].status === 'rejected' || responses[1].status === 'rejected' ? data.myInfo : responses[1].value.data.find(user => responses[0].value.data.email === user.email),
-            users: responses[1].status === 'rejected' ? null : responses[1].value.data,
+            users: responses[1].status === 'rejected' ? [] : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,
-            adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
+            adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data,
+            facebookCampaigns: responses[5].status === 'rejected' ? [] : responses[5].value.data,
+            googleCampaigns: responses[6].status === 'rejected' ? [] : responses[6].value.data,
+            flightRules: responses[7].status === 'rejected' ? [] : responses[7].value.data,
+            weatherRules: responses[8].status === 'rejected' ? [] : responses[8].value.data,
+            locations: responses[9].status === 'rejected' ? [] : responses[9].value.data,
+            flights: responses[10].status === 'rejected' ? [] : responses[10].value.data,
+            weather_list: responses[11].status === 'rejected' ? [] : responses[11].value.data
           })
       })
       .catch(console.log)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from './Select'
 
-const FlightCardRules = ({name, priority, lowPrice, highPrice, percentChange, blueBtnText}) =>{
+const FlightCardRules = ({name, priority, lowPrice, highPrice, percentChange, blueBtnText, handleUpdate}) =>{
 
     const connectorOptions = ["None", "And", "Or"]
     const LogicOptions = ["<", "< =", ":", ">", "> ="]
@@ -20,9 +20,9 @@ const FlightCardRules = ({name, priority, lowPrice, highPrice, percentChange, bl
                 </div>
                 <div className="box">
                     <Select 
-                        title="Connector"
-                        elementsName="Connectors"
-                        options={connectorOptions}
+                      title="Connector"
+                      elementsName="Connectors"
+                      options={connectorOptions}
                     />
                 </div>
             </div>
@@ -33,9 +33,9 @@ const FlightCardRules = ({name, priority, lowPrice, highPrice, percentChange, bl
                 </div>
                 <div className="mid">
                     <Select 
-                        title="Logic"
-                        elementsName="Opers"
-                        options={LogicOptions}
+                      title="Logic"
+                      elementsName="Opers"
+                      options={LogicOptions}
                     />
                 </div>
                 <div className="box">
@@ -45,16 +45,16 @@ const FlightCardRules = ({name, priority, lowPrice, highPrice, percentChange, bl
             </div>
             <div className="row">
                 <Select 
-                    title="Modifier action"
-                    elementsName="Modifier actions"
-                    options={ModifierOptions}
+                  title="Modifier action"
+                  elementsName="Modifier actions"
+                  options={ModifierOptions}
                 />
                 <div className="mid">
                     <label>% change:</label>
                     <label className="data" title={percentChange}>{percentChange}</label>
                 </div>
                 <div className="box">
-                    <button className="blue-btn">{blueBtnText}</button>
+                    <button className="blue-btn" onClick={handleUpdate}>{blueBtnText}</button>
                 </div>
             </div>
         </div>

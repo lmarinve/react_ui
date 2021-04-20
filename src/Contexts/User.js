@@ -42,7 +42,12 @@ export const UserProvider = ({ children }) => {
     clients: [],
     adfluence_campaigns: [],
     googleCampaigns: [],
-    facebookCampaigns: []
+    facebookCampaigns: [],
+    flightRules: [],
+    weatherRules: [],
+    locations: [],
+    flights: [],
+    weather_list: []
   })
   const [alert, setAlert] = useState({})
   const [activeMenu, setActiveMenu] = useState('')

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from './Select'
 
-const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChange, blueBtnText}) =>{
+const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChange, blueBtnText, handleUpdate}) =>{
 
     const connectorOptions = ["None", "And", "Or"]
     const whenOptions = ["Real time", "Forescast", "Historical"]
@@ -22,18 +22,18 @@ const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChan
                 </div>
                 <div className="box">
                     <Select 
-                        title="Connector"
-                        elementsName="Connectors"
-                        options={connectorOptions}
+                      title="Connector"
+                      elementsName="Connectors"
+                      options={connectorOptions}
                     />
                 </div>
             </div>
             <div className="row">
                 <div className="box">
                     <Select 
-                        title="When"
-                        elementsName="when"
-                        options={whenOptions}
+                      title="When"
+                      elementsName="when"
+                      options={whenOptions}
                     />
                 </div>
                 <div className="mid">
@@ -42,9 +42,9 @@ const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChan
                 </div>
                 <div className="box">
                     <Select 
-                        title="Weather tigger"
-                        elementsName="weather tiggers"
-                        options={weatherTiggerOptions}
+                      title="Weather tigger"
+                      elementsName="weather tiggers"
+                      options={weatherTiggerOptions}
                     />
                 </div>
             </div>
@@ -55,9 +55,9 @@ const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChan
                 </div>
                 <div className="mid">
                     <Select 
-                        title="Logic"
-                        elementsName="Opers"
-                        options={LogicOptions}
+                      title="Logic"
+                      elementsName="Opers"
+                      options={LogicOptions}
                     />
                 </div>
                 <div className="box">
@@ -67,16 +67,16 @@ const WeatherCardRules = ({name, priority, days,lowPrice, highPrice, percentChan
             </div>
             <div className="row">
                 <Select 
-                    title="Modifier action"
-                    elementsName="Modifier actions"
-                    options={ModifierOptions}
+                  title="Modifier action"
+                  elementsName="Modifier actions"
+                  options={ModifierOptions}
                 />
                 <div className="mid">
                     <label>% change:</label>
                     <label className="data" title={percentChange}>{percentChange}</label>
                 </div>
                 <div className="box">
-                    <button className="blue-btn">{blueBtnText}</button>
+                    <button className="blue-btn" onClick={handleUpdate}>{blueBtnText}</button>
                 </div>
             </div>
         </div>

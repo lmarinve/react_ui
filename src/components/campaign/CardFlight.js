@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from './Select'
 
-const CardFlight = ({name, origin, destination}) => {
+const CardFlight = ({name, origin, destination, handleUpdate}) => {
 
     const campaignTest = ["campaign #1", "campaign #2"]
 
@@ -21,11 +21,11 @@ const CardFlight = ({name, origin, destination}) => {
             </div>
             <div className="flight-selects">
                 <Select 
-                    title="Campaign"
-                    elementsName="campaigns"
-                    options={campaignTest}
+                  title="Campaign"
+                  elementsName="campaigns"
+                  options={campaignTest}
                 />
-                <button className="blue-btn">Update</button>
+                <button className="blue-btn" onClick={handleUpdate}>Update</button>
             </div>
         </div>
     )

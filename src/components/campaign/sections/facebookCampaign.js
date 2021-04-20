@@ -266,7 +266,7 @@ export default ({ setAlert }) => {
                             key={UUIDGenerator()} 
                             className={isActiveTab(index) ? 'active' : ''} 
                             onClick={() => {
-                                if (index === 1)
+                                if (index === 2)
                                     setEntity({})
 
                                 if (activeIndex() !== index)

@@ -2,6 +2,8 @@ export * from './user.service'
 export * from './agency.service'
 export * from './client.service'
 export * from './campaign.service'
+export * from './rules.services'
+export * from './location.service'
 
 function randomNumber (minimo, maximo) {
     return Math.round(Math.random() * (maximo - minimo) + minimo)

@@ -30,7 +30,12 @@ import {
   getUserAdfluenceCampaigns as getUserAdfluenceCampaignsRequest ,
   getMyInfo as getMyInfoRequest,
   getFacebookCampaigns as getFacebookCampaignsRequest,
-  getGoogleCampaigns as getGoogleCampaignsRequest
+  getGoogleCampaigns as getGoogleCampaignsRequest,
+  getFlightRules as getFlightRulesRequest,
+  getWeatherRules as getWeatherRulesRequest,
+  getLocations as getLocationsRequest,
+  getFlights as getFlightsRequest,
+  getWeather as getWeatherRequest
 } from '../_services'
 import { useLoader } from '../_helpers/Loader'
 import '../styles/main.css'
@@ -40,6 +45,9 @@ const MainMenu = ({ path }) => {
   const { mockedData, data, setData } = useContext(UserContext)
   const { agencies, clients, adfluence_campaigns } = data
   const MenuLoader = useLoader()
+  const pageLoaders = {
+    'weatherRules': useLoader()
+  }
 
   const getMyInfo = () => {
       return getMyInfoRequest(token)
@@ -61,6 +69,29 @@ const MainMenu = ({ path }) => {
   }
   const getFacebookCampaigns = () => {
       return getFacebookCampaignsRequest(token)
+  }
+  const getFlightRules = () => {
+      return getFlightRulesRequest(token)
+        .then((response) => {
+           return response
+        })
+  }
+  const getWeatherRules = () => {
+    pageLoaders['weatherRules'].loading()
+    return getWeatherRulesRequest(token)
+      .then((response) => {
+         pageLoaders['weatherRules'].loaded()
+         return response
+      })
+  }
+  const getLocations = () => {
+    return getLocationsRequest(token)
+  }
+  const getFlights = () => {
+    return getFlightsRequest(token)
+  }
+  const getWeather = () => {
+    return getWeatherRequest(token)
   }
 
   const cleanedUrlPath = path.replace('/', '')
@@ -195,7 +226,11 @@ const MainMenu = ({ path }) => {
   useEffect(() => {
     console.log('holaa')
     MenuLoader.loading()
-    let requests = [getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns(), getFacebookCampaigns(), getGoogleCampaigns()]
+    let requests = [
+      getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns(), 
+      getFacebookCampaigns(), getGoogleCampaigns(), getFlightRules(), getWeatherRules(),
+      getLocations(), getFlights(), getWeather()
+    ]
     Promise.allSettled(requests)
       .then(responses => {
           setData({
@@ -207,6 +242,11 @@ const MainMenu = ({ path }) => {
             adfluence_campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data,
             facebookCampaigns: responses[5].status === 'rejected' ? [] : responses[5].value.data,
             googleCampaigns: responses[6].status === 'rejected' ? [] : responses[6].value.data,
+            flightRules: responses[7].status === 'rejected' ? [] : responses[7].value.data,
+            weatherRules: responses[8].status === 'rejected' ? [] : responses[8].value.data,
+            locations: responses[9].status === 'rejected' ? [] : responses[9].value.data,
+            flights: responses[10].status === 'rejected' ? [] : responses[10].value.data,
+            weather_list: responses[11].status === 'rejected' ? [] : responses[11].value.data
           })
       })
       .catch(console.log)

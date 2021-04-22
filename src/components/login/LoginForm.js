@@ -35,7 +35,7 @@ export default () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    if (Validator(UserInfo.username, 'text') !== 1 || Validator(UserInfo.email, 'email') !== 1 /*|| Validator(UserInfo.password, 'password') !== 1*/) {
+    if (Validator(UserInfo.email, 'email') !== 1 /*|| Validator(UserInfo.password, 'password') !== 1*/) {
           const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : Validator(UserInfo.password, 'password')
           return setMessageError(setMessage)
     } else {
@@ -49,8 +49,7 @@ export default () => {
               } 
             })
             .catch(e => {
-              console.log(e.response)
-              if (e.response.data.non_field_errors.length) {
+              if (e.response && e.response.data.non_field_errors.length) {
                 setMessageError(e.response.data.non_field_errors[0])
                   
                 if (e.response.data.non_field_errors[0] === 'user account is inactive!')
@@ -75,7 +74,6 @@ export default () => {
               else {
                 setMessageError('An error occurred, please contact support@adfluencepro.com')
               }
-              e.response.data.status === 404 ? setMessageError('Invalid Credentials') : setMessageError('An error occurred while loggin in, please try again')
             })
             .finally(Loader.loaded)
     }
@@ -100,7 +98,7 @@ export default () => {
   return (
     <form className='login-form'>
         <img className='login-logo animated fadeInDown' src={Logo2} />
-        <LogInput animation="animated fadeInRight" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
+        {/*<LogInput animation="animated fadeInRight" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} /> */}
         <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
         {messageError !== ''

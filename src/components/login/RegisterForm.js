@@ -75,16 +75,10 @@ export default () => {
       return Validator(UserInfo.username, 'text') !== 1 || 
              Validator(UserInfo.email, 'email') !== 1 || 
              Validator(UserInfo.password, 'password') !== 1 || 
-             Validator(UserInfo.confirmedPassword, 'password') !== 1 ||
-             !UserInfo.first_name.length ||
-             !UserInfo.last_name.length ||
-             !UserInfo.country ||
-             !UserInfo.city ||
-             !UserInfo.dateOfBorn ||
-             !UserInfo.zip
+             Validator(UserInfo.confirmedPassword, 'password') !== 1
     }
     if (cantSubmit()) {
-      const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a password with at least one lowercase, one uppercase, a number and a special character'
+      const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a valid email as username and also as email address'
       return setMessageError(setMessage)
     } else {
       Loader.loading()

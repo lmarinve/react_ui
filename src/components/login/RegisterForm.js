@@ -69,7 +69,6 @@ export default () => {
   }
 
   const onSubmit = e => {
-    console.log(UserInfo)
     e.preventDefault()
     const cantSubmit = () => {
       return Validator(UserInfo.username, 'text') !== 1 || 
@@ -121,7 +120,7 @@ export default () => {
 
 
   return (
-    <form className='register-form'>
+    <form className='register-form' autoComplete='off'>
         <img className='register-logo animated fadeInDown' src={Logo2} />
         <LogInput animation="animated fadeInDown" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
         <LogInput animation="animated fadeInDown" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />

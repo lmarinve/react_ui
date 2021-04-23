@@ -98,6 +98,7 @@ export default () => {
   return (
     <form className='login-form'>
         <img className='login-logo animated fadeInDown' src={Logo2} />
+        <input type='hidden' value='something' />
         {/*<LogInput animation="animated fadeInRight" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} /> */}
         <LogInput animation="animated fadeInLeft" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInRight" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />

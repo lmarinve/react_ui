@@ -29,10 +29,10 @@ export default () => {
     is_superuser: false,
     is_active: true,
     role: 'D',
-    country: null,
-    city: null,
-    zip: null,
-    dateOfBorn: null
+    country: 'usa',
+    city: '',
+    zip: '00000',
+    dateOfBorn: '2000/01/01'
   })
   const [messageError, setMessageError] = useState('')
   const Loader = useLoader()
@@ -84,34 +84,10 @@ export default () => {
       return register(UserInfo)
         .then((response) => {
           Loader.loaded(() => navigator('/sign-in', { replace: true }))
-          // if (response.data.key) 
-          //   Loader.loaded( () => activateUser(response.data.key) ) 
-          //   // navigator('/dashboard', { replace: true }) 
-          // else if (response.data.message && response.data.message.length) 
-          //   Loader.loaded( () => navigator('/welcome-signup', { replace: true }) )
-          // else
-          //   Loader.loaded( () => setMessageError('An error occurred, please contact support@adfluencepro.com') )
-          
         })
         .catch(() => Loader.loaded( setMessageError('An error occurred, please try again') ) )
     }
   }
-
-//   const paises = ["United States", "Canada", "Mexico"];
-//   const handleCountryChange = value => {
-//     setUserInfo({
-//       ...UserInfo,
-//       country: value
-//     })
-//   }
-//   const ciudades = ["Texas", "California", "Aragua"];
-//   const handleCityChange = (value) => {
-//     setUserInfo({
-//       ...UserInfo,
-//       city: value
-//     })
-//   }
-
 
   return (
     <form className='register-form' autoComplete='off'>

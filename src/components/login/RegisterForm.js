@@ -24,13 +24,13 @@ export default () => {
     confirmedPassword: '',
     first_name: '',
     last_name: '',
-    address: '',
+    address: '1',
     is_staff: false,
     is_superuser: false,
     is_active: true,
     role: 'D',
     country: 'usa',
-    city: '',
+    city: '001',
     zip: '00000',
     dateOfBorn: '2000/01/01'
   })

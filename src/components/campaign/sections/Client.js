@@ -202,6 +202,10 @@ const ClientMyAccount = ({ setAlert }) => {
           .then((response) => {
             setData({
               ...data,
+              myInfo: {
+                ...data.myInfo,
+                clients: response.data
+              },
               clients: response.data 
             })
             setActiveTab(1)

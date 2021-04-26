@@ -14,7 +14,10 @@ export const UserProvider = ({ children }) => {
       lastName: 'Pajarraco',
       userId: 1,
       agencyName: 'demo',
-      agencyId: 1
+      agencyId: 1,
+      agencies: [],
+      clients: [],
+      campaigns: []
     },
     users: [
       {

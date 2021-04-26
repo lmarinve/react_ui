@@ -165,6 +165,10 @@ const AgencyMyAccount = ({ setAlert }) => {
         .then((response) => {
           setData({
             ...data,
+            myInfo: {
+                ...data.myInfo,
+                agencies: response.data
+            },
             agencies: response.data 
           })
           setActiveTab(0)

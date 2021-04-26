@@ -36,7 +36,7 @@
     grid-column: span 2; 
     width: 250px;
 }
-.register-form .input-group-container:nth-child(8){
+.register-form .input-group-container:nth-child(2){
     grid-column: span 2;
 }
 .register-form .error-message-container{

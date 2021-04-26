@@ -253,7 +253,6 @@ const AccountConfiguration = (props) => {
 
   return (
     <div className="account-config-container animated fadeInUp">
-      {console.log(entity())}
     <div className="account-config-form">
       <div className="card-container">
         <div className="user-avatar-container">
@@ -299,16 +298,16 @@ const AccountConfiguration = (props) => {
           </div>
           <div className="user-selects">
             <Select 
-              title="My Agency"
+              title="My Agencies"
               elementsName="agencies"
               isSelectable
-              options={agenciesTest}
+              options={isThereActiveEntity() ? agenciesTest : myInfo.agencies.map(agency => agency.name)}
             />
             <SelectCheckbox 
               title="My Clients"
               elementsName="clients"
               isSelectable
-              options={clientsTest}
+              options={isThereActiveEntity() ? clientsTest : myInfo.clients.map(client => client.name)}
             />
           </div>
           <div className="user-selects">
@@ -316,7 +315,7 @@ const AccountConfiguration = (props) => {
               title="Active campaigns"
               elementsName="campaigns"
               isSelectable
-              options={user.adfluence_campaigns}
+              options={isThereActiveEntity() ? user.adfluence_campaigns : myInfo.campaigns.map(campaign => campaign.name)}
             />
           </div>
         </div>

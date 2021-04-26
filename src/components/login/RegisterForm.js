@@ -5,7 +5,7 @@ import LogInput from './LogInput'
 import LogSelect from './LogSelect'
 import LogDate from './LogDate'
 import LogButton from './LogButton'
-import { register, getEmailAvailability } from '../../_services/user.service'
+import { register1, register2, getEmailAvailability } from '../../_services/user.service'
 import ErrorMessage from '../ErrorMessage'
 import { globalValidator as Validator, checkPasswordPattern, usePasswordCheck } from '../../_helpers/Validator'
 import MustContainItem from './MustContainItem'
@@ -71,22 +71,30 @@ export default () => {
   const onSubmit = e => {
     e.preventDefault()
     const cantSubmit = () => {
-      return Validator(UserInfo.username, 'text') !== 1 || 
-             Validator(UserInfo.email, 'email') !== 1 || 
+      return Validator(UserInfo.email, 'email') !== 1 || 
              Validator(UserInfo.password, 'password') !== 1 || 
-             Validator(UserInfo.confirmedPassword, 'password') !== 1 ||
-             !UserInfo.first_name.length ||
-             !UserInfo.last_name.length ||
-             !UserInfo.country ||
-             !UserInfo.city ||
-             !UserInfo.dateOfBorn ||
-             !UserInfo.zip
+             Validator(UserInfo.confirmedPassword, 'password') !== 1
+            //  !UserInfo.first_name.length ||
+            //  !UserInfo.last_name.length ||
+            //  !UserInfo.country ||
+            //  !UserInfo.city ||
+            //  !UserInfo.dateOfBorn ||
+            //  !UserInfo.zip
     }
+    const hasProfile = () => (
+        UserInfo.first_name.length &&
+        UserInfo.last_name.length &&
+        UserInfo.country &&
+        UserInfo.city &&
+        UserInfo.dateOfBorn &&
+        UserInfo.zip
+    )
     if (cantSubmit()) {
       const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a password with at least one lowercase, one uppercase, a number and a special character'
       return setMessageError(setMessage)
     } else {
       Loader.loading()
+      const register = !hasProfile() ? register1 : register2
       return register(UserInfo)
         .then((response) => {
           Loader.loaded(() => navigator('/sign-in', { replace: true }))
@@ -103,26 +111,9 @@ export default () => {
     }
   }
 
-//   const paises = ["United States", "Canada", "Mexico"];
-//   const handleCountryChange = value => {
-//     setUserInfo({
-//       ...UserInfo,
-//       country: value
-//     })
-//   }
-//   const ciudades = ["Texas", "California", "Aragua"];
-//   const handleCityChange = (value) => {
-//     setUserInfo({
-//       ...UserInfo,
-//       city: value
-//     })
-//   }
-
-
   return (
     <form className='register-form' autoComplete='off'>
         <img className='register-logo animated fadeInDown' src={Logo2} />
-        <LogInput animation="animated fadeInDown" icon='fal fa-user' typeInput="text" nameId='username' placeHolderText='Username' onChange={onChange} />
         <LogInput animation="animated fadeInDown" icon='fal fa-envelope' typeInput="text" nameId='email' placeHolderText='User Email' onChange={onChange} />
         <LogInput animation="animated fadeInDown" icon='fal fa-lock' typeInput="password" nameId='password' placeHolderText='Password' onChange={onChange} />
         <LogInput animation="animated fadeInDown" icon='fal fa-lock' typeInput="password" nameId='confirmedPassword' placeHolderText='Confirm Password' onChange={onChange} />

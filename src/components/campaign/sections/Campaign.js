@@ -262,6 +262,10 @@ const CampaignMyAccount = ({ setAlert }) => {
           .then(response => {
             setData({
               ...data,
+              myInfo: {
+                ...data.myInfo,
+                campaigns: response.data
+              },
               adfluence_campaigns: response.data
             })
             setActiveTab(1)

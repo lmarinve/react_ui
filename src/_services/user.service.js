@@ -1,6 +1,6 @@
 import Axios from 'axios'
 
-export function oldRegister (user) {
+export function register1 (user) {
   return Axios({
     method: 'post',
     baseURL: `${process.env.API_URL}/api/v1/rest-auth/registration/`,
@@ -8,7 +8,7 @@ export function oldRegister (user) {
       'Content-Type': 'application/json'
     },
     data: JSON.stringify({
-      username: user.username,
+      username: user.email,
       email: user.email,
       password1: user.password,
       password2: user.confirmedPassword
@@ -16,31 +16,36 @@ export function oldRegister (user) {
   })
 }
 
-export function register (user) {
+export function register2 (user) {
+  const newUser = {
+    username: user.email,
+    email: user.email,
+    password1: user.password,
+    password2: user.confirmedPassword,
+    is_active: true,
+    is_staff: false,
+    is_superuser: false,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    profile: {
+      role: 'D',
+      title: 'Mr',
+      dob: user.dateOfBorn,
+      address: user.address,
+      country: user.country,
+      city: user.city,
+      zip: user.zip,
+      photo: ''
+    }
+  }
+
   return Axios({
     method: 'post',
-    baseURL: `${process.env.API_URL}/users/users/`,
+    baseURL: `${process.env.API_URL}api/v1/rest-auth/registration/"`,
     headers: {
       'Content-Type': 'application/json'
     },
-    data: JSON.stringify({
-      email: user.email,
-      password: user.password,
-      first_name: user.first_name,
-      last_name: user.last_name,
-      is_active: true,
-      is_staff: false,
-      is_superuser: false,
-      profile: {
-        role: 'D',
-        title: 'Mr',
-        dob: user.dateOfBorn,
-        address: user.address,
-        country: user.country,
-        city: user.city,
-        zip: user.zip
-      }
-    })
+    data: JSON.stringify(newUser)
   })
 }
 

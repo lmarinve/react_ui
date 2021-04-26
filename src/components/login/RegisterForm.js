@@ -32,7 +32,7 @@ export default () => {
     country: 'usa',
     city: '001',
     zip: '00000',
-    dateOfBorn: '2000/01/01'
+    dateOfBorn: '2000-01-01'
   })
   const [messageError, setMessageError] = useState('')
   const Loader = useLoader()

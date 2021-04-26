@@ -24,15 +24,15 @@ export default () => {
     confirmedPassword: '',
     first_name: '',
     last_name: '',
-    address: '',
+    address: '1',
     is_staff: false,
     is_superuser: false,
     is_active: true,
     role: 'D',
-    country: null,
-    city: null,
-    zip: null,
-    dateOfBorn: null
+    country: 'usa',
+    city: '001',
+    zip: '00000',
+    dateOfBorn: '2000-01-01'
   })
   const [messageError, setMessageError] = useState('')
   const Loader = useLoader()
@@ -74,12 +74,6 @@ export default () => {
       return Validator(UserInfo.email, 'email') !== 1 || 
              Validator(UserInfo.password, 'password') !== 1 || 
              Validator(UserInfo.confirmedPassword, 'password') !== 1
-            //  !UserInfo.first_name.length ||
-            //  !UserInfo.last_name.length ||
-            //  !UserInfo.country ||
-            //  !UserInfo.city ||
-            //  !UserInfo.dateOfBorn ||
-            //  !UserInfo.zip
     }
     const hasProfile = () => (
         UserInfo.first_name.length &&
@@ -90,7 +84,7 @@ export default () => {
         UserInfo.zip
     )
     if (cantSubmit()) {
-      const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a password with at least one lowercase, one uppercase, a number and a special character'
+      const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a valid email as username and also as email address'
       return setMessageError(setMessage)
     } else {
       Loader.loading()
@@ -98,14 +92,6 @@ export default () => {
       return register(UserInfo)
         .then((response) => {
           Loader.loaded(() => navigator('/sign-in', { replace: true }))
-          // if (response.data.key) 
-          //   Loader.loaded( () => activateUser(response.data.key) ) 
-          //   // navigator('/dashboard', { replace: true }) 
-          // else if (response.data.message && response.data.message.length) 
-          //   Loader.loaded( () => navigator('/welcome-signup', { replace: true }) )
-          // else
-          //   Loader.loaded( () => setMessageError('An error occurred, please contact support@adfluencepro.com') )
-          
         })
         .catch(() => Loader.loaded( setMessageError('An error occurred, please try again') ) )
     }

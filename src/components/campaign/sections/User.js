@@ -65,9 +65,6 @@ const UsersList = ({ users, setEntity, setActiveTab }) => (
                 dateJoined="10/10/2021"
                 IdUserClient={user.id}
                 IdUserStaff="staff-1"
-                clientId1="1"
-                clientId2="2"
-                clientId3="3"
                 btnText="Modify"
                 handleClick={() => {
                   setEntity(user)
@@ -123,28 +120,37 @@ const AccountConfiguration = (props) => {
     })
   }
 
-  const setUserAsDemo = () => {
-    setUser({
-      ...user,
-      is_staff: false,
-      is_superuser: false,
-      modified: true
-    })
+  const setUserAsDemo = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_staff: false,
+        is_superuser: false,
+        modified: true
+      })
+    }
   }
-  const setUserAsClient = () => {
-    setUser({
-      ...user,
-      is_staff: true,
-      is_superuser: false,
-      modified: true
-    })
+  const setUserAsClient = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_staff: true,
+        is_superuser: false,
+        modified: true
+      })
+    }
   }
-  const setUserAsStaff = () => {
-    setUser({
-      ...user,
-      is_superuser: true,
-      modified: true
-    })
+  const setUserAsStaff = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_superuser: true,
+        modified: true
+      })
+    }
   }
 
   const update = () => {
@@ -251,6 +257,17 @@ const AccountConfiguration = (props) => {
     const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
     const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
 
+    const [change, setChange] = useState({status: false, display: 'display-none'});
+
+    const onChangePassword = () => {
+        if(!change.status){
+            setChange({status: true, display: 'display-block'})
+        } else {
+            setChange({status: false, display: 'display-none'})
+        }
+    }
+  
+
   return (
     <div className="account-config-container animated fadeInUp">
     <div className="account-config-form">
@@ -264,20 +281,16 @@ const AccountConfiguration = (props) => {
           <div className="user-data-container">
             <div className="left">
                 <div className="row">
-                    <label>Username:</label>
-                    <label>{user.username}</label>
-                </div>
-                <div className="row">
                     <label>User email:</label>
                     <label>{user.email}</label>
                 </div>
                 <div className="row">
                     <label>First name:</label>
-                    <label>{user.first_name}</label>
+                    <input type="text" defaultValue={user.first_name} />
                 </div>
                 <div className="row">
                     <label>Last name:</label>
-                    <label>{user.last_name}</label>
+                    <input type="text" defaultValue={user.last_name} />
                 </div>
             </div>
             <div className="right">
@@ -323,25 +336,29 @@ const AccountConfiguration = (props) => {
       {
         !isThereActiveEntity()
           && <>
-            <p className="change-text">Change your password</p>
-      <DashInput
-        inputTitle='Current Password'
-        inputId='currentPassword'
-        inputType="password"
-        handleChange={handleChange}
-      />
-      <DashInput
-        inputTitle='New Password'
-        inputId='newPassword'
-        inputType="password"
-        handleChange={handleChange}
-      />
-      <DashInput
-        inputTitle='Confirm Password'
-        inputId='confirmedPassword'
-        inputType="password"
-        handleChange={handleChange}
-      />
+          <div className="change-option">
+            <label>Change your password: </label><input type="checkbox" onChange={onChangePassword}/>
+          </div>
+        <div className={`change-password-container ${change.display}`}>
+            <DashInput
+                inputTitle='Current Password'
+                inputId='currentPassword'
+                inputType="password"
+                handleChange={handleChange}
+            />
+            <DashInput
+                inputTitle='New Password'
+                inputId='newPassword'
+                inputType="password"
+                handleChange={handleChange}
+            />
+            <DashInput
+                inputTitle='Confirm Password'
+                inputId='confirmedPassword'
+                inputType="password"
+                handleChange={handleChange}
+            />
+        </div>
              </>
       }
       {showBadPasswordMessage

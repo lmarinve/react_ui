@@ -16,7 +16,7 @@ import CreateNewCard from '../CreateNewCard'
 import CardButton from '../../CardButton'
 import ConfigurationCard from '../../ConfigurationCard'
 
-const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
+const AgencyList = ({ agencies, setEntity, setActiveTab, clients }) => {
   const updateAgency = agency => {
     setEntity(agency)
     setActiveTab(1)
@@ -32,11 +32,13 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
         // />
         
             agencies.length < 1
-            ? <CreateNewCard 
+            ? 
+            <CreateNewCard 
               title="There are no agencies"
               entity="Agency"
               handleClick={goToConfiguration}
               />
+
             :   <div className="agency-list-container animated fadeInUp">
                     <div className="agency-list">
                         {
@@ -51,15 +53,17 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
                               blueBtnText="Update"
                               key={agency.id}
                               handleClick={() => updateAgency(agency)}
+                              clients={clients}
                             />
                         ))
                         }
+ 
                     </div>
                 </div>
     )
 }
 
-const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenciesAsActive, addAgency, updateAgency, removeAgency, setAlert }) => {
+const AgencyConfiguration = ({ clients, agencies, isThereActiveEntity, entity, setMyAgenciesAsActive, addAgency, updateAgency, removeAgency, setAlert }) => {
   const token = localStorage.getItem('token')
   const [createdAgency, setCreatedAgency] = useState(false)
   const loaders = {
@@ -97,6 +101,13 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
       loaders['create'].loading()
       createUserAgencyRequest(token, agency)
         .then(responseHandler.bind(this, 'The agency was created!'))
+        .catch(() => {
+          setAlert({
+            title: 'Oops!',
+            message: 'Something went wrong, try again',
+            icon: 'fas fa-sync-alt'
+          })
+        })
         .finally(loaders['create'].loaded)
 
     }
@@ -135,8 +146,14 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
   }, [entity()])
 
   return <div className="agency-config-container animated fadeInUp">
-    {console.log(agency)}
-    <ConfigurationCard entity={agency} handleChange={handleChange} itemsName='Clients' entityName='Agency' isThereActiveEntity={isThereActiveEntity} />
+    <ConfigurationCard 
+      items={isThereActiveEntity() ? clients.filter(client => client.agency === agency.id).map(client => client.name) : []} 
+      entity={agency} 
+      handleChange={handleChange} 
+      itemsName='Clients' 
+      entityName='Agency' 
+      isThereActiveEntity={isThereActiveEntity} 
+    />
     <div className="crud-btn-container">
       {
         !isThereActiveEntity()
@@ -153,7 +170,7 @@ const AgencyConfiguration = ({ agencies, isThereActiveEntity, entity, setMyAgenc
 const AgencyMyAccount = ({ setAlert }) => {
   const token = localStorage.getItem('token')
   const { data, setData } = React.useContext(UserContext)
-  const { agencies } = data
+  const { agencies, clients } = data
   const { tabs, activeTab, isActiveTab, setActiveTab } = useTabController([
     { name: 'Agency list', Component: AgencyList },
     { name: 'Agency configuration', Component: AgencyConfiguration  }
@@ -236,6 +253,7 @@ const AgencyMyAccount = ({ setAlert }) => {
           updateAgency={updateAgency}
           removeAgency={removeAgency}
           setAlert={setAlert}
+          clients={clients}
         />                                          
     </div>
   )

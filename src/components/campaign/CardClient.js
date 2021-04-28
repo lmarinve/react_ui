@@ -1,9 +1,9 @@
 import React from 'react'
-import { Select } from './Select'
+import { Select, SelectCheckbox } from './Select'
 
 import AgencyPhoto from '../../images/traneLogo.jpg'
 
-const CardCampaign = ({clientId, clientName, clientAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) => {
+const CardCampaign = ({adfluence_campaigns, clientId, clientName, clientAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) => {
     
     const clientsTest = ["Demo", "Advertiser", "Marketer"]
     const campaignsTest = ["Campaign #1", "Campaign #2", "Campaign #3"]
@@ -14,7 +14,7 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
             <div className="client-photo-container">
                 <div className="client-photo">
                     <i className="client-icon fas fa-store" />
-                    <img src={AgencyPhoto} />
+                    {/* <img src={AgencyPhoto} /> */}
                 </div>
             </div>
             <div className="client-data-container">
@@ -47,22 +47,23 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
                         <label>Active:</label>
                         <input type="checkbox" />
                     </div>
-                    <Select 
-                        title="Client Type"
-                        elementsName="clients type"
-                        options={clientsTest}
+                    <SelectCheckbox 
+                      title="Client Type"
+                      elementsName="clients type"
+                      isSelectable
+                      options={clientsTest}
                     />
                 </div>
                 <div className="client-selects">
                     <Select 
-                        title="Campaigns"
-                        elementsName="campaigns"
-                        options={campaignsTest}
+                      title="Campaigns"
+                      elementsName="campaigns"
+                      options={adfluence_campaigns.filter(campaign => campaign.client === clientId).map(campaign => campaign.name)}
                     />
                     <Select 
-                        title="Users"
-                        elementsName="users"
-                        options={usersTest}
+                      title="Users"
+                      elementsName="users"
+                      options={usersTest}
                     />
                 </div>
                 <div className="blue-btn-container">

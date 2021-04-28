@@ -1,20 +1,23 @@
 /* eslint-disable react/jsx-closing-tag-location */
 import React from 'react'
-import { Select } from './campaign/Select'
+import { Select, SelectCheckbox } from './campaign/Select'
 import AgencyPhoto from '../images/pj_logo.jpg'
 import ClientPhoto from '../images/traneLogo.jpg'
 
-const Photos = {
-    'Agency': AgencyPhoto,
-    'Client': ClientPhoto
-}
+// const Photos = {
+//     'Agency': AgencyPhoto,
+//     'Client': ClientPhoto
+// }
 
-const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies, activeOption, handleOptionsChange }) => (
+const ClientsTest = ['STLUC', 'COBAY']
+const UsersTest = ['lmarinvera@mediagistic.com', 'ray@mediagistic.com']
+
+const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies, activeOption, handleOptionsChange, items }) => (
     <div className="card-container">
             <div className={`${entityName.toLowerCase()}-photo-container`}>
               <div className={`${entityName.toLowerCase()}-photo pointer`}>
                 <i className={`${entityName.toLowerCase()}-icon fas fa-store-alt`} />
-                <img src={Photos[entityName]} />
+                {/* <img src={Photos[entityName]} /> */}
                 <div className="upload-img-container">
                   <input type="file" />
                   <i className="upload-icon fal fa-upload" />
@@ -50,38 +53,31 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                 <input type="text" />
               </div>
               <div className="status-row">
-                <div className="status">
-                  <label>Active:</label>
-                  <input type="checkbox" />
-                </div>
-                <Select 
+                {
+                  isThereActiveEntity()
+                    && <div className="status">
+                    <label>Active:</label>
+                    <input type="checkbox" checked />
+                  </div>
+                }
+                <SelectCheckbox
                   title={`${entityName} Type`}
                   elementsName="agencies type"
                   isSelectable
                   options={["Demo", "Advertiser", "Marketer"]}
                 />
               </div>
-              <Select
-                title="Select an agency"
-                elementsName='agencies'
-                isSelectable
-                options={agencies}
-                activeOption={activeOption}
-                handleOptionsChange={handleOptionsChange}
-              />
               {
                 isThereActiveEntity()
                   && <div className={`${entityName.toLowerCase()}-selects`}>
-                  <div className="select-container">
-                    <button className="select-btn">
-                      {itemsName}
-                      <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                      <label>STLUC</label>
-                      <label>COBAY</label>
-                    </div>
-                  </div>
+                    <Select
+                      title={itemsName}
+                      elementsName={itemsName}
+                      isSelectable
+                      options={items}
+                      activeOption={null}
+                      handleOptionsChange={() => null}
+                    />
                   <div className="select-container">
                     <button className="select-btn">
                       Users

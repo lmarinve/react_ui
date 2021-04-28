@@ -1,9 +1,9 @@
 import React from 'react'
-import { Select } from './Select'
+import { Select, SelectCheckbox } from './Select'
 
 import AgencyPhoto from '../../images/pj_logo.jpg'
 
-const CardAgency = ({agencyId, agencyName, agencyAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) =>{
+const CardAgency = ({clients, agencyId, agencyName, agencyAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) =>{
     
     const agenciesTest = ["Demo", "Advertiser", "Marketer"]
     const clientsTest = ["STLUC", "COBAY"]
@@ -14,7 +14,7 @@ const CardAgency = ({agencyId, agencyName, agencyAddress, contactName, contactPh
             <div className="agency-photo-container">
                 <div className="agency-photo">
                     <i className="agency-icon fas fa-store-alt" />
-                    <img src={AgencyPhoto} />
+                    {/* <img src={AgencyPhoto} /> */}
                 </div>
             </div>
             <div className="agency-data-container">
@@ -45,24 +45,25 @@ const CardAgency = ({agencyId, agencyName, agencyAddress, contactName, contactPh
                 <div className="status-row">
                     <div className="status">
                         <label>Active:</label>
-                        <input type="checkbox" />
+                        <input type="checkbox" checked />
                     </div>
-                    <Select 
-                        title="Agency Type"
-                        elementsName="agencies type"
-                        options={agenciesTest}
+                    <SelectCheckbox 
+                      title="Agency Type"
+                      elementsName="agencies type"
+                      isSelectable
+                      options={agenciesTest}
                     />
                 </div>
                 <div className="agency-selects">
                     <Select 
-                        title="Clients"
-                        elementsName="clients"
-                        options={clientsTest}
+                      title="Clients"
+                      elementsName="clients"
+                      options={clients.filter(client => client.agency === agencyId).map(client => client.name)}
                     />
                     <Select 
-                        title="Users"
-                        elementsName="users"
-                        options={usersTest}
+                      title="Users"
+                      elementsName="users"
+                      options={usersTest}
                     />
                 </div>
                 <div className="blue-btn-container">

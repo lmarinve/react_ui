@@ -16,7 +16,7 @@ import ConfigurationCard from '../../ConfigurationCard'
 import CreateNewCard from '../CreateNewCard'
 import { useLoader } from '../../../_helpers/Loader'
 
-const ClientsList = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
+const ClientsList = ({ adfluence_campaigns, clients, goToUpdateClient, setActiveTab, setEntity }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
             {
@@ -32,6 +32,7 @@ const ClientsList = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => 
                       blueBtnText="Update"
                       key={client.id}
                       handleClick={() => goToUpdateClient(client)}
+                      adfluence_campaigns={adfluence_campaigns}
                     /> 
                 ))
                 : <CreateNewCard 
@@ -47,7 +48,7 @@ const ClientsList = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => 
     </div>
 )
 
-const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
+const MyClients = ({ adfluence_campaigns, clients, goToUpdateClient, setActiveTab, setEntity }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
              {
@@ -63,6 +64,7 @@ const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
                       blueBtnText="Update"
                       key={client.id}
                       handleClick={() => goToUpdateClient(client)}
+                      adfluence_campaigns={adfluence_campaigns}
                     /> 
                 ))
                 : <CreateNewCard 
@@ -80,7 +82,7 @@ const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
 
 const ClientConfiguration = (props) => {
     const token = localStorage.getItem('token')
-    const { isThereActiveEntity, entity, setMyClientsAsActive, agencies, setAlert, createClient, updateClient,removeClient } = props
+    const { adfluence_campaigns, isThereActiveEntity, entity, setMyClientsAsActive, agencies, setAlert, createClient, updateClient,removeClient } = props
     const [client, setClient] = useState(() => {
         if (!isThereActiveEntity())
           return { name: '', agencyId: null }
@@ -169,6 +171,7 @@ const ClientConfiguration = (props) => {
           itemsName='Campaigns' 
           entityName='Client' 
           isThereActiveEntity={isThereActiveEntity}
+          items={isThereActiveEntity() ? adfluence_campaigns.filter(campaign => campaign.client === client.id).map(campaign => campaign.name) : []}
         />
         <div className="crud-btn-container">
         { 
@@ -188,7 +191,7 @@ const ClientConfiguration = (props) => {
 const ClientMyAccount = ({ setAlert }) => {
     const token = localStorage.getItem('token')
     const { data, setData } = React.useContext(UserContext)
-    const { clients, agencies } = data
+    const { clients, agencies, adfluence_campaigns } = data
 
     const { tabs, activeTab, isActiveTab, setActiveTab } = useTabController([
         { name: 'Clients list', Component: ClientsList },
@@ -280,6 +283,7 @@ const ClientMyAccount = ({ setAlert }) => {
               updateClient={updateClient}
               removeClient={removeClient}
               token={token}
+              adfluence_campaigns={adfluence_campaigns}
             />
         </div>
     )

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Select } from './Select'
+import { Select, SelectCheckbox } from './Select'
 
 import AgencyPhoto from '../../images/traneLogo.jpg'
 
@@ -14,7 +14,7 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
             <div className="client-photo-container">
                 <div className="client-photo">
                     <i className="client-icon fas fa-store" />
-                    <img src={AgencyPhoto} />
+                    {/* <img src={AgencyPhoto} /> */}
                 </div>
             </div>
             <div className="client-data-container">
@@ -47,9 +47,10 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
                         <label>Active:</label>
                         <input type="checkbox" />
                     </div>
-                    <Select 
+                    <SelectCheckbox 
                         title="Client Type"
                         elementsName="clients type"
+                        isSelectable
                         options={clientsTest}
                     />
                 </div>
@@ -57,11 +58,13 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
                     <Select 
                         title="Campaigns"
                         elementsName="campaigns"
+                        isSelectable
                         options={campaignsTest}
                     />
                     <Select 
                         title="Users"
                         elementsName="users"
+                        isSelectable
                         options={usersTest}
                     />
                 </div>

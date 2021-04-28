@@ -32,11 +32,13 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
         // />
         
             agencies.length < 1
-            ? <CreateNewCard 
+            ? 
+            <CreateNewCard 
               title="There are no agencies"
               entity="Agency"
               handleClick={goToConfiguration}
               />
+
             :   <div className="agency-list-container animated fadeInUp">
                     <div className="agency-list">
                         {
@@ -54,6 +56,7 @@ const AgencyList = ({ agencies, setEntity, setActiveTab }) => {
                             />
                         ))
                         }
+ 
                     </div>
                 </div>
     )

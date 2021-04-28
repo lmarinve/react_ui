@@ -708,10 +708,22 @@
     display: flex;
     align-items: flex-end;
 }
+.main-container .user-section-container .card-container .user-data-container .row:last-child{
+    margin-bottom: 0;
+}
 .main-container .user-section-container .card-container .user-data-container .row label{
+    white-space: nowrap;
     color: #b7b7b7;
 }
-.main-container .user-section-container .card-container .user-data-container .row label:last-of-type{
+.main-container .user-section-container .user-list-container .card-container .user-data-container .row label:last-of-type{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 10px;
+}
+.main-container .user-section-container .account-config-container .card-container .user-data-container .row:first-child label:last-of-type{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -740,7 +752,7 @@
 }
 .main-container .user-section-container .card-container .user-selects{
     width: 100%;
-    margin-top: 10px;
+    margin-top: 20px;
 
     /* FLEX */
     display: flex;
@@ -805,15 +817,56 @@
 .main-container .user-section-container .account-config-container .account-config-form .card-container .user-information-container .user-data-container .user-type-icon{
     margin: 0 10px;
 }
-.main-container .user-section-container .account-config-container .account-config-form .blue-btn{
-    position: static;
-    min-width: 160px;
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row{
+    white-space: initial;
 }
-.main-container .user-section-container .account-config-container .account-config-form .change-text{
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input{
+    box-sizing: border-box;
+    width: 100%;
+    margin-left: 10px;
+    padding: 5px 5px 0 5px;
+    font-weight: 300;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(183, 183, 183, 0.588);
+    color: #fff;
+    font-size: 15px;
+    transition: all 0.5s ease;
+}
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input:focus{
+    outline: 0;
+    border-color: #EC115D;
+}
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input:-webkit-autofill,
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input:-webkit-autofill:hover, 
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input:-webkit-autofill:active  {
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #838383;
+}
+.main-container .user-section-container .account-config-container .card-container .user-information-container .row input:-webkit-autofill:focus{
+    box-shadow: 0 0 0 30px #1f1f1f inset !important;
+    -webkit-text-fill-color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #EC115D;
+}
+.main-container .user-section-container .account-config-container .account-config-form .change-option{
     text-align: center;
     margin-top: 30px;
     font-size: 15px;
     color: #b7b7b7;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-container .user-section-container .account-config-container .account-config-form .change-option label{
+    margin-right: 10px;
+}
+.main-container .user-section-container .account-config-container .account-config-form .change-password-container{
+    width: 100%;
 }
 .main-container .user-section-container .account-config-container .account-config-btn{
     margin: 0 20px;
@@ -1022,7 +1075,7 @@
     font-weight: 500;
     margin-left: 10px;
 }
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input{
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]{
     box-sizing: border-box;
     margin-left: 10px;
     padding: 5px 5px 0 5px;
@@ -1037,26 +1090,30 @@
     /* FLEX */
     flex: 1 1;
 }
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input:focus{
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]:focus{
     outline: 0;
     border-color: #EC115D;
 }
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input:-webkit-autofill,
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input:-webkit-autofill:hover, 
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input:-webkit-autofill:active  {
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]:-webkit-autofill,
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]:-webkit-autofill:hover, 
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]:-webkit-autofill:active  {
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #838383;
 }
-.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input:-webkit-autofill:focus{
+.main-container .agency-section-container .agency-config-container .card-container .agency-data-container .row input[type="text"]:-webkit-autofill:focus{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #EC115D;
 }
+.main-container .agency-section-container .card-container .select-container .list-container .row{
+    align-items: center;
+}
 .main-container .agency-section-container .card-container .agency-data-container .status-row{
-    margin-top: 20px;
+    height: 23px;
+    margin-top: 5px;
 
     /* FLEX */
     display: flex;
@@ -1290,7 +1347,7 @@
     font-weight: 500;
     margin-left: 10px;
 }
-.main-container .client-section-container .card-container .client-data-container .row input{
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]{
     box-sizing: border-box;
     margin-left: 10px;
     padding: 5px 5px 0 5px;
@@ -1305,19 +1362,19 @@
     /* FLEX */
     flex: 1 1;
 }
-.main-container .client-section-container .card-container .client-data-container .row input:focus{
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]:focus{
     outline: 0;
     border-color: #EC115D;
 }
-.main-container .client-section-container .card-container .client-data-container .row input:-webkit-autofill,
-.main-container .client-section-container .card-container .client-data-container .row input:-webkit-autofill:hover, 
-.main-container .client-section-container .card-container .client-data-container .row input:-webkit-autofill:active  {
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]:-webkit-autofill,
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]:-webkit-autofill:hover, 
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]:-webkit-autofill:active  {
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
     border-bottom: 1px solid #838383;
 }
-.main-container .client-section-container .card-container .client-data-container .row input:-webkit-autofill:focus{
+.main-container .client-section-container .card-container .client-data-container .row input[type="text"]:-webkit-autofill:focus{
     box-shadow: 0 0 0 30px #1f1f1f inset !important;
     -webkit-text-fill-color: #fff !important;
     border: none;
@@ -1344,6 +1401,9 @@
     /* FLEX */
     display: flex;
     justify-content: space-between;
+}
+.main-container .client-section-container .card-container .select-container .list-container .row{
+    align-items: center;
 }
 .main-container .client-section-container .card-container .blue-btn-container .blue-btn{
     min-width: 180px;

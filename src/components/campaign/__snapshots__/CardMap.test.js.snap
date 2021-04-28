@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Ad Channel Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="box"
+    >
+      <label>
+        Map ID:
+      </label>
+      <label
+        className="data"
+      />
+    </div>
+    <div
+      className="mid"
+    >
+      <label>
+        Priority:
+      </label>
+      <label
+        className="data"
+      />
+    </div>
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Connector
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            None
+          </label>
+          <label
+            className=""
+          >
+            And
+          </label>
+          <label
+            className=""
+          >
+            Or
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row operation"
+  >
+    <div
+      className="box values"
+    >
+      <div
+        className="left"
+      >
+        <label>
+          Value 1:
+        </label>
+        <label
+          className="data"
+        />
+      </div>
+      <div
+        className="right"
+      >
+        <label>
+          Value 2:
+        </label>
+        <label
+          className="data"
+        />
+      </div>
+    </div>
+    <div
+      className="mid"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Oper
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            &lt;
+          </label>
+          <label
+            className=""
+          >
+            &lt; =
+          </label>
+          <label
+            className=""
+          >
+            :
+          </label>
+          <label
+            className=""
+          >
+            &gt;
+          </label>
+          <label
+            className=""
+          >
+            &gt; =
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box"
+    >
+      <label>
+        % change:
+      </label>
+      <label
+        className="data"
+      />
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Tense
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Historical
+          </label>
+          <label
+            className=""
+          >
+            Real time
+          </label>
+          <label
+            className=""
+          >
+            Forecast
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="mid"
+    >
+      <label>
+        Days:
+      </label>
+      <label
+        className="data"
+      />
+    </div>
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Weather trigger
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            No weather trigger
+          </label>
+          <label
+            className=""
+          >
+            Temperature
+          </label>
+          <label
+            className=""
+          >
+            Snow
+          </label>
+          <label
+            className=""
+          >
+            Wind
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Campaign
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Campaign #1
+          </label>
+          <label
+            className=""
+          >
+            Campaign #2
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Ad channel
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Ad channel #1
+          </label>
+          <label
+            className=""
+          >
+            Ad channel #2
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="row"
+  >
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Rules
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Rules #1
+          </label>
+          <label
+            className=""
+          >
+            Rules #2
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="box"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Modifier action
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Pause ad
+          </label>
+          <label
+            className=""
+          >
+            Increase budget
+          </label>
+          <label
+            className=""
+          >
+            Decrease budget
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="blue-btn-container"
+  >
+    <button
+      className="blue-btn"
+    >
+      Update
+    </button>
+  </div>
+</div>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorMessage.Index Snapshot Test 1`] = `
+<div
+  className="error-message-container"
+  style={
+    Object {
+      "marginBottom": "",
+    }
+  }
+>
+  <span>
+     
+     
+  </span>
+</div>
+`;

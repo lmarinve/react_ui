@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Rules Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="row"
+  >
+    <label>
+      Rule ID:
+    </label>
+    <label />
+  </div>
+  <div
+    className="row"
+  >
+    <label>
+      Name:
+    </label>
+    <label />
+  </div>
+  <div
+    className="rules-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Rule Type
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Flight
+        </label>
+        <label
+          className=""
+        >
+          Weather
+        </label>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Campaigns
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Campaign #1
+        </label>
+        <label
+          className=""
+        >
+          Campaign #2
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rules-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Maps
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Maps ID #1
+        </label>
+        <label
+          className=""
+        >
+          Maps ID #2
+        </label>
+      </div>
+    </div>
+    <button
+      className="blue-btn"
+    />
+  </div>
+</div>
+`;

@@ -1,0 +1,448 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card New User Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="user-data-container"
+  >
+    <div
+      className="left"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Username:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          User email:
+        </label>
+        <label />
+      </div>
+    </div>
+    <div
+      className="right"
+    >
+      <label>
+        User type:
+      </label>
+      <div
+        className="user-type"
+      >
+        <input
+          checked={true}
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user-clock"
+          />
+          Demo
+        </label>
+      </div>
+      <div
+        className="user-type"
+      >
+        <input
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user-tag"
+          />
+          Client
+        </label>
+      </div>
+      <div
+        className="user-type"
+      >
+        <input
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user-cog"
+          />
+          Staff
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="user-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        My Agency
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Demo
+        </label>
+        <label
+          className=""
+        >
+          Mediagistic Inc
+        </label>
+        <label
+          className=""
+        >
+          Agency #3
+        </label>
+        <label
+          className=""
+        >
+          Agency #4
+        </label>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        My Clients
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Demo
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Coconut Bay
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Saint Lucia
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="blue-btn-container"
+  >
+    <button
+      className="blue-btn"
+    />
+  </div>
+</div>
+`;
+
+exports[`Card User Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="user-data-container"
+  >
+    <div
+      className="left"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Username:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          User email:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          First name
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Last name
+        </label>
+        <label />
+      </div>
+    </div>
+    <div
+      className="right"
+    >
+      <label>
+        User type:
+      </label>
+      <div
+        className="user-type"
+      >
+        <input
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user"
+          />
+          Demo
+        </label>
+      </div>
+      <div
+        className="user-type"
+      >
+        <input
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user-check"
+          />
+          Client
+        </label>
+      </div>
+      <div
+        className="user-type"
+      >
+        <input
+          onClick={[Function]}
+          type="checkbox"
+        />
+        <label>
+          <i
+            className="user-type-icon fas fa-user-cog"
+          />
+          Staff
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="user-data-container mid"
+  >
+    <div
+      className="left"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Last login:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Date joined:
+        </label>
+        <label />
+      </div>
+    </div>
+    <div
+      className="right"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Is active:
+        </label>
+        <input
+          type="checkbox"
+        />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Is superuser:
+        </label>
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    className="user-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        My Agency
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Demo
+        </label>
+        <label
+          className=""
+        >
+          Mediagistic Inc
+        </label>
+        <label
+          className=""
+        >
+          Agency #3
+        </label>
+        <label
+          className=""
+        >
+          Agency #4
+        </label>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        My Clients
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Demo
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Coconut Bay
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Saint Lucia
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="blue-btn-container"
+  >
+    <button
+      className="blue-btn"
+    />
+  </div>
+</div>
+`;

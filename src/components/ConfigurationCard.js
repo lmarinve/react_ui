@@ -9,7 +9,7 @@ const Photos = {
     'Client': ClientPhoto
 }
 
-const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies, activeOption, handleOptionsChange }) => (
+const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isThereActiveEntity, agencies, activeOption, handleOptionsChange, items }) => (
     <div className="card-container">
             <div className={`${entityName.toLowerCase()}-photo-container`}>
               <div className={`${entityName.toLowerCase()}-photo pointer`}>
@@ -50,10 +50,13 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                 <input type="text" />
               </div>
               <div className="status-row">
-                <div className="status">
-                  <label>Active:</label>
-                  <input type="checkbox" />
-                </div>
+                {
+                  isThereActiveEntity()
+                    && <div className="status">
+                    <label>Active:</label>
+                    <input type="checkbox" checked />
+                  </div>
+                }
                 <Select 
                   title={`${entityName} Type`}
                   elementsName="agencies type"
@@ -72,16 +75,14 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
               {
                 isThereActiveEntity()
                   && <div className={`${entityName.toLowerCase()}-selects`}>
-                  <div className="select-container">
-                    <button className="select-btn">
-                      {itemsName}
-                      <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                      <label>STLUC</label>
-                      <label>COBAY</label>
-                    </div>
-                  </div>
+                    <Select
+                      title={itemsName}
+                      elementsName={itemsName}
+                      isSelectable
+                      options={items}
+                      activeOption={null}
+                      handleOptionsChange={() => null}
+                    />
                   <div className="select-container">
                     <button className="select-btn">
                       Users

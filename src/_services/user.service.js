@@ -41,7 +41,7 @@ export function register2 (user) {
 
   return Axios({
     method: 'post',
-    baseURL: `${process.env.API_URL}api/v1/rest-auth/registration/"`,
+    baseURL: `${process.env.API_URL}api/v1/rest-auth/registration/`,
     headers: {
       'Content-Type': 'application/json'
     },

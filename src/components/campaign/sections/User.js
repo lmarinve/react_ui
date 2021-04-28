@@ -123,28 +123,37 @@ const AccountConfiguration = (props) => {
     })
   }
 
-  const setUserAsDemo = () => {
-    setUser({
-      ...user,
-      is_staff: false,
-      is_superuser: false,
-      modified: true
-    })
+  const setUserAsDemo = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_staff: false,
+        is_superuser: false,
+        modified: true
+      })
+    }
   }
-  const setUserAsClient = () => {
-    setUser({
-      ...user,
-      is_staff: true,
-      is_superuser: false,
-      modified: true
-    })
+  const setUserAsClient = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_staff: true,
+        is_superuser: false,
+        modified: true
+      })
+    }
   }
-  const setUserAsStaff = () => {
-    setUser({
-      ...user,
-      is_superuser: true,
-      modified: true
-    })
+  const setUserAsStaff = (event) => {
+    event.preventDefault()
+    if (isThereActiveEntity()) {
+      setUser({
+        ...user,
+        is_superuser: true,
+        modified: true
+      })
+    }
   }
 
   const update = () => {

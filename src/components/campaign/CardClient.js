@@ -3,7 +3,7 @@ import { Select } from './Select'
 
 import AgencyPhoto from '../../images/traneLogo.jpg'
 
-const CardCampaign = ({clientId, clientName, clientAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) => {
+const CardCampaign = ({adfluence_campaigns, clientId, clientName, clientAddress, contactName, contactPhone, contactEmail, blueBtnText, handleClick}) => {
     
     const clientsTest = ["Demo", "Advertiser", "Marketer"]
     const campaignsTest = ["Campaign #1", "Campaign #2", "Campaign #3"]
@@ -48,21 +48,21 @@ const CardCampaign = ({clientId, clientName, clientAddress, contactName, contact
                         <input type="checkbox" />
                     </div>
                     <Select 
-                        title="Client Type"
-                        elementsName="clients type"
-                        options={clientsTest}
+                      title="Client Type"
+                      elementsName="clients type"
+                      options={clientsTest}
                     />
                 </div>
                 <div className="client-selects">
                     <Select 
-                        title="Campaigns"
-                        elementsName="campaigns"
-                        options={campaignsTest}
+                      title="Campaigns"
+                      elementsName="campaigns"
+                      options={adfluence_campaigns.filter(campaign => campaign.client === clientId).map(campaign => campaign.name)}
                     />
                     <Select 
-                        title="Users"
-                        elementsName="users"
-                        options={usersTest}
+                      title="Users"
+                      elementsName="users"
+                      options={usersTest}
                     />
                 </div>
                 <div className="blue-btn-container">

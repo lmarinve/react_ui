@@ -48,7 +48,7 @@ const ClientsList = ({ adfluence_campaigns, clients, goToUpdateClient, setActive
     </div>
 )
 
-const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
+const MyClients = ({ adfluence_campaigns, clients, goToUpdateClient, setActiveTab, setEntity }) => (
     <div className="client-list-container animated fadeInUp">
         <div className="client-list">
              {
@@ -64,6 +64,7 @@ const MyClients = ({ clients, goToUpdateClient, setActiveTab, setEntity }) => (
                       blueBtnText="Update"
                       key={client.id}
                       handleClick={() => goToUpdateClient(client)}
+                      adfluence_campaigns={adfluence_campaigns}
                     /> 
                 ))
                 : <CreateNewCard 

@@ -4,7 +4,7 @@ import { Select, SelectCheckbox } from './Select'
 const CardNewUser = (props) =>{
     const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
     const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
-    const {username, email, btnText, handleClick} = props
+    const {email, btnText, handleClick} = props
     const handleCheckboxClick = (event) => {
         event.preventDefault()
     }
@@ -13,10 +13,6 @@ const CardNewUser = (props) =>{
         <div className="card-container">
             <div className="user-data-container">
                 <div className="left">
-                    <div className="row">
-                        <label>Username:</label>
-                        <label>{username}</label>
-                    </div>
                     <div className="row">
                         <label>User email:</label>
                         <label>{email}</label>
@@ -61,9 +57,9 @@ const CardUser = (props) => {
     const agenciesTest = ["Demo", "Mediagistic Inc", "Agency #3", "Agency #4"]
     const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
     const { 
-        handleClick, username, email, firstName, lastName, lastLogin, 
-        dateJoined, IdUserDemo, IdUserClient, IdUserStaff, clientId1, 
-        clientId2, clientId3, btnText, isStaff, isSuperuser
+        handleClick, email, firstName, lastName, lastLogin, 
+        dateJoined, IdUserDemo, IdUserClient, IdUserStaff, 
+        btnText, isStaff, isSuperuser
     } = props
     const handleCheckboxClick = (event) => {
         event.preventDefault()
@@ -72,10 +68,6 @@ const CardUser = (props) => {
         <div className="card-container">
             <div className="user-data-container">
                 <div className="left">
-                    <div className="row">
-                        <label>Username:</label>
-                        <label>{username}</label>
-                    </div>
                     <div className="row">
                         <label>User email:</label>
                         <label>{email}</label>
@@ -87,6 +79,10 @@ const CardUser = (props) => {
                     <div className="row">
                         <label>Last name</label>
                         <label>{lastName}</label>
+                    </div>
+                    <div className="row">
+                        <label>Last login:</label>
+                        <label>{lastLogin}</label>
                     </div>
                 </div>
                 <div className="right">
@@ -107,10 +103,6 @@ const CardUser = (props) => {
             </div>
             <div className="user-data-container mid">
                 <div className="left">
-                    <div className="row">
-                        <label>Last login:</label>
-                        <label>{lastLogin}</label>
-                    </div>
                     <div className="row">
                         <label>Date joined:</label>
                         <label>{dateJoined}</label>

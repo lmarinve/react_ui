@@ -27,7 +27,7 @@ const CampaignsList = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }
             adfluence_campaigns.length > 0
               ? adfluence_campaigns.map((campaign, i) => (
                   <CardCampaign 
-                    campaignImage={CampaignPhoto}
+                    // campaignImage={CampaignPhoto}
                     CampaignId={campaign.id}
                     CampaignName={campaign.name}
                     CampaignStart="2021-01-19"
@@ -58,7 +58,7 @@ const MyCampaigns = ({ adfluence_campaigns, goToUpdateCampaign, setActiveTab }) 
             adfluence_campaigns.length > 0
               ? adfluence_campaigns.map((campaign, i) => (
                   <CardCampaign 
-                    campaignImage={CampaignPhoto}
+                    // campaignImage={CampaignPhoto}
                     CampaignId={campaign.id}
                     CampaignName={campaign.name}
                     CampaignStart="2021-01-19"
@@ -168,7 +168,7 @@ const CampaignConfiguration = (props) => {
         <div className="campaign-photo-container">
             <div className="campaign-photo">
                 <i className="campaign-icon fas fa-store-alt" />
-                <img src={CampaignPhoto} />
+                {/* <img src={CampaignPhoto} /> */}
                 <div className="upload-img-container">
                     <input type="file" />
                     <i className="upload-icon fal fa-upload" />

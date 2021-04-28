@@ -15,7 +15,7 @@ const Card = (props) => {
             <div className="campaign-photo-container">
                 <div className="campaign-photo">
                     <i className="campaign-icon fas fa-store-alt" />
-                    <img src={campaignImage} />
+                    {/* <img src={campaignImage} /> */}
                 </div>
             </div>
             <div className="campaign-data-container">

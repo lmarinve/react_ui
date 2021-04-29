@@ -282,7 +282,7 @@ const AccountConfiguration = (props) => {
             <div className="left">
                 <div className="row">
                     <label>User email:</label>
-                    <label>{user.email}</label>
+                    <label title={user.email}>{user.email}</label>
                 </div>
                 <div className="row">
                     <label>First name:</label>

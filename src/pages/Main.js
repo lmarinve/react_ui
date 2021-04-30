@@ -224,7 +224,6 @@ const MainMenu = ({ path }) => {
   const [alert, setAlert] = useState({})
 
   useEffect(() => {
-    console.log('holaa')
     MenuLoader.loading()
     let requests = [
       getMyInfo(), getUsers(), getUserAgencies(), getUserClients(), getUserAdfluenceCampaigns(), 
@@ -242,7 +241,12 @@ const MainMenu = ({ path }) => {
                 clients: responses[3].status === 'rejected' ? [] : responses[3].value.data.filter(client => client.users.find(userId => userId === responses[0].value.data.pk)),
                 campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
               }
-              : responses[1].value.data.find(user => responses[0].value.data.email === user.email),
+              : {
+                ...responses[1].value.data.find(user => responses[0].value.data.email === user.email),
+                agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data.filter(agency => agency.users.find(userId => userId === responses[0].value.data.pk)),
+                clients: responses[3].status === 'rejected' ? [] : responses[3].value.data.filter(client => client.users.find(userId => userId === responses[0].value.data.pk)),
+                campaigns: responses[4].status === 'rejected' ? [] : responses[4].value.data
+              },
             users: responses[1].status === 'rejected' ? [] : responses[1].value.data,
             agencies: responses[2].status === 'rejected' ? [] : responses[2].value.data,
             clients: responses[3].status === 'rejected' ? [] : responses[3].value.data,

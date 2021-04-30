@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Ad Channel Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="ad-initial-container"
+  >
+    <div
+      className="left"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Ad channel ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Name:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Base budget:
+        </label>
+        <label>
+          $
+        </label>
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Ad group ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Ad account ID:
+        </label>
+        <label />
+      </div>
+    </div>
+    <div
+      className="right"
+    >
+      <div
+        className="row"
+      >
+        <label>
+          Base ad ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Ad ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Ad creative ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Pixel ID:
+        </label>
+        <label />
+      </div>
+      <div
+        className="row"
+      >
+        <label>
+          Headline:
+        </label>
+        <label />
+      </div>
+    </div>
+  </div>
+  <div
+    className="ad-channel-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Copy injection
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Airfare
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Airline
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Destination city name
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Destination airport code
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Origin temperature
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Destination temperature
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Snow
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Origin city name
+          </label>
+        </div>
+        <div
+          className="row"
+        >
+          <input
+            type="checkbox"
+          />
+          <label
+            className="check-option"
+          >
+            Destination city name
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        City
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Miami, FL
+        </label>
+        <label
+          className=""
+        >
+          Phoenix, AZ
+        </label>
+        <label
+          className=""
+        >
+          Austin, TX
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ad-channel-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Channel type
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Google
+        </label>
+        <label
+          className=""
+        >
+          Facebook
+        </label>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Action types
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Action Type #1
+        </label>
+        <label
+          className=""
+        >
+          Action Type #2
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ad-channel-selects"
+  >
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Campaigns
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Campaign #1
+        </label>
+        <label
+          className=""
+        >
+          Campaign #2
+        </label>
+      </div>
+    </div>
+    <div
+      className="select-container "
+      onClick={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <button
+        className="select-btn"
+      >
+        Rules
+        <div
+          className="select-icon-container "
+        >
+          <i
+            className="fas fa-angle-right"
+          />
+        </div>
+      </button>
+      <div
+        className="list-container "
+      >
+        <label
+          className=""
+        >
+          Rules #1
+        </label>
+        <label
+          className=""
+        >
+          Rules #2
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="blue-btn-container"
+  >
+    <button
+      className="blue-btn"
+    >
+      Update
+    </button>
+  </div>
+</div>
+`;

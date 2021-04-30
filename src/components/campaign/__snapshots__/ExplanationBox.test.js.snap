@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Explanation Box Snapshot Test 1`] = `
+<div
+  className="explanation-container"
+>
+  <span
+    className="explanation-header"
+  >
+    Explain this section
+    <i
+      className="explanation-icon fas fa-caret-up"
+    />
+  </span>
+  <div
+    className="explanation-body"
+  >
+    <h1 />
+    <p />
+  </div>
+</div>
+`;

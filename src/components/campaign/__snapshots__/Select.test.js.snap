@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Snapshot Test 1`] = `
+<div
+  className="select-container selectable"
+  onClick={[Function]}
+  onMouseLeave={[Function]}
+>
+  <button
+    className="select-btn"
+  >
+    Test Select
+    <div
+      className="select-icon-container "
+    >
+      <i
+        className="fas fa-angle-right"
+      />
+    </div>
+  </button>
+  <div
+    className="list-container "
+  >
+    <label
+      className=""
+    >
+      their
+    </label>
+    <label
+      className=""
+    >
+      there
+    </label>
+    <label
+      className=""
+    >
+      they're
+    </label>
+  </div>
+</div>
+`;

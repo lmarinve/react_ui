@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Step Snapshot Test 1`] = `
+<div
+  className="step undefined"
+>
+  <div
+    className="count-title"
+  />
+</div>
+`;

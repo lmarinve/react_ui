@@ -1,0 +1,238 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Card Campaign Snapshot Test 1`] = `
+<div
+  className="card-container"
+>
+  <div
+    className="campaign-photo-container"
+  >
+    <div
+      className="campaign-photo"
+    >
+      <i
+        className="campaign-icon fas fa-store-alt"
+      />
+      <img />
+    </div>
+  </div>
+  <div
+    className="campaign-data-container"
+  >
+    <div
+      className="row"
+    >
+      <label>
+        Campaign ID:
+      </label>
+      <label />
+    </div>
+    <div
+      className="row"
+    >
+      <label>
+        Name:
+      </label>
+      <label />
+    </div>
+    <div
+      className="row"
+    >
+      <label>
+        Start date:
+      </label>
+      <label />
+    </div>
+    <div
+      className="row"
+    >
+      <label>
+        End date:
+      </label>
+      <label />
+    </div>
+    <div
+      className="row"
+    >
+      <label>
+        Base daily budget:
+      </label>
+      <label>
+        $
+      </label>
+    </div>
+    <div
+      className="status-row"
+    >
+      <div
+        className="status"
+      >
+        <label>
+          Active:
+        </label>
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div
+      className="campaign-selects"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Clients
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Client ID
+          </label>
+          <label
+            className=""
+          >
+            Client ID
+          </label>
+          <label
+            className=""
+          >
+            Client ID
+          </label>
+        </div>
+      </div>
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Copy injection tags
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Injection tags #1
+          </label>
+          <label
+            className=""
+          >
+            Injection  tags #2
+          </label>
+          <label
+            className=""
+          >
+            Injection tags #3
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="campaign-selects"
+    >
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Ad channel
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            Ad channel #1
+          </label>
+          <label
+            className=""
+          >
+            Ad channel #2
+          </label>
+          <label
+            className=""
+          >
+            Ad channel #3
+          </label>
+        </div>
+      </div>
+      <div
+        className="select-container "
+        onClick={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <button
+          className="select-btn"
+        >
+          Users
+          <div
+            className="select-icon-container "
+          >
+            <i
+              className="fas fa-angle-right"
+            />
+          </div>
+        </button>
+        <div
+          className="list-container "
+        >
+          <label
+            className=""
+          >
+            lmarinvera@mediagistic.com
+          </label>
+          <label
+            className=""
+          >
+            ray@mediagistic.com
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      className="blue-btn-container"
+    >
+      <button
+        className="blue-btn"
+      />
+    </div>
+  </div>
+</div>
+`;

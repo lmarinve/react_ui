@@ -14,7 +14,9 @@ import {
   request,
   changeMyPassword as changeMyPasswordRequest,
   editUser as editUserRequest,
-  getUsers as getUsersRequest
+  editCurrentUser,
+  getUsers as getUsersRequest,
+  removeUser as removeUserRequest
 } from '../../../_services'
 
 import ProfileImage from '../../../images/avatar.png'
@@ -181,6 +183,7 @@ const AccountConfiguration = (props) => {
   }
 
   const update = () => {
+    console.log(user)
     if (!user.modified)
       return 0
     
@@ -191,45 +194,57 @@ const AccountConfiguration = (props) => {
       if (user.newPassword !== user.confirmedPassword)
         return setShowBadPasswordMessage(true)
 
-      loaders['update'].loading()
-      const dispatch = () => {
-        setData({
-          ...data,
-          myInfo: {
-            ...myInfo,
-            password: user.newPassword
-          }
-        })
-        setUser({
-          ...user,
-          password: user.newPassword,
-          currentPassword: '',
-          newPassword: '',
-          confirmedPassword: '',
-        })
+      if (user.newPassword && user.confirmedPassword) {
+        loaders['update'].loading()
+        const dispatch = () => {
+          setData({
+            ...data,
+            myInfo: {
+              ...myInfo,
+              password: user.newPassword
+            }
+          })
+          setUser({
+            ...user,
+            password: user.newPassword,
+            currentPassword: '',
+            newPassword: '',
+            confirmedPassword: '',
+          })
+        }
+        changeMyPasswordRequest(token, user)
+          .then((response) => {
+            dispatch()
+            loaders['update'].loaded()
+            document.getElementById('currentPassword').value = ''
+            document.getElementById('newPassword').value = ''
+            document.getElementById('confirmedPassword').value = ''
+            setAlert({
+              title: 'Yeah!',
+              message: 'Your password was succesfully updated',
+              icon: 'fas fa-sync-alt'
+            })
+          })
+          .catch(error => {
+            loaders['update'].loaded()
+            console.log(error)
+            setAlert({
+              title: 'Oops...',
+              message: 'Something went wrong',
+              icon: 'fas fa-sync-alt'
+            })
+          })
       }
-      changeMyPasswordRequest(token, user)
-        .then((response) => {
-          dispatch()
-          loaders['update'].loaded()
-          document.getElementById('currentPassword').value = ''
-          document.getElementById('newPassword').value = ''
-          document.getElementById('confirmedPassword').value = ''
-          setAlert({
-            title: 'Yeah!',
-            message: 'Your password was succesfully updated',
-            icon: 'fas fa-sync-alt'
+
+      editCurrentUser(token, user)
+          .then(() => {
+            setAlert({
+              title: 'Yeah!',
+              message: 'Your user was succesfully updated',
+              icon: 'fas fa-sync-alt'
+            })
           })
-        })
-        .catch(error => {
-          loaders['update'].loaded()
-          console.log(error)
-          setAlert({
-            title: 'Oops...',
-            message: 'Something went wrong',
-            icon: 'fas fa-sync-alt'
-          })
-        })
+          .finally(loaders['update'].loaded)
     }
 
   }
@@ -259,7 +274,7 @@ const AccountConfiguration = (props) => {
 
   const remove = () => {
     loaders['remove'].loading()
-    request(() => null)
+    removeUserRequest(token, user)
         .then((response) => {
           loaders['remove'].loaded()
           removeUser()
@@ -314,11 +329,11 @@ const AccountConfiguration = (props) => {
                 </div>
                 <div className="row">
                     <label>First name:</label>
-                    <input type="text" defaultValue={user.first_name} />
+                    <input type="text" defaultValue={user.first_name} name='first_name' onInput={handleChange} />
                 </div>
                 <div className="row">
                     <label>Last name:</label>
-                    <input type="text" defaultValue={user.last_name} />
+                    <input type="text" defaultValue={user.last_name} name='last_name' onInput={handleChange} />
                 </div>
             </div>
             <div className="right">

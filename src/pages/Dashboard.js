@@ -6,9 +6,6 @@ import '../styles/dashboard.css'
 const Dashboard = () => {
   return (
     <div className='dashboard-container animated fadeIn'>
-      <DashHeader
-          title="Dashboard"
-      />
       <DashModal />
       <div className="welcome-back-btn">
         <i className="fal fa-plus" />

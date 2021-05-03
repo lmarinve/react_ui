@@ -174,3 +174,30 @@ export function editUser (token, user) {
     })
   })
 }
+
+export function removeUser (token, user) {
+  return Axios({
+    method: 'DELETE',
+    baseURL: user.url,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    },
+  })
+}
+
+export function editCurrentUser (token, user) {
+  return Axios({
+    method: 'PUT',
+    baseURL: `${process.env.API_URL}/users/auth/user`,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+      username: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name
+    })
+  })
+}

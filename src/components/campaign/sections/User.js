@@ -14,12 +14,29 @@ import {
   request,
   changeMyPassword as changeMyPasswordRequest,
   editUser as editUserRequest,
-  getUsers as getUsersRequest
+  editCurrentUser,
+  getUsers as getUsersRequest,
+  removeUser as removeUserRequest
 } from '../../../_services'
 
 import ProfileImage from '../../../images/avatar.png'
 
-const NewUsersList = ({ users, setActiveTab, setEntity }) => (
+function getNumbersInString(string) {
+  let tmp = string.split("");
+  let map = tmp.map(function(current) {
+    if (!isNaN(parseInt(current))) {
+      return current;
+    }
+  });
+
+  let numbers = map.filter(function(value) {
+    return value != undefined;
+  });
+
+  return numbers.join("");
+}
+
+const NewUsersList = ({ users, setActiveTab, setEntity, agencies, clients, adfluence_campaigns }) => (
   <>
     <div className="user-list-container animated fadeInUp">
       <div className="new-user-list">
@@ -33,7 +50,12 @@ const NewUsersList = ({ users, setActiveTab, setEntity }) => (
                 email={user.email}
                 btnText="Set"
                 handleClick={() => {
-                  setEntity(user)
+                  setEntity({
+                    ...user,
+                    agencies: agencies.filter(agency => agency.users.find(singleUser => singleUser === Number(getNumbersInString(user.url)))),
+                    clients: clients.filter(client => client.users.find(singleUser => singleUser === Number(getNumbersInString(user.url)))),
+                    campaigns: adfluence_campaigns.filter(campaign => campaign.users.find(singleUser => singleUser === Number(getNumbersInString(user.url))))
+                  })
                   setActiveTab(2)
                 }}
               />
@@ -44,7 +66,7 @@ const NewUsersList = ({ users, setActiveTab, setEntity }) => (
   </>
 )
 
-const UsersList = ({ users, setEntity, setActiveTab }) => (
+const UsersList = ({ users, setEntity, setActiveTab, agencies, clients, adfluence_campaigns }) => (
   <>
     <SearchList animation="animated fadeInDown" searchPlaceholder="Search users..." />
       <div className="user-list-container animated fadeInUp">
@@ -67,7 +89,12 @@ const UsersList = ({ users, setEntity, setActiveTab }) => (
                 IdUserStaff="staff-1"
                 btnText="Modify"
                 handleClick={() => {
-                  setEntity(user)
+                  setEntity({
+                    ...user,
+                    agencies: agencies.filter(agency => agency.users.find(singleUser => singleUser === Number(getNumbersInString(user.url)))),
+                    clients: clients.filter(client => client.users.find(singleUser => singleUser === Number(getNumbersInString(user.url)))),
+                    campaigns: adfluence_campaigns.filter(campaign => campaign.users.find(singleUser => singleUser === Number(getNumbersInString(user.url))))
+                  })
                   setActiveTab(2)
                 }}
               />
@@ -99,7 +126,6 @@ const AccountConfiguration = (props) => {
     else
       return { 
         ...entity(),
-        clients: [], 
         adfluence_campaigns: [],
         modified: false 
       }
@@ -121,7 +147,6 @@ const AccountConfiguration = (props) => {
   }
 
   const setUserAsDemo = (event) => {
-    event.preventDefault()
     if (isThereActiveEntity()) {
       setUser({
         ...user,
@@ -129,10 +154,11 @@ const AccountConfiguration = (props) => {
         is_superuser: false,
         modified: true
       })
+    } else {
+      event.preventDefault()
     }
   }
   const setUserAsClient = (event) => {
-    event.preventDefault()
     if (isThereActiveEntity()) {
       setUser({
         ...user,
@@ -140,20 +166,24 @@ const AccountConfiguration = (props) => {
         is_superuser: false,
         modified: true
       })
+    } else {
+      event.preventDefault()
     }
   }
   const setUserAsStaff = (event) => {
-    event.preventDefault()
     if (isThereActiveEntity()) {
       setUser({
         ...user,
         is_superuser: true,
         modified: true
       })
+    } else {
+      event.preventDefault()
     }
   }
 
   const update = () => {
+    console.log(user)
     if (!user.modified)
       return 0
     
@@ -164,45 +194,57 @@ const AccountConfiguration = (props) => {
       if (user.newPassword !== user.confirmedPassword)
         return setShowBadPasswordMessage(true)
 
-      loaders['update'].loading()
-      const dispatch = () => {
-        setData({
-          ...data,
-          myInfo: {
-            ...myInfo,
-            password: user.newPassword
-          }
-        })
-        setUser({
-          ...user,
-          password: user.newPassword,
-          currentPassword: '',
-          newPassword: '',
-          confirmedPassword: '',
-        })
+      if (user.newPassword && user.confirmedPassword) {
+        loaders['update'].loading()
+        const dispatch = () => {
+          setData({
+            ...data,
+            myInfo: {
+              ...myInfo,
+              password: user.newPassword
+            }
+          })
+          setUser({
+            ...user,
+            password: user.newPassword,
+            currentPassword: '',
+            newPassword: '',
+            confirmedPassword: '',
+          })
+        }
+        changeMyPasswordRequest(token, user)
+          .then((response) => {
+            dispatch()
+            loaders['update'].loaded()
+            document.getElementById('currentPassword').value = ''
+            document.getElementById('newPassword').value = ''
+            document.getElementById('confirmedPassword').value = ''
+            setAlert({
+              title: 'Yeah!',
+              message: 'Your password was succesfully updated',
+              icon: 'fas fa-sync-alt'
+            })
+          })
+          .catch(error => {
+            loaders['update'].loaded()
+            console.log(error)
+            setAlert({
+              title: 'Oops...',
+              message: 'Something went wrong',
+              icon: 'fas fa-sync-alt'
+            })
+          })
       }
-      changeMyPasswordRequest(token, user)
-        .then((response) => {
-          dispatch()
-          loaders['update'].loaded()
-          document.getElementById('currentPassword').value = ''
-          document.getElementById('newPassword').value = ''
-          document.getElementById('confirmedPassword').value = ''
-          setAlert({
-            title: 'Yeah!',
-            message: 'Your password was succesfully updated',
-            icon: 'fas fa-sync-alt'
+
+      editCurrentUser(token, user)
+          .then(() => {
+            setAlert({
+              title: 'Yeah!',
+              message: 'Your user was succesfully updated',
+              icon: 'fas fa-sync-alt'
+            })
           })
-        })
-        .catch(error => {
-          loaders['update'].loaded()
-          console.log(error)
-          setAlert({
-            title: 'Oops...',
-            message: 'Something went wrong',
-            icon: 'fas fa-sync-alt'
-          })
-        })
+          .finally(loaders['update'].loaded)
     }
 
   }
@@ -232,7 +274,7 @@ const AccountConfiguration = (props) => {
 
   const remove = () => {
     loaders['remove'].loading()
-    request(() => null)
+    removeUserRequest(token, user)
         .then((response) => {
           loaders['remove'].loaded()
           removeUser()
@@ -244,6 +286,7 @@ const AccountConfiguration = (props) => {
           })
         })
         .catch(error => {
+          loaders['remove'].loaded()
           console.log(error)
           setAlert({
             title: 'Oops...',
@@ -286,11 +329,11 @@ const AccountConfiguration = (props) => {
                 </div>
                 <div className="row">
                     <label>First name:</label>
-                    <input type="text" defaultValue={user.first_name} />
+                    <input type="text" defaultValue={user.first_name} name='first_name' onInput={handleChange} />
                 </div>
                 <div className="row">
                     <label>Last name:</label>
-                    <input type="text" defaultValue={user.last_name} />
+                    <input type="text" defaultValue={user.last_name} name='last_name' onInput={handleChange} />
                 </div>
             </div>
             <div className="right">
@@ -314,13 +357,13 @@ const AccountConfiguration = (props) => {
               title="My Agencies"
               elementsName="agencies"
               isSelectable
-              options={isThereActiveEntity() ? agenciesTest : myInfo.agencies.map(agency => agency.name)}
+              options={isThereActiveEntity() ? user.agencies : myInfo.agencies.map(agency => agency.name)}
             />
             <SelectCheckbox 
               title="My Clients"
               elementsName="clients"
               isSelectable
-              options={isThereActiveEntity() ? clientsTest : myInfo.clients.map(client => client.name)}
+              options={isThereActiveEntity() ? user.clients : myInfo.clients.map(client => client.name)}
             />
           </div>
           <div className="user-selects">
@@ -328,7 +371,7 @@ const AccountConfiguration = (props) => {
               title="Active campaigns"
               elementsName="campaigns"
               isSelectable
-              options={isThereActiveEntity() ? user.adfluence_campaigns : myInfo.campaigns.map(campaign => campaign.name)}
+              options={isThereActiveEntity() ? user.campaigns : myInfo.campaigns.map(campaign => campaign.name)}
             />
           </div>
         </div>
@@ -337,26 +380,26 @@ const AccountConfiguration = (props) => {
         !isThereActiveEntity()
           && <>
           <div className="change-option">
-            <label>Change your password: </label><input type="checkbox" onChange={onChangePassword}/>
+            <label>Change your password: </label><input type="checkbox" onChange={onChangePassword} />
           </div>
         <div className={`change-password-container ${change.display}`}>
             <DashInput
-                inputTitle='Current Password'
-                inputId='currentPassword'
-                inputType="password"
-                handleChange={handleChange}
+              inputTitle='Current Password'
+              inputId='currentPassword'
+              inputType="password"
+              handleChange={handleChange}
             />
             <DashInput
-                inputTitle='New Password'
-                inputId='newPassword'
-                inputType="password"
-                handleChange={handleChange}
+              inputTitle='New Password'
+              inputId='newPassword'
+              inputType="password"
+              handleChange={handleChange}
             />
             <DashInput
-                inputTitle='Confirm Password'
-                inputId='confirmedPassword'
-                inputType="password"
-                handleChange={handleChange}
+              inputTitle='Confirm Password'
+              inputId='confirmedPassword'
+              inputType="password"
+              handleChange={handleChange}
             />
         </div>
              </>

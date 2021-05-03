@@ -20,28 +20,23 @@ export function register2 (user) {
   const newUser = {
     username: user.email,
     email: user.email,
-    password1: user.password,
-    password2: user.confirmedPassword,
+    password: user.password,
     is_active: true,
     is_staff: false,
     is_superuser: false,
     first_name: user.first_name,
     last_name: user.last_name,
-    profile: {
-      role: 'D',
-      title: 'Mr',
-      dob: user.dateOfBorn,
-      address: user.address,
-      country: user.country,
-      city: user.city,
-      zip: user.zip,
-      photo: ''
-    }
+    role: 'D',
+    address: user.address,
+    city: user.city,
+    state: user.state,
+    zip: user.zip,
+    country: user.country
   }
 
   return Axios({
     method: 'post',
-    baseURL: `${process.env.API_URL}api/v1/rest-auth/registration/`,
+    baseURL: `${process.env.API_URL}/users/users/`,
     headers: {
       'Content-Type': 'application/json'
     },

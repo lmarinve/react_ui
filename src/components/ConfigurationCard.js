@@ -78,16 +78,12 @@ const ConfigurationCard = ({ entity, handleChange, itemsName, entityName, isTher
                       activeOption={null}
                       handleOptionsChange={() => null}
                     />
-                  <div className="select-container">
-                    <button className="select-btn">
-                      Users
-                      <i className="select-icon fas fa-angle-down" />
-                    </button>
-                    <div className="list-container">
-                      <label>lmarinvera@mediagistic.com</label>
-                      <label>ray@mediagistic.com</label>
-                    </div>
-                  </div>
+                    <Select
+                        title="Users"
+                        elementsName="users"
+                        isSelectable
+                        options={UsersTest}
+                    />
                 </div>
               }
             </div>

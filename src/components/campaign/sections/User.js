@@ -300,6 +300,7 @@ const AccountConfiguration = (props) => {
     const clientsTest = ["Demo", "Coconut Bay", "Saint Lucia"]
 
     const [change, setChange] = useState({status: false, display: 'display-none'});
+    const [optional, setOptional] = useState({status: false, display: 'display-none'});
 
     const onChangePassword = () => {
         if(!change.status){
@@ -308,120 +309,147 @@ const AccountConfiguration = (props) => {
             setChange({status: false, display: 'display-none'})
         }
     }
+
+    const onChangeOptional = () => {
+        if(!optional.status){
+            setOptional({status: true, display: 'display-grid'})
+        } else {
+            setOptional({status: false, display: 'display-none'})
+        }
+    }
   
 
   return (
     <div className="account-config-container animated fadeInUp">
-    <div className="account-config-form">
-      <div className="card-container">
-        <div className="user-avatar-container">
-          <div className="user-avatar">
-            <img src={ProfileImage} />
-          </div>
-        </div>
-        <div className="user-information-container">
-          <div className="user-data-container">
-            <div className="left">
-                <div className="row">
-                    <label>User email:</label>
-                    <label>{user.email}</label>
+        <div className="account-config-form">
+        <div className="card-container">
+            <div className="user-avatar-container">
+            <div className="user-avatar">
+                <img src={ProfileImage} />
+            </div>
+            </div>
+            <div className="user-information-container">
+            <div className="user-main-data-container">
+                <div className="left">
+                    <div className="row">
+                        <label>User email:</label>
+                        <label title={user.email}>{user.email}</label>
+                    </div>
+                    <div className="row">
+                        <label>First name:</label>
+                        <input type="text" defaultValue={user.first_name} name='first_name' onInput={handleChange} />
+                    </div>
+                    <div className="row">
+                        <label>Last name:</label>
+                        <input type="text" defaultValue={user.last_name} name='last_name' onInput={handleChange} />
+                    </div>
                 </div>
-                <div className="row">
-                    <label>First name:</label>
-                    <input type="text" defaultValue={user.first_name} name='first_name' onInput={handleChange} />
-                </div>
-                <div className="row">
-                    <label>Last name:</label>
-                    <input type="text" defaultValue={user.last_name} name='last_name' onInput={handleChange} />
+                <div className="right">
+                    <label>User type:</label>
+                    <div className="user-type">
+                        <input onClick={setUserAsDemo} type="checkbox" checked={!user.is_superuser && !user.is_staff} />
+                        <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
+                    </div>
+                    <div className="user-type">
+                        <input onClick={setUserAsClient} type="checkbox" checked={user.is_staff && !user.is_superuser} />
+                        <label><i className="user-type-icon fas fa-user-tag" />Client</label>
+                    </div>
+                    <div className="user-type">
+                        <input onClick={setUserAsStaff} type="checkbox" checked={user.is_superuser} />
+                        <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
+                    </div>
                 </div>
             </div>
-            <div className="right">
-                <label>User type:</label>
-                <div className="user-type">
-                    <input onClick={setUserAsDemo} type="checkbox" checked={!user.is_superuser && !user.is_staff} />
-                    <label><i className="user-type-icon fas fa-user-clock" />Demo</label>
-                </div>
-                <div className="user-type">
-                    <input onClick={setUserAsClient} type="checkbox" checked={user.is_staff && !user.is_superuser} />
-                    <label><i className="user-type-icon fas fa-user-tag" />Client</label>
-                </div>
-                <div className="user-type">
-                    <input onClick={setUserAsStaff} type="checkbox" checked={user.is_superuser} />
-                    <label><i className="user-type-icon fas fa-user-cog" />Staff</label>
-                </div>
+            <div className="optional-info">
+                    <label>Optional info: </label><input type="checkbox" onChange={onChangeOptional}/>
             </div>
-          </div>
-          <div className="user-selects">
-            <Select 
-              title="My Agencies"
-              elementsName="agencies"
-              isSelectable
-              options={isThereActiveEntity() ? user.agencies : myInfo.agencies.map(agency => agency.name)}
-            />
-            <SelectCheckbox 
-              title="My Clients"
-              elementsName="clients"
-              isSelectable
-              options={isThereActiveEntity() ? user.clients : myInfo.clients.map(client => client.name)}
-            />
-          </div>
-          <div className="user-selects">
-            <SelectCheckbox 
-              title="Active campaigns"
-              elementsName="campaigns"
-              isSelectable
-              options={isThereActiveEntity() ? user.campaigns : myInfo.campaigns.map(campaign => campaign.name)}
-            />
-          </div>
+            <div className={`user-additional-data-container ${optional.display}`}>
+                    <div className="row">
+                        <label>Address:</label>
+                        <input type="text" name='addres' />
+                    </div>
+                    <div className="row">
+                        <label>City:</label>
+                        <input type="text" name='city' />
+                    </div>
+                    <div className="row">
+                        <label>State:</label>
+                        <input type="text" name='state' />
+                    </div>
+                    <div className="row">
+                        <label>Zip Code:</label>
+                        <input type="text" name='zip_code' />
+                    </div>
+                    <div className="row">
+                        <label>Country:</label>
+                        <input type="text" name='country' />
+                    </div>
+            </div>
+            <div className="user-selects">
+                <Select 
+                title="My Agencies"
+                elementsName="agencies"
+                isSelectable
+                options={isThereActiveEntity() ? user.agencies : myInfo.agencies.map(agency => agency.name)}
+                />
+                <SelectCheckbox 
+                title="My Clients"
+                elementsName="clients"
+                isSelectable
+                options={isThereActiveEntity() ? user.clients : myInfo.clients.map(client => client.name)}
+                />
+            </div>
+            <div className="user-selects">
+                <SelectCheckbox 
+                title="Active campaigns"
+                elementsName="campaigns"
+                isSelectable
+                options={isThereActiveEntity() ? user.campaigns : myInfo.campaigns.map(campaign => campaign.name)}
+                />
+            </div>
+            </div>
         </div>
-      </div>
-      {
-        !isThereActiveEntity()
-          && <>
-          <div className="change-option">
-            <label>Change your password: </label><input type="checkbox" onChange={onChangePassword} />
-          </div>
-        <div className={`change-password-container ${change.display}`}>
-            <DashInput
-              inputTitle='Current Password'
-              inputId='currentPassword'
-              inputType="password"
-              handleChange={handleChange}
-            />
-            <DashInput
-              inputTitle='New Password'
-              inputId='newPassword'
-              inputType="password"
-              handleChange={handleChange}
-            />
-            <DashInput
-              inputTitle='Confirm Password'
-              inputId='confirmedPassword'
-              inputType="password"
-              handleChange={handleChange}
-            />
+        {
+            !isThereActiveEntity()
+            && <>
+            <div className="change-option">
+                <label>Change your password: </label><input type="checkbox" onChange={onChangePassword} />
+            </div>
+            <div className={`change-password-container ${change.display}`}>
+                <DashInput
+                inputTitle='New Password'
+                inputId='newPassword'
+                inputType="password"
+                handleChange={handleChange}
+                />
+                <DashInput
+                inputTitle='Confirm Password'
+                inputId='confirmedPassword'
+                inputType="password"
+                handleChange={handleChange}
+                />
+            </div>
+                </>
+        }
+        {showBadPasswordMessage
+            && <ErrorMessage message='The passwords does not match' marginBottom='0.5rem' />}
         </div>
-             </>
-      }
-      {showBadPasswordMessage
-          && <ErrorMessage message='The passwords does not match' marginBottom='0.5rem' />}
-    </div>
-    <div className="crud-btn-container">
-      {
-        isThereActiveEntity()
-          ? <>
-            <CardButton 
-              text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={editUser}
-            />
-            <CardButton
-              text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
-            />
-            </>
-          : <CardButton 
-            text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
-            />
-      }
-    </div>
+        <div className="crud-btn-container">
+        {
+            isThereActiveEntity()
+            ? <>
+                <CardButton 
+                text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={editUser}
+                />
+                <CardButton
+                text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
+                />
+                </>
+            : <CardButton 
+                text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
+                />
+        }
+        </div>
     </div>
   )
 }

@@ -277,7 +277,6 @@ const AccountConfiguration = (props) => {
     removeUserRequest(token, user)
         .then((response) => {
           loaders['remove'].loaded()
-          removeUser()
           sendToMyUsers()
           setAlert({
             title: 'Success!',

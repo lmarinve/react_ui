@@ -11,7 +11,7 @@ const CardNewUser = (props) =>{
 
     return(
         <div className="card-container">
-            <div className="user-data-container">
+            <div className="user-main-data-container">
                 <div className="left">
                     <div className="row">
                         <label>User email:</label>
@@ -66,7 +66,7 @@ const CardUser = (props) => {
     }
     return(
         <div className="card-container">
-            <div className="user-data-container">
+            <div className="user-main-data-container">
                 <div className="left">
                     <div className="row">
                         <label>User email:</label>
@@ -101,7 +101,7 @@ const CardUser = (props) => {
                     </div>
                 </div>
             </div>
-            <div className="user-data-container mid">
+            <div className="user-main-data-container mid">
                 <div className="left">
                     <div className="row">
                         <label>Date joined:</label>

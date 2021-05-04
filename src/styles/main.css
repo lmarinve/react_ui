@@ -681,26 +681,28 @@
     max-width: initial;
     width: 525px;
 }
-.main-container .user-section-container .card-container .user-data-container{
+.main-container .user-section-container .card-container .user-main-data-container{
     width: 100%;
 
     /* FLEX */
     display: flex;
     justify-content: space-between;
 }
-.main-container .user-section-container .card-container .user-data-container:last-child{
+.main-container .user-section-container .card-container .user-main-data-container:last-child{
     margin-top: 20px;
 }
-.main-container .user-section-container .card-container .user-data-container .left{
-    width: 55%;
+.main-container .user-section-container .card-container .user-main-data-container .left{
+    width: 75%;
+    margin-right: 15px;
 }
-.main-container .user-section-container .card-container .user-data-container .right{
-    width: 200px;
+.main-container .user-section-container .card-container .user-main-data-container .right{
+    /* width: 200px; */
+    width: 25%;
 }
-.main-container .user-section-container .card-container .user-data-container .right label{
+.main-container .user-section-container .card-container .user-main-data-container .right label{
     color: #b7b7b7;
 }
-.main-container .user-section-container .card-container .user-data-container .row{
+.main-container .user-section-container .card-container .user-main-data-container .row{
     white-space: nowrap;
     margin: 5px 0;
 
@@ -708,14 +710,14 @@
     display: flex;
     align-items: flex-end;
 }
-.main-container .user-section-container .card-container .user-data-container .row:last-child{
+.main-container .user-section-container .card-container .user-main-data-container .row:last-child{
     margin-bottom: 0;
 }
-.main-container .user-section-container .card-container .user-data-container .row label{
+.main-container .user-section-container .card-container .user-main-data-container .row label{
     white-space: nowrap;
     color: #b7b7b7;
 }
-.main-container .user-section-container .user-list-container .card-container .user-data-container .row label:last-of-type{
+.main-container .user-section-container .user-list-container .card-container .user-main-data-container .row label:last-of-type{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -723,7 +725,7 @@
     font-weight: 500;
     margin-left: 10px;
 }
-.main-container .user-section-container .account-config-container .card-container .user-data-container .row:first-child label:last-of-type{
+.main-container .user-section-container .account-config-container .card-container .user-main-data-container .row:first-child label:last-of-type{
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -735,7 +737,7 @@
     margin-left: 0;
     margin-right: 10px;
 }
-.main-container .user-section-container .card-container .user-data-container .user-type{
+.main-container .user-section-container .card-container .user-main-data-container .user-type{
     margin: 5px 0;
     transition: all 0.5s ease;
 
@@ -743,20 +745,63 @@
     display: flex;
     align-items: center;
 }
-.main-container .user-section-container .card-container .user-data-container .user-type-icon{
+.main-container .user-section-container .card-container .user-main-data-container .user-type:last-child{
+    margin-bottom: 0;
+}
+.main-container .user-section-container .card-container .user-main-data-container .user-type-icon{
     color: #fff;
     margin: 0 10px;
 }
-.main-container .user-section-container .card-container .user-data-container .user-type label{
+.main-container .user-section-container .card-container .user-main-data-container .user-type label{
     color: #fff;
+}
+.main-container .user-section-container .card-container .optional-info{
+    width: 100%;
+    margin-top: 15px;
+    text-align: left;
+    color: #fff;
+
+    /* FLEX */
+    display: flex;
+    align-items: center;
+}
+.main-container .user-section-container .card-container .optional-info label{
+    margin-right: 10px;
+}
+.main-container .user-section-container .card-container .user-additional-data-container{
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+
+    /* GRID */
+    grid-template-columns: 1fr 1fr;
+    column-gap: 15px;
+    row-gap: 5px;
+}
+.main-container .user-section-container .card-container .user-additional-data-container .row{
+    white-space: nowrap;
+
+    /* FLEX */
+    display: flex;
+    align-items: flex-end;
+}
+.main-container .user-section-container .card-container .user-additional-data-container .row label{
+    white-space: nowrap;
+    color: #b7b7b7;
+}
+.main-container .user-section-container .card-container .user-additional-data-container .row:first-child{
+    grid-column: span 2;
 }
 .main-container .user-section-container .card-container .user-selects{
     width: 100%;
-    margin-top: 20px;
+    margin-top: 15px;
 
     /* FLEX */
     display: flex;
     justify-content: space-between;
+}
+.main-container .user-section-container .card-container .user-selects:last-child{
+    margin-top: 20px;
 }
 .main-container .user-section-container .card-container .user-selects .select-container button{
     min-width: 200px;
@@ -814,7 +859,7 @@
 .main-container .user-section-container .account-config-container .account-config-form .card-container .user-information-container{
     width: 80%;
 }
-.main-container .user-section-container .account-config-container .account-config-form .card-container .user-information-container .user-data-container .user-type-icon{
+.main-container .user-section-container .account-config-container .account-config-form .card-container .user-information-container .user-main-data-container .user-type-icon{
     margin: 0 10px;
 }
 .main-container .user-section-container .account-config-container .card-container .user-information-container .row{

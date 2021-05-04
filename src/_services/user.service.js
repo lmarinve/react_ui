@@ -161,16 +161,12 @@ export function editUser (token, user) {
       is_active: user.is_active,
       is_staff: user.is_staff,
       is_superuser: user.is_superuser,
-      profile: {
-        "role": "D",
-        "title":"Mr",
-        "dob":"2021-04-09",
-        "address":"1221 sw 111 st",
-        "country":"Usa",
-        "city":"Miami",
-        "zip":"33196"
-      },
-      password: 'P4j4rr4c0'
+      role: user.role,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      zip: user.zip,
+      country: user.country
     })
   })
 }

@@ -20,28 +20,23 @@ export function register2 (user) {
   const newUser = {
     username: user.email,
     email: user.email,
-    password1: user.password,
-    password2: user.confirmedPassword,
+    password: user.password,
     is_active: true,
     is_staff: false,
     is_superuser: false,
     first_name: user.first_name,
     last_name: user.last_name,
-    profile: {
-      role: 'D',
-      title: 'Mr',
-      dob: user.dateOfBorn,
-      address: user.address,
-      country: user.country,
-      city: user.city,
-      zip: user.zip,
-      photo: ''
-    }
+    role: 'D',
+    address: user.address,
+    city: user.city,
+    state: user.state,
+    zip: user.zip,
+    country: user.country
   }
 
   return Axios({
     method: 'post',
-    baseURL: `${process.env.API_URL}api/v1/rest-auth/registration/`,
+    baseURL: `${process.env.API_URL}/users/users/`,
     headers: {
       'Content-Type': 'application/json'
     },
@@ -166,16 +161,39 @@ export function editUser (token, user) {
       is_active: user.is_active,
       is_staff: user.is_staff,
       is_superuser: user.is_superuser,
-      profile: {
-        "role": "D",
-        "title":"Mr",
-        "dob":"2021-04-09",
-        "address":"1221 sw 111 st",
-        "country":"Usa",
-        "city":"Miami",
-        "zip":"33196"
-      },
-      password: 'P4j4rr4c0'
+      role: user.role,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      zip: user.zip,
+      country: user.country
+    })
+  })
+}
+
+export function removeUser (token, user) {
+  return Axios({
+    method: 'DELETE',
+    baseURL: user.url,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    },
+  })
+}
+
+export function editCurrentUser (token, user) {
+  return Axios({
+    method: 'PUT',
+    baseURL: `${process.env.API_URL}/users/auth/user`,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({
+      username: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name
     })
   })
 }

@@ -3,7 +3,6 @@ import { useNavigate } from '@reach/router'
 import { Link } from '@reach/router'
 import LogInput from './LogInput'
 import LogSelect from './LogSelect'
-import LogDate from './LogDate'
 import LogButton from './LogButton'
 import { register1, register2, getEmailAvailability } from '../../_services/user.service'
 import ErrorMessage from '../ErrorMessage'
@@ -29,10 +28,11 @@ export default () => {
     is_superuser: false,
     is_active: true,
     role: 'D',
-    country: 'usa',
+    address: 'A',
     city: '001',
+    state: 'fl',
     zip: '00000',
-    dateOfBorn: '2000-01-01'
+    country: 'usa'
   })
   const [messageError, setMessageError] = useState('')
   const Loader = useLoader()
@@ -78,10 +78,10 @@ export default () => {
     const hasProfile = () => (
         UserInfo.first_name.length &&
         UserInfo.last_name.length &&
-        UserInfo.country &&
         UserInfo.city &&
-        UserInfo.dateOfBorn &&
-        UserInfo.zip
+        UserInfo.state &&
+        UserInfo.zip &&
+        UserInfo.country
     )
     if (cantSubmit()) {
       const setMessage = isNaN(Validator(UserInfo.email, 'email')) ? Validator(UserInfo.email, 'email') : 'Must enter a valid email as username and also as email address'
@@ -119,10 +119,10 @@ export default () => {
             <LogInput icon='far fa-id-card-alt' typeInput="text" nameId='first_name' placeHolderText='First Name' onChange={onChange} />
             <LogInput icon='far fa-id-card-alt' typeInput="text" nameId='last_name' placeHolderText='Last Name' onChange={onChange} />
             <LogInput icon='far fa-map-marked-alt' typeInput="text" nameId='address' placeHolderText='Address' onChange={onChange} />
-            <LogInput icon='far fa-globe-americas' typeInput="text" nameId='country' placeHolderText='Country' onChange={onChange} />
             <LogInput icon='fas fa-search-location' typeInput="text" nameId='city' placeHolderText='City' onChange={onChange} />
+            <LogInput icon='fas fa-search-location' typeInput="text" nameId='state' placeHolderText='State' onChange={onChange} />
             <LogInput icon='fal fa-location' typeInput="text" nameId='zip' placeHolderText='Zip Code' onChange={onChange} />
-            <LogDate setter={onChange} />
+            <LogInput icon='far fa-globe-americas' typeInput="text" nameId='country' placeHolderText='Country' onChange={onChange} />
             {/* <LogSelect animation="animated fadeInRight" icon="far fa-globe-americas" title="Country" options={paises} elementsName="contries" value={UserInfo.country} onChange={handleCountryChange} /> */}
             {/* <LogSelect animation="animated fadeInLeft" icon="fas fa-search-location" title="City" options={ciudades} elementsName="cities" value={UserInfo.city} onChange={handleCityChange} /> */}           
         </div>

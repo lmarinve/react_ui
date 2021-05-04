@@ -116,20 +116,32 @@ const AccountConfiguration = (props) => {
     if (!isThereActiveEntity())
       return { 
         ...myInfo, 
+        pk: myInfo.pk, 
         clients: clients, 
         adfluence_campaigns: adfluence_campaigns,
         currentPassword: '',
         newPassword: '',
         confirmedPassword: '',
+        address: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: '',
         modified: false
       }
     else
       return { 
         ...entity(),
+        address: entity().address || '',
+        city: entity().city || '',
+        state: entity().state || '',
+        zip: entity().zip || '',
+        country: entity().country || '',
         adfluence_campaigns: [],
         modified: false 
       }
   })
+  const [errorMessage, setErrorMessage] = useState('')
   const [showBadPasswordMessage, setShowBadPasswordMessage] = useState(false)
 
   const loaders = {
@@ -138,6 +150,7 @@ const AccountConfiguration = (props) => {
   }
 
   const handleChange = event => {
+    setErrorMessage('')
     setShowBadPasswordMessage(false)
     setUser({
       ...user,
@@ -181,9 +194,30 @@ const AccountConfiguration = (props) => {
       event.preventDefault()
     }
   }
+  const canUpdateUser = () => {
+    if (user.first_name && user.last_name && user.address && user.city && user.zip && user.country && user.state)
+      return 1
+    else {
+      if (!user.first_name)
+        return setErrorMessage('first name is required')
+      else if (!user.last_name)
+        return setErrorMessage('last name is required')
+      else if (!user.address)
+        return setErrorMessage('address is required')
+      else if (!user.city)
+        return setErrorMessage('city is required')
+      else if (!user.zip)
+        return setErrorMessage('zip is required')
+      else if (!user.country)
+        return setErrorMessage('country is required')
+      else if (!user.state)
+        return setErrorMessage('state is required')
+      else
+        return setErrorMessage('something went wrong, try again')
+    }
+  }
 
   const update = () => {
-    console.log(user)
     if (!user.modified)
       return 0
     
@@ -216,7 +250,6 @@ const AccountConfiguration = (props) => {
           .then((response) => {
             dispatch()
             loaders['update'].loaded()
-            document.getElementById('currentPassword').value = ''
             document.getElementById('newPassword').value = ''
             document.getElementById('confirmedPassword').value = ''
             setAlert({
@@ -236,7 +269,9 @@ const AccountConfiguration = (props) => {
           })
       }
 
-      editCurrentUser(token, user)
+      if (canUpdateUser()) {
+        loaders['update'].loading()
+        editUserRequest(token, user, true)
           .then(() => {
             setAlert({
               title: 'Yeah!',
@@ -244,14 +279,23 @@ const AccountConfiguration = (props) => {
               icon: 'fas fa-sync-alt'
             })
           })
+          .catch(() => {
+            setAlert({
+              title: 'Oh no!',
+              message: 'Something went wrong',
+              icon: 'far fa-frown'
+            })
+          })
           .finally(loaders['update'].loaded)
+      }
     }
 
   }
 
   const editUser = () => {
-    loaders['update'].loading()
-    editUserRequest(token, user)
+    if (canUpdateUser()) {
+      loaders['update'].loading()
+    editUserRequest(token, user, false)
       .then(response => {
         loaders['update'].loaded()
         sendToMyUsers()
@@ -270,6 +314,7 @@ const AccountConfiguration = (props) => {
           icon: 'fas fa-sync-alt'
         })
       })
+    }
   }
 
   const remove = () => {
@@ -361,50 +406,50 @@ const AccountConfiguration = (props) => {
                 </div>
             </div>
             <div className="optional-info">
-                    <label>Optional info: </label><input type="checkbox" onChange={onChangeOptional}/>
+                    <label>Optional info: </label><input type="checkbox" onChange={onChangeOptional} />
             </div>
             <div className={`user-additional-data-container ${optional.display}`}>
                     <div className="row">
                         <label>Address:</label>
-                        <input type="text" name='addres' />
+                        <input type="text" name='address' defaultValue={user.address} onInput={handleChange} />
                     </div>
                     <div className="row">
                         <label>City:</label>
-                        <input type="text" name='city' />
+                        <input type="text" name='city' defaultValue={user.city} onInput={handleChange} />
                     </div>
                     <div className="row">
                         <label>State:</label>
-                        <input type="text" name='state' />
+                        <input type="text" name='state' defaultValue={user.state} onInput={handleChange} />
                     </div>
                     <div className="row">
                         <label>Zip Code:</label>
-                        <input type="text" name='zip_code' />
+                        <input type="text" name='zip' defaultValue={user.zip} onInput={handleChange} />
                     </div>
                     <div className="row">
                         <label>Country:</label>
-                        <input type="text" name='country' />
+                        <input type="text" name='country' defaultValue={user.country} onInput={handleChange} />
                     </div>
             </div>
             <div className="user-selects">
                 <Select 
-                title="My Agencies"
-                elementsName="agencies"
-                isSelectable
-                options={isThereActiveEntity() ? user.agencies : myInfo.agencies.map(agency => agency.name)}
+                  title="My Agencies"
+                  elementsName="agencies"
+                  isSelectable
+                  options={isThereActiveEntity() ? user.agencies : myInfo.agencies.map(agency => agency.name)}
                 />
                 <SelectCheckbox 
-                title="My Clients"
-                elementsName="clients"
-                isSelectable
-                options={isThereActiveEntity() ? user.clients : myInfo.clients.map(client => client.name)}
+                  title="My Clients"
+                  elementsName="clients"
+                  isSelectable
+                  options={isThereActiveEntity() ? user.clients : myInfo.clients.map(client => client.name)}
                 />
             </div>
             <div className="user-selects">
                 <SelectCheckbox 
-                title="Active campaigns"
-                elementsName="campaigns"
-                isSelectable
-                options={isThereActiveEntity() ? user.campaigns : myInfo.campaigns.map(campaign => campaign.name)}
+                  title="Active campaigns"
+                  elementsName="campaigns"
+                  isSelectable
+                  options={isThereActiveEntity() ? user.campaigns : myInfo.campaigns.map(campaign => campaign.name)}
                 />
             </div>
             </div>
@@ -417,19 +462,23 @@ const AccountConfiguration = (props) => {
             </div>
             <div className={`change-password-container ${change.display}`}>
                 <DashInput
-                inputTitle='New Password'
-                inputId='newPassword'
-                inputType="password"
-                handleChange={handleChange}
+                  inputTitle='New Password'
+                  inputId='newPassword'
+                  inputType="password"
+                  handleChange={handleChange}
                 />
                 <DashInput
-                inputTitle='Confirm Password'
-                inputId='confirmedPassword'
-                inputType="password"
-                handleChange={handleChange}
+                  inputTitle='Confirm Password'
+                  inputId='confirmedPassword'
+                  inputType="password"
+                  handleChange={handleChange}
                 />
             </div>
-                </>
+               </>
+        }
+        {
+          errorMessage &&
+            <ErrorMessage message={errorMessage} marginBottom='0.5rem' />
         }
         {showBadPasswordMessage
             && <ErrorMessage message='The passwords does not match' marginBottom='0.5rem' />}
@@ -439,15 +488,15 @@ const AccountConfiguration = (props) => {
             isThereActiveEntity()
             ? <>
                 <CardButton 
-                text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={editUser}
+                  text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={editUser}
                 />
                 <CardButton
-                text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
+                  text='Delete' iconClassName='fas fa-trash-alt' isLoading={loaders['remove'].isLoading} handleClick={remove}
                 />
-                </>
+              </>
             : <CardButton 
-                text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
-                />
+              text='Update' iconClassName='fas fa-sync-alt' isLoading={loaders['update'].isLoading} handleClick={update}
+              />
         }
         </div>
     </div>

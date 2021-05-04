@@ -146,22 +146,23 @@ export function createUser (token, user) {
 
 }
 
-export function editUser (token, user) {
+export function editUser (token, user, ownUser) {
   return Axios({
     method: 'put',
-    baseURL: /*`${process.env.API_URL}/users/users/`*/user.url,
+    baseURL: ownUser ? `${process.env.API_URL}/users/users/${user.pk}/` : user.url,
     headers: {
       'Authorization': `Token ${token}`,
       'Content-Type': 'application/json'
     },
     data: JSON.stringify({
+      username: user.email,
       email: user.email,
       first_name: user.first_name,
       last_name: user.last_name,
       is_active: user.is_active,
       is_staff: user.is_staff,
       is_superuser: user.is_superuser,
-      role: user.role,
+      role: 'D',
       address: user.address,
       city: user.city,
       state: user.state,

@@ -146,6 +146,17 @@ export function createUser (token, user) {
 
 }
 
+export function getUser (token, user) {
+  return Axios({
+    method: 'get',
+    baseURL: `${process.env.API_URL}/users/users/${user.pk}/`,
+    headers: {
+      'Authorization': `Token ${token}`,
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
 export function editUser (token, user, ownUser) {
   return Axios({
     method: 'put',
